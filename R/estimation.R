@@ -558,3 +558,87 @@ make_nw_het <- function(n = 10000,
 
   return(out)
 }
+
+
+#' @title Calculate Target Statistics for Netwrok Model Estimation
+#'
+#' @description Calculates the target statistics for the formation and dissolution 
+#'              components of the network model to be estimated with \code{netest}.
+#' @param time.unit Time unit relative to 1 for daily.
+#' @param method Method for calculating target statistics by race, with options of
+#'        \code{2} for preserving race-specific statistics and \code{1} for
+#'        averaging over the statistics and dropping the race-specific terms.
+#' @param num.B.f Population size of black females.
+#' @param num.BI.f Population size of black imigrant females.
+#' @param num.H.f Population size of hispanic females.
+#' @param num.HI.f Population size of hispanic imigrant females.
+#' @param num.W.f Population size of white females.
+#' @param num.B.m Population size of blacks males.
+#' @param num.BI.m Population size of black imigrant males.
+#' @param num.H.m Population size of hispanic males.
+#' @param num.HI.m Population size of hispanic imigrant males.
+#' @param num.W.m Population size of white males.
+#' @param deg.mp.B Degree distribution for
+
+#' @param deg.B.f Degree distribution for black females.
+#' @param deg.BI.f Degree distribution for black imigrant females.
+#' @param deg.H.f Degree distribution for hispanic females.
+#' @param deg.HI.f Degree distribution for hispanic imigrant females.
+#' @param deg.W.f Degree distribution for white females.
+#' @param deg.B.m Degree distribution for blacks males.
+#' @param deg.BI.m Degree distribution for black imigrant males.
+#' @param deg.H.m Degree distribution for hispanic males.
+#' @param deg.HI.m Degree distribution for hispanic imigrant males.
+#' @param deg.W.m Degree distribution for white males.
+#'
+#' @param prop.hom.B The proportion of partnerships in same race for blacks.
+#' @param prop.hom.BI The proportion of partnerships in same race for black imigrants.
+#' @param prop.hom.H The proportion of partnerships in same race for hispanics.
+#' @param prop.hom.HI The proportion of partnerships in same race for hispanic imigrants.
+#' @param prop.hom.W The proportion of partnerships in same race for whites.
+#'
+#' @param balance Method for balancing of edges by race for number of mixed-race
+#'        partnerships, with options of \code{"black"} to apply black MSM counts,
+#'        \code{"white"} to apply white MSM counts, and \code{"mean"} to take
+#'        the average of the two expectations.
+#' @param sqrt.adiff.BB The mean absolute differences in the square root of ages in black-black
+#'        partnerships.
+#' @param diss.main Dissolution model formula for main partnerships.
+#' @param diss.pers Dissolution model formula for casual partnerships.
+#' @param durs.main Vector of length 3 with the duration of BB, BW, and WW main
+#'        partnerships in days.
+#' @param durs.pers Vector of length 3 with the duration of BB, BW, and WW
+#'        casual partnerships in days.
+#' @param ages Integer vector of ages in years that defines range of possible
+#'        initial ages in the population.
+#' @param asmr.B Vector of length 40 defining the age-specific
+#'        mortality rate for persons within that age slot, for black MSM.
+#' @param asmr.W Vector of length 40 defining the age-specific
+#'        mortality rate for persons within that age slot, for white MSM.
+#' @param role.B.prob Vector of length 3 for the probability of sexual role as
+#'        insertive, receptive, and versatile, for black MSM.
+#' @param role.W.prob Vector of length 3 for the probability of sexual role as
+#'        insertive, receptive, and versatile, for white MSM.
+#'
+#' @details
+#' This function performs basic calculations to determine the components of the
+#' formationa and dissolution models for the network model estimation to be
+#' conducted with \code{\link{netest}}. The inputs inputs for this function are
+#' calculated externally to the package in a setup scenario file.
+#'
+#' @keywords msm
+#'
+#' @seealso
+#' Network statistics calculated here are entered into \code{\link{base_nw_msm}}
+#' to construct the base network, and then into the parameters in
+#' \code{\link{param_msm}}.
+#'
+#' @export
+#'
+
+
+
+
+
+
+
