@@ -6,10 +6,10 @@ suppressPackageStartupMessages(library(EpiModelHPC))
 suppressPackageStartupMessages(library(ergm.ego))
 
 ##Read in ego and alter data for ergm.ego.
-data.egos<-read.csv("C:/Users/dth2/Dropbox/SHAMP/Modeling/ego_temp.csv",sep=",")
+data.egos<-read.csv("ego_temp.csv",sep=",")
 data.egos$race<-as.character(data.egos$race)
 data.egos$sex<-as.character(data.egos$sex)
-data.alters<-read.csv("C:/Users/dth2/Dropbox/SHAMP/Modeling/alter_temp.csv",sep=",")
+data.alters<-read.csv("alter_temp.csv",sep=",")
 data.alters$race<-as.character(data.alters$race)
 data.alters$sex<-as.character(data.alters$sex)
 
