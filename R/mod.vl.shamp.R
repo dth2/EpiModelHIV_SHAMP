@@ -23,7 +23,7 @@
 #' @return
 #' This function returns the \code{dat} object with updated \code{vl} attribute.
 #'
-#' @keywords module msm het
+#' @keywords module shamp
 #'
 #' @export
 #'

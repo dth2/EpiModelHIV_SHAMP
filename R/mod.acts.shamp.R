@@ -8,7 +8,8 @@
 #'
 #' @details
 #' The number of acts at each time step is specified as a function of the race of
-#' both members in a pair.  Rates are averages of the reported rates by each race.
+#' both members in a pair and whether the relationship is male male
+#' or heterosexual.  Rates are averages of the reported rates by each race.
 #' For one-off partnerships, this is deterministically
 #' set at 1, whereas for main and causal partnerships it is a stochastic draw
 #' from a Poisson distribution. The number of total acts may further be modified
@@ -19,7 +20,7 @@
 #' list (\code{dal}). Each element of \code{dal} is a data frame with the ids of the
 #' discordant pair repeated the number of times they have AI.
 #'
-#' @keywords module msm het
+#' @keywords module SHAMP msm het
 #' @export
 #'
 acts_shamp <- function(dat, at) {
@@ -33,6 +34,7 @@ acts_shamp <- function(dat, at) {
     race <- dat$attr$race
     sex <- dat$attr$sex
     sex.ident <- dat$attr$sex.ident
+    immig.loc <- dat$attr$immig.loc
 
     # Parameters
     ai.scale <- dat$param$ai.scale
@@ -107,41 +109,45 @@ acts_shamp <- function(dat, at) {
       race.p2 <- race[el[, 2]]
       sex.p1 <- sex[el[, 1]]
       sex.p2 <- sex[el[, 2]]
+      immig.loc.p1 <- immig.loc[el[, 1]]
+      immig.loc.p2 <- immig.loc[el[, 2]]
       num.het <- (sex.p1 == "F") + (sex.p2 == "F")
+      num.away <- (immig.loc.p1 == 1) + (immig.loc.p2 == 1)
       
-      ai.rate[race.p1=="B" & race.p2=="B" & num.het==0] <- base.ai.B.rate
-      ai.rate[race.p1=="B" & race.p2=="BI" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.BI.rate))
-      ai.rate[race.p1=="B" & race.p2=="H" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.H.rate))
-      ai.rate[race.p1=="B" & race.p2=="HI" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="B" & race.p2=="W" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.W.rate))
+            
+      ai.rate[race.p1=="B" & race.p2=="B" & num.het==0 & num.away==0] <- base.ai.B.rate
+      ai.rate[race.p1=="B" & race.p2=="BI" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.BI.rate))
+      ai.rate[race.p1=="B" & race.p2=="H" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.H.rate))
+      ai.rate[race.p1=="B" & race.p2=="HI" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="B" & race.p2=="W" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="BI" & race.p2=="B" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.BI.rate))
-      ai.rate[race.p1=="H" & race.p2=="B" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.H.rate))
-      ai.rate[race.p1=="HI" & race.p2=="B" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="W" & race.p2=="B" & num.het==0] <- mean(c(base.ai.B.rate,base.ai.W.rate))
+      ai.rate[race.p1=="BI" & race.p2=="B" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.BI.rate))
+      ai.rate[race.p1=="H" & race.p2=="B" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.H.rate))
+      ai.rate[race.p1=="HI" & race.p2=="B" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="W" & race.p2=="B" & num.het==0 & num.away==0] <- mean(c(base.ai.B.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="BI" & race.p2=="BI" & num.het==0] <- base.ai.BI.rate
-      ai.rate[race.p1=="BI" & race.p2=="H" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.H.rate))
-      ai.rate[race.p1=="BI" & race.p2=="HI" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="BI" & race.p2=="W" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.W.rate))
+      ai.rate[race.p1=="BI" & race.p2=="BI" & num.het==0 & num.away==0] <- base.ai.BI.rate
+      ai.rate[race.p1=="BI" & race.p2=="H" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.H.rate))
+      ai.rate[race.p1=="BI" & race.p2=="HI" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="BI" & race.p2=="W" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="H" & race.p2=="BI" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.H.rate))
-      ai.rate[race.p1=="HI" & race.p2=="BI" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="W" & race.p2=="BI" & num.het==0] <- mean(c(base.ai.BI.rate,base.ai.W.rate))
+      ai.rate[race.p1=="H" & race.p2=="BI" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.H.rate))
+      ai.rate[race.p1=="HI" & race.p2=="BI" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="W" & race.p2=="BI" & num.het==0 & num.away==0] <- mean(c(base.ai.BI.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="H" & race.p2=="H" & num.het==0] <- base.ai.H.rate
-      ai.rate[race.p1=="H" & race.p2=="HI" & num.het==0] <- mean(c(base.ai.H.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="H" & race.p2=="W" & num.het==0] <- mean(c(base.ai.H.rate,base.ai.W.rate))
+      ai.rate[race.p1=="H" & race.p2=="H" & num.het==0 & num.away==0] <- base.ai.H.rate
+      ai.rate[race.p1=="H" & race.p2=="HI" & num.het==0 & num.away==0] <- mean(c(base.ai.H.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="H" & race.p2=="W" & num.het==0 & num.away==0] <- mean(c(base.ai.H.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="HI" & race.p2=="H" & num.het==0] <- mean(c(base.ai.H.rate,base.ai.HI.rate))
-      ai.rate[race.p1=="W" & race.p2=="H" & num.het==0] <- mean(c(base.ai.H.rate,base.ai.W.rate))
+      ai.rate[race.p1=="HI" & race.p2=="H" & num.het==0 & num.away==0] <- mean(c(base.ai.H.rate,base.ai.HI.rate))
+      ai.rate[race.p1=="W" & race.p2=="H" & num.het==0 & num.away==0] <- mean(c(base.ai.H.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="HI" & race.p2=="HI" & num.het==0] <- base.ai.HI.rate
-      ai.rate[race.p1=="HI" & race.p2=="W" & num.het==0] <- mean(c(base.ai.HI.rate,base.ai.W.rate))
+      ai.rate[race.p1=="HI" & race.p2=="HI" & num.het==0 & num.away==0] <- base.ai.HI.rate
+      ai.rate[race.p1=="HI" & race.p2=="W" & num.het==0 & num.away==0] <- mean(c(base.ai.HI.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="W" & race.p2=="HI" & num.het==0] <- mean(c(base.ai.HI.rate,base.ai.W.rate))
+      ai.rate[race.p1=="W" & race.p2=="HI" & num.het==0 & num.away==0] <- mean(c(base.ai.HI.rate,base.ai.W.rate))
       
-      ai.rate[race.p1=="W" & race.p2=="W" & num.het==0] <- base.ai.W.rate
+      ai.rate[race.p1=="W" & race.p2=="W" & num.het==0 & num.away==0] <- base.ai.W.rate
       
     
       ai.rate <- ai.rate * ai.scale
@@ -149,39 +155,39 @@ acts_shamp <- function(dat, at) {
       # Base VI rates
       vi.rate <- rep(0, nrow(el))
 
-      vi.rate[race.p1=="B" & race.p2=="B" & num.het==1] <- base.vi.B.rate
-      vi.rate[race.p1=="B" & race.p2=="BI" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.BI.rate))
-      vi.rate[race.p1=="B" & race.p2=="H" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.H.rate))
-      vi.rate[race.p1=="B" & race.p2=="HI" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="B" & race.p2=="W" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.W.rate))
+      vi.rate[race.p1=="B" & race.p2=="B" & num.het==1 & num.away==0] <- base.vi.B.rate
+      vi.rate[race.p1=="B" & race.p2=="BI" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.BI.rate))
+      vi.rate[race.p1=="B" & race.p2=="H" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.H.rate))
+      vi.rate[race.p1=="B" & race.p2=="HI" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="B" & race.p2=="W" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="BI" & race.p2=="B" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.BI.rate))
-      vi.rate[race.p1=="H" & race.p2=="B" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.H.rate))
-      vi.rate[race.p1=="HI" & race.p2=="B" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="W" & race.p2=="B" & num.het==1] <- mean(c(base.vi.B.rate,base.vi.W.rate))
+      vi.rate[race.p1=="BI" & race.p2=="B" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.BI.rate))
+      vi.rate[race.p1=="H" & race.p2=="B" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.H.rate))
+      vi.rate[race.p1=="HI" & race.p2=="B" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="W" & race.p2=="B" & num.het==1 & num.away==0] <- mean(c(base.vi.B.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="BI" & race.p2=="BI" & num.het==1] <- base.vi.BI.rate
-      vi.rate[race.p1=="BI" & race.p2=="H" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.H.rate))
-      vi.rate[race.p1=="BI" & race.p2=="HI" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="BI" & race.p2=="W" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.W.rate))
+      vi.rate[race.p1=="BI" & race.p2=="BI" & num.het==1 & num.away==0] <- base.vi.BI.rate
+      vi.rate[race.p1=="BI" & race.p2=="H" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.H.rate))
+      vi.rate[race.p1=="BI" & race.p2=="HI" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="BI" & race.p2=="W" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="H" & race.p2=="BI" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.H.rate))
-      vi.rate[race.p1=="HI" & race.p2=="BI" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="W" & race.p2=="BI" & num.het==1] <- mean(c(base.vi.BI.rate,base.vi.W.rate))
+      vi.rate[race.p1=="H" & race.p2=="BI" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.H.rate))
+      vi.rate[race.p1=="HI" & race.p2=="BI" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="W" & race.p2=="BI" & num.het==1 & num.away==0] <- mean(c(base.vi.BI.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="H" & race.p2=="H" & num.het==1] <- base.vi.H.rate
-      vi.rate[race.p1=="H" & race.p2=="HI" & num.het==1] <- mean(c(base.vi.H.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="H" & race.p2=="W" & num.het==1] <- mean(c(base.vi.H.rate,base.vi.W.rate))
+      vi.rate[race.p1=="H" & race.p2=="H" & num.het==1 & num.away==0] <- base.vi.H.rate
+      vi.rate[race.p1=="H" & race.p2=="HI" & num.het==1 & num.away==0] <- mean(c(base.vi.H.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="H" & race.p2=="W" & num.het==1 & num.away==0] <- mean(c(base.vi.H.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="HI" & race.p2=="H" & num.het==1] <- mean(c(base.vi.H.rate,base.vi.HI.rate))
-      vi.rate[race.p1=="W" & race.p2=="H" & num.het==1] <- mean(c(base.vi.H.rate,base.vi.W.rate))
+      vi.rate[race.p1=="HI" & race.p2=="H" & num.het==1 & num.away==0] <- mean(c(base.vi.H.rate,base.vi.HI.rate))
+      vi.rate[race.p1=="W" & race.p2=="H" & num.het==1 & num.away==0] <- mean(c(base.vi.H.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="HI" & race.p2=="HI" & num.het==1] <- base.vi.HI.rate
-      vi.rate[race.p1=="HI" & race.p2=="W" & num.het==1] <- mean(c(base.vi.HI.rate,base.vi.W.rate))
+      vi.rate[race.p1=="HI" & race.p2=="HI" & num.het==1 & num.away==0] <- base.vi.HI.rate
+      vi.rate[race.p1=="HI" & race.p2=="W" & num.het==1 & num.away==0] <- mean(c(base.vi.HI.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="W" & race.p2=="HI" & num.het==1] <- mean(c(base.vi.HI.rate,base.vi.W.rate))
+      vi.rate[race.p1=="W" & race.p2=="HI" & num.het==1 & num.away==0] <- mean(c(base.vi.HI.rate,base.vi.W.rate))
       
-      vi.rate[race.p1=="W" & race.p2=="W" & num.het==1] <- base.vi.W.rate
+      vi.rate[race.p1=="W" & race.p2=="W" & num.het==1 & num.away==0] <- base.vi.W.rate
 
       vi.rate <- vi.rate * vi.scale
       
@@ -203,7 +209,8 @@ acts_shamp <- function(dat, at) {
       # Full edge list
       el <- cbind(el, ptype, ai, vi)
       colnames(el)[5:7] <- c("ptype", "ai", "vi")
-
+      
+ 
       if (type == "main") {
         dat$temp$el <- el
       } else {
@@ -213,8 +220,11 @@ acts_shamp <- function(dat, at) {
 
   } # loop over type end
 
-  # Remove inactive edges from el
+  # Remove inactive edges and edges 
+  
   dat$temp$el <- dat$temp$el[-which(dat$temp$el[, "ai"] == 0 & dat$temp$el[, "vi"] == 0), ]
 
+
+  
   return(dat)
 }

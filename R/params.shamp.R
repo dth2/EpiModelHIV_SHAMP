@@ -1,40 +1,35 @@
 
 # SHAMP  -----------------------------------------------------------------
 
-#' @title Epidemic Model Parameters
+#' @title Epidemic Model Parameters for SHAMP
 #'
 #' @description Sets the epidemic parameters for stochastic network models
 #'              simulated with \code{\link{netsim}} for EpiModelHIV
 #'
-#' @param last.neg.test.B.int Time range in days for last negative test for
-#'        black men.
-#' @param mean.test.B.int Mean intertest interval in days for black MSM who test.
-#' @param last.neg.test.W.int Time range in days for last negative test for
-#'        white men.
-#' @param mean.test.W.int Mean intertest interval in days for white MSM who test.
+#' @param last.neg.test.R.S.int Time range in days for last negative test for
+#'        race group R where R is a charater (B, BI, H, HI or W) and sex group S
+#'        where s is a charter (f, msf, msm, msmf).
+#' @param mean.test.B.int Mean intertest interval in days for race group R where R 
+#'        is a charater (B, BI, H, HI or W) and sex group S
+#'        where s is a charter (f, msf, msm, msmf) who test.
 #' @param testing.pattern Method for HIV testing, with options \code{"memoryless"}
 #'        for constant hazard without regard to time since previous test, or
 #'        \code{"interval"} deterministic fixed intervals.
 #' @param test.window.int Length of the HIV test window period in days.
-#' @param tt.traj.B.prob Proportion of black MSM who enter one of four
+#' @param tt.traj.R.S.prob Proportion of race group R, where R is a charater (B, BI, H, HI or W), 
+#'        and sex group S, where s is a charter (f, msf, msm, msmf), who enter one of four
 #'        testing/treatment trajectories: never test or treat, test and never
 #'        initiate treatment, test and treated with partial viral suppression,
 #'        and test and treated with full suppression.
-#' @param tt.traj.W.prob Proportion of white MSM who enter into the four
-#'        testing/treatment trajectories, as defined above.
-#' @param tx.init.B.prob Probability per time step that a black MSM who has
-#'        tested positive will initiate treatment.
-#' @param tx.init.W.prob Probability per time step that a white MSM who has
-#'        tested positive will initiate treatment.
-#' @param tx.halt.B.prob Probability per time step that a black MSM who is
-#'        currently on treatment will halt treatment.
-#' @param tx.halt.W.prob Probability per time step that a white MSM who is
-#'        currently on treatment will halt treatment.
-#' @param tx.reinit.B.prob Probability per time step that a black MSM who is
-#'        not currently on treatment but who has been in the past will
-#'        re-initiate treatment.
-#' @param tx.reinit.W.prob Probability per time step that a white MSM who is
-#'        not currently on treatment but who has been in the past will
+#' @param tx.init.R.S.prob Probability per time step that a person in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        who has tested positive will initiate treatment.
+#' @param tx.halt.R.S.prob Probability per time step that a person in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        who is currently on treatment will halt treatment.
+#' @param tx.reinit.R.S.prob Probability per time step that a person in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        who is not currently on treatment but who has been in the past will
 #'        re-initiate treatment.
 #' @param max.time.off.tx.full.int Number of days off treatment for a full
 #'        suppressor before onset of AIDS, including time before diagnosis.
@@ -67,17 +62,30 @@
 #'        re-initiation until the level in \code{vl.part.supp}.
 #' @param part.supp.up.slope For partial suppressors, number of log10 units that
 #'        viral load rises per time step from treatment halting until expected value.
-#' @param b.B.rate Rate at which black MSM enter the population.
-#' @param b.W.rate Rate at which white MSM enter the population.
+#' @param b.R.S.rate Rate at which a person in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        enters the population.
 #' @param birth.age Age (in years) of new arrivals.
 #' @param b.method Method for calculating the number of expected births at each
 #'        time step, with \code{"fixed"} based on the number of persons at the
 #'        initial time step and \code{"varying"} based on the current time step.
+#' @param msm.frac The fraction of males entering the population at each time step 
+#'        as a male that has intercourse exclusivly with other males "msm" - 
+#'        males not designated as msm or msmf are considered "msf".
+#' @param msmf.frac  The fraction of males entering the population at each time step as
+#'        as a male that has intercourse with both males and females "msmf" - 
+#'        males not designated as msm or msmf are considered "msf".
 #' @param URAI.prob Probability of transmission for a man having unprotected
 #'        receptive anal intercourse with an infected man at set point viral
 #'        load.
 #' @param UIAI.prob Probability of transmission for an uncircumcised man having
 #'        unprotected insertive anal intercourse with an infected man at set
+#'        point viral load.
+#' @param URVI.prob Probability of transmission for a woman having unprotected
+#'        receptive vaginal intercourse with an infected man at set point viral
+#'        load.
+#' @param UIVI.prob Probability of transmission for an uncircumcised man having
+#'        unprotected insertive vaginal intercourse with an infected women at set
 #'        point viral load.
 #' @param acute.rr Relative risk of infection (compared to that predicted by
 #'        elevated viral load) when positive partner is in the acute stage.
@@ -85,121 +93,120 @@
 #'        negative insertive partner is circumcised.
 #' @param condom.rr Relative risk of infection from anal sex when a condom is
 #'        used.
-#' @param disc.outset.main.B.prob Probability that an HIV-infected black MSM will
-#'        disclose his status at the start of a main partnership.
-#' @param disc.outset.main.W.prob Probability that an HIV-infected white MSM will
-#'        disclose his status at the start of a main partnership.
-#' @param disc.at.diag.main.B.prob Probability that a black MSM already in a main
-#'        partnership will disclose at the time of diagnosis.
-#' @param disc.at.diag.main.W.prob Probability that a white MSM already in a main
-#'        partnership will disclose at the time of diagnosis.
-#' @param disc.post.diag.main.B.prob Probability that an HIV-infected black MSM
-#'        in a main partnership will disclose his status, assuming he didn't
+#' @param disc.outset.main.R.S.prob Probability that an HIV-infected person in race group R,
+#'        where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+#'        (f, msf, msm, msmf), will disclose their status at the start of a main partnership.
+#' @param disc.at.diag.main.R.S.prob Probability that a a person in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        already in a main partnership will disclose at the time of diagnosis.
+#' @param disc.post.diag.main.R.S.prob Probability that an HIV-infected a person in race group R, 
+#'        where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+#'        (f, msf, msm, msmf), in a main partnership will disclose their status, assuming they didn't
 #'        at the start of the partnership or at diagnosis.
-#' @param disc.post.diag.main.W.prob Probability that an HIV-infected white MSM
-#'        in a main partnership will disclose his status, assuming he didn't
-#'        at the start of the partnership or at diagnosis.
-#' @param disc.outset.pers.B.prob Probability that an HIV-infected black MSM will
-#'        disclose his status at the start of a casual partnership.
-#' @param disc.outset.pers.W.prob Probability that an HIV-infected white MSM will
-#'        disclose his status at the start of a casual partnership.
-#' @param disc.at.diag.pers.B.prob Probability that a black MSM already in a
-#'        casual partnership will disclose at the time of diagnosis.
-#' @param disc.at.diag.pers.W.prob Probability that a white MSM already in a
-#'        casual partnership will disclose at the time of diagnosis.
-#' @param disc.post.diag.pers.B.prob Probability that an HIV-infected black MSM
-#'        in a casual partnership will disclose his status, assuming he
+#' @param disc.outset.pers.R.S.prob Probability that an HIV-infected a person in race group R, 
+#'        where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter
+#'        (f, msf, msm, msmf), will disclose their status at the start of a casual partnership.
+#' @param disc.at.diag.pers.R.S.prob Probability that a person in race group R, where R is a
+#'        charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+#'        already in a casual partnership will disclose at the time of diagnosis.
+#' @param disc.post.diag.pers.R.S.prob Probability that an HIV-infected person in race group R,
+#'        where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+#'        (f, msf, msm, msmf), in a casual partnership will disclose their status, assuming they
 #'        didn't at the start of the partnership or at diagnosis.
-#' @param disc.post.diag.pers.W.prob Probability that an HIV-infected white MSM
-#'        in a casual partnership will disclose his status, assuming he
-#'        didn't at the start of the partnership or at diagnosis.
-#' @param disc.inst.B.prob Probability that an HIV-infected black MSM will
-#'        disclose his status to a one-off partner.
-#' @param disc.inst.W.prob Probability that an HIV-infected white MSM will
-#'        disclose his status to a one-off partner.
-#' @param circ.B.prob Probablity that a black new arrival in the population
+#' @param disc.inst.R.S.prob Probability that an HIV-infected person in race group R, 
+#'        where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter
+#'        (f, msf, msm, msmf), will disclose ther status to a one-off partner.
+#' @param circ.R.prob Probablity that a male in race group R, where R is a 
+#'        charater (B, BI, H, HI or W), newly arriving in the population
 #'        will be circumcised.
-#' @param circ.W.prob Probablity that a white new arrival in the population
-#'        will be circumcised.
-#' @param ccr5.B.prob Vector of length two of frequencies of the Delta 32
+#' @param ccr5.R.S.prob Vector of length two of frequencies of the Delta 32
 #'        mutation (homozygous and heterozygous, respectively) in the CCR5 gene
-#'        among black MSM.
-#' @param ccr5.W.prob Vector of length two of frequencies of the Delta 32
-#'        mutation (homozygous and heterozygous, respectively) in the CCR5 gene
-#'        among white MSM.
-#' @param ccr5.heteroz.rr Relative risk of infection for men who are heterozygous
+#'        among people in race group R, where R is a charater (B, BI, H, HI or W), 
+#'        and sex group S, where s is a charter (f or m).
+#' @param ccr5.heteroz.rr Relative risk of infection for people who are heterozygous
 #'        in the CCR5 mutation.
 #' @param num.inst.ai.classes Number of quantiles into which men should be
 #'        divided in determining their levels of one-off anal intercourse.
-#' @param base.ai.main.BB.rate Expected coital frequency in black-black main
-#'        partnerships (acts per day).
-#' @param base.ai.main.BW.rate Expected coital frequency in black-white main
-#'        partnerships (acts per day).
-#' @param base.ai.main.WW.rate Expected coital frequency in white-white main
-#'        partnerships (acts per day).
-#' @param base.ai.pers.BB.rate Expected coital frequency in black-black casual
-#'        partnerships (acts per day).
-#' @param base.ai.pers.BW.rate Expected coital frequency in black-white casual
-#'        partnerships (acts per day).
-#' @param base.ai.pers.WW.rate Expected coital frequency in white-white casual
-#'        partnerships (acts per day).
-#' @param ai.scale General relative scaler for all act rates for model
+#' @param base.ai.main.R.rate Expected coital frequency (for anal intercourse) for males 
+#'        (msm and msmf) in race group R, where R is a charater (B, BI, H, HI or W), 
+#'        in main partnerships (acts per day).
+#' @param base.vi.main.R.rate Expected coital frequency (for vaginal intercourse) for 
+#'        males and females in race group R, where R is a charater (B, BI, H, HI or W), 
+#'        in main partnerships (acts per day).
+#' @param base.ai.pers.R.rate Expected coital frequency (for anal intercourse) for males 
+#'        (msm and msmf) in race group R, where R is a charater (B, BI, H, HI or W), 
+#'        in casual partnerships (acts per day).
+#' @param base.vi.pers.R.rate Expected coital frequency (for vaginal intercourse) for 
+#'        males and females in race group R, where R is a charater (B, BI, H, HI or W), 
+#'        in casual partnerships (acts per day).
+#' @param ai.scale General relative scaler for all ai act rates for model
 #'        calibration.
-#' @param cond.main.BB.prob Probability of condom use in a black-black main
-#'        partnership.
-#' @param cond.main.BW.prob Probability of condom use in a black-white main
-#'        partnership.
-#' @param cond.main.WW.prob Probability of condom use in a white-white main
-#'        partnership.
-#' @param cond.pers.always.prob Fraction of men in casual partnerships who always
+#' @param vi.scale General relative scaler for all vi act rates for model
+#'        calibration.
+#' @param cond.main.R.prob.msm Probability of condom use by an male of race group R, 
+#'        where R is a charater (B, BI, H, HI or W), in a male-male main partnership.
+#' @param cond.pers.always.prob.msm Fraction of men in male-male casual partnerships who always
 #'        use condoms in those partnerships.
-#' @param cond.pers.BB.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a black-black casual partnerships.
-#' @param cond.pers.BW.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a black-white casual partnerships.
-#' @param cond.pers.WW.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a white-white casual partnerships.
-#' @param cond.inst.always.prob Fraction of men in instant partnerships who always
+#' @param cond.pers.R.prob.msm Of men who are not consistent condom users, per-act
+#'        probability of condom use in a casual male-male partnership by 
+#'        males of race group R, where R is a charater (B, BI, H, HI or W).
+#' @param cond.inst.always.prob.msm Fraction of men in male-male one-time partnerships who always
 #'        use condoms in those partnerships.
-#' @param cond.inst.BB.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a black-black one-off partnerships.
-#' @param cond.inst.BW.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a black-white one-off partnerships.
-#' @param cond.inst.WW.prob Of men who are not consistent condom users, per-act
-#'        probability of condom use in a white-white one-off partnerships.
-#' @param cond.always.prob.corr Correlation coefficient for probability of always
-#'        using condoms in both casual and one-off
-#' @param cond.rr.BB Condom probability scaler for black-black partnerships for
-#'        model calibration purposes.
-#' @param cond.rr.BW Condom probability scaler for black-white partnerships for
-#'        model calibration purposes.
-#' @param cond.rr.WW Condom probability scaler for white-white partnerships for
-#'        model calibration purposes.
-#' @param cond.diag.main.beta Beta multiplier for the log odds of using a
-#'        condom in a main partnership if the HIV-infected man has been
+#' @param cond.inst.R.prob.msm Of men who are not consistent condom users, per-act
+#'        probability of condom use in a one-time male-male partnership by 
+#'        males of race group R, where R is a charater (B, BI, H, HI or W).
+#' @param cond.always.prob.corr.msm Correlation coefficient for probability of always
+#'        using condoms in both casual and one-off male-male partnerships
+#' @param cond.main.R.prob.het Probability of condom use by an person of race group R, 
+#'        where R is a charater (B, BI, H, HI or W), in a heterosexual main partnership.
+#' @param cond.pers.always.prob.het Fraction of people in heterosexual casual partnerships who always
+#'        use condoms in those partnerships.
+#' @param cond.pers.R.prob.het Of people who are not consistent condom users, per-act
+#'        probability of condom use in a casual heterosexual partnership by 
+#'        people of race group R, where R is a charater (B, BI, H, HI or W).
+#' @param cond.inst.always.prob.het Fraction of people in heterosexual one-time partnerships who always
+#'        use condoms in those partnerships.
+#' @param cond.inst.R.prob.het Of people who are not consistent condom users, per-act
+#'        probability of condom use in a one-time heterosexual partnership by 
+#'        males of race group R, where R is a charater (B, BI, H, HI or W).
+#' @param cond.always.prob.corr.het Correlation coefficient for probability of always
+#'        using condoms in both casual and one-off heterosexual partnerships
+#' @param cond.diag.main.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male main partnership if the HIV-infected man has been
 #'        diagnosed.
-#' @param cond.discl.main.beta Beta multiplier for the log odds of using a
-#'        condom in a main partnership if the HIV-infected man has disclosed.
-#' @param cond.diag.pers.beta Beta multiplier for the log odds of using a
-#'        condom in a casual partnership if the HIV-infected man has been
+#' @param cond.discl.main.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male main partnership if the HIV-infected man has disclosed.
+#' @param cond.diag.pers.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male casual partnership if the HIV-infected man has been
 #'        diagnosed.
-#' @param cond.discl.pers.beta Beta multiplier for the log odds of using a
-#'        condom in a casual partnership if the HIV-infected man has disclosed
+#' @param cond.discl.pers.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male casual partnership if the HIV-infected man has disclosed
 #'        his status.
-#' @param cond.diag.inst.beta Beta multiplier for the log odds of using a
-#'        condom in a one-off partnership if the HIV-infected man has been
+#' @param cond.diag.inst.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male one-off partnership if the HIV-infected man has been
 #'        diagnosed.
-#' @param cond.discl.inst.beta Beta multiplier for the log odds of using a
-#'        condom in a one-off partnership if the HIV-infected man has disclosed
+#' @param cond.discl.inst.beta.msm Beta multiplier for the log odds of using a
+#'        condom in a male-male one-off partnership if the HIV-infected man has disclosed
 #'        his status.
-#' @param vv.iev.BB.prob Probability that in a black-black partnership of
-#'        two versatile men, they will engage in intra-event versatility
-#'        ("flipping") given that they're having AI.
-#' @param vv.iev.BW.prob Probability that in a black-white partnership of
-#'        two versatile men, they will engage in intra-event versatility
-#'        ("flipping") given that they're having AI.
-#' @param vv.iev.WW.prob Probability that in a white-white partnership of
-#'        two versatile men, they will engage in intra-event versatility
+#' @param cond.diag.main.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual main partnership if the HIV-infected man has been
+#'        diagnosed.
+#' @param cond.discl.main.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual main partnership if the HIV-infected man has disclosed.
+#' @param cond.diag.pers.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual casual partnership if the HIV-infected man has been
+#'        diagnosed.
+#' @param cond.discl.pers.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual casual partnership if the HIV-infected man has disclosed
+#'        his status.
+#' @param cond.diag.inst.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual one-off partnership if the HIV-infected man has been
+#'        diagnosed.
+#' @param cond.discl.inst.beta.het Beta multiplier for the log odds of using a
+#'        condom in a heterosexual one-off partnership if the HIV-infected man has disclosed
+#'        his status.
+#' @param vv.iev.R.prob Probability that a person of group R, where R is a charater (B, BI, H, HI or W),
+#'        in a male male relationship will engage in intra-event versatility
 #'        ("flipping") given that they're having AI.
 #' @param prep.start Time step at which the PrEP intervention should start.
 #' @param prep.elig.model Modeling approach for determining who is eligible for
@@ -223,6 +230,20 @@
 #'        in days.
 #' @param prep.risk.reassess If \code{TRUE}, reassess eligibility for PrEP at
 #'        each testing visit.
+#'        
+#' @param immig.depart.R.S The probability per time step that a person of group R,
+#' where R is a charater (BI or HI), and sex S, were S is a charater (f or m), leaves the population
+#' being simulated by returning to their home country.
+#' @param immig.return.R.S The probability per time step that a person of group R,
+#' where R is a charater (BI or HI), and sex S, were S is a charater (f or m), who has left
+#' the population being simulated by returning to their home country returns to the population
+#' being simulated.
+#' @param immig.aq.prob.R.S The probability per time step that a person of group R,
+#' where R is a charater (BI or HI), and sex S, were S is a charater (f or m), who has left
+#' the population being simulated aquires HIV while in their home country.
+#' 
+#'        
+#'        
 #' @param ... Additional arguments passed to the function.
 #'
 #' @return
@@ -234,6 +255,7 @@
 #' @export
 param_shamp <- function(race.method = 1,
                       time.unit = 7,
+                      method=1,
                       last.neg.test.B.f.int = 301,
                       last.neg.test.BI.f.int = 301,
                       last.neg.test.H.f.int = 301,
@@ -515,11 +537,11 @@ param_shamp <- function(race.method = 1,
                       disc.post.diag.pers.H.f.prob = 0,
                       disc.post.diag.pers.HI.f.prob = 0,
                       disc.post.diag.pers.W.f.prob = 0,
-                      disc.post.diag.pers.B.mf.prob = 0,
-                      disc.post.diag.pers.BI.mf.prob = 0,
-                      disc.post.diag.pers.H.mf.prob = 0,
-                      disc.post.diag.pers.HI.mf.prob = 0,
-                      disc.post.diag.pers.W.mf.prob = 0, 
+                      disc.post.diag.pers.B.msf.prob = 0,
+                      disc.post.diag.pers.BI.msf.prob = 0,
+                      disc.post.diag.pers.H.msf.prob = 0,
+                      disc.post.diag.pers.HI.msf.prob = 0,
+                      disc.post.diag.pers.W.msf.prob = 0, 
                       disc.post.diag.pers.B.msm.prob = 0,
                       disc.post.diag.pers.BI.msm.prob = 0,
                       disc.post.diag.pers.H.msm.prob = 0,
@@ -568,7 +590,7 @@ param_shamp <- function(race.method = 1,
                       ccr5.H.m.prob = c(0, 0.034),
                       ccr5.HI.m.prob = c(0, 0.034),
                       ccr5.W.m.prob = c(0.021, 0.176),
-                      ccr5.heteroz.rr = 0.3,
+                      ccr5.heteroz.rr = 0,
 
                       num.inst.ai.classes = 1,
                       base.ai.main.B.rate = 0.17,
@@ -634,9 +656,6 @@ param_shamp <- function(race.method = 1,
                       cond.always.prob.corr.het = 0.5,
                       
                       
-                      cond.rr.BB = 1,
-                      cond.rr.BW = 1,
-                      cond.rr.WW = 1,
                       cond.diag.main.beta.msm = -0.67,
                       cond.discl.main.beta.msm = -0.85,
                       cond.diag.pers.beta.msm = -0.67,
@@ -709,54 +728,6 @@ param_shamp <- function(race.method = 1,
   }
 
 
-#  if (race.method == 1) {
-#    p$last.neg.test.B.int = (last.neg.test.B.int + last.neg.test.W.int)/2
-#    p$last.neg.test.W.int = (last.neg.test.B.int + last.neg.test.W.int)/2
-#    p$mean.test.B.int = (mean.test.W.int + mean.test.B.int)/2
-#    p$mean.test.W.int = (mean.test.W.int + mean.test.B.int)/2
-#    p$tt.traj.B.prob = (tt.traj.B.prob + tt.traj.W.prob)/2
-#    p$tt.traj.W.prob = (tt.traj.B.prob + tt.traj.W.prob)/2
-#    p$tx.init.B.prob = (tx.init.B.prob + tx.init.W.prob)/2
-#    p$tx.init.W.prob = (tx.init.B.prob + tx.init.W.prob)/2
-#    p$tx.halt.B.prob = (tx.halt.B.prob + tx.halt.W.prob)/2
-#    p$tx.halt.W.prob = (tx.halt.B.prob + tx.halt.W.prob)/2
-#    p$tx.reinit.B.prob = (tx.reinit.B.prob + tx.reinit.W.prob)/2
-#    p$tx.reinit.W.prob = (tx.reinit.B.prob + tx.reinit.W.prob)/2
-#    p$disc.outset.main.B.prob = (disc.outset.main.B.prob + disc.outset.main.W.prob)/2
-#    p$disc.outset.main.W.prob = (disc.outset.main.B.prob + disc.outset.main.W.prob)/2
-#    p$disc.outset.pers.B.prob = (disc.outset.pers.B.prob + disc.outset.pers.W.prob)/2
-#    p$disc.outset.pers.W.prob = (disc.outset.pers.B.prob + disc.outset.pers.W.prob)/2
-#    p$disc.inst.B.prob = (disc.inst.B.prob + disc.inst.W.prob)/2
-#    p$disc.inst.W.prob = (disc.inst.B.prob + disc.inst.W.prob)/2
-#    p$circ.B.prob = (circ.B.prob + circ.W.prob)/2
-#    p$circ.W.prob = (circ.B.prob + circ.W.prob)/2
-#    p$ccr5.B.prob = (ccr5.B.prob + ccr5.W.prob)/2
-#    p$ccr5.W.prob = (ccr5.B.prob + ccr5.W.prob)/2
-#    p$base.ai.main.BB.rate = (base.ai.main.BB.rate + base.ai.main.BW.rate +
-#                                base.ai.main.WW.rate)/3
-#    p$base.ai.main.BW.rate = (base.ai.main.BB.rate + base.ai.main.BW.rate +
-#                                base.ai.main.WW.rate)/3
-#    p$base.ai.main.WW.rate = (base.ai.main.BB.rate + base.ai.main.BW.rate +
-#                                base.ai.main.WW.rate)/3
-#    p$base.ai.pers.BB.rate = (base.ai.pers.BB.rate + base.ai.pers.BW.rate +
-#                                base.ai.pers.WW.rate)/3
-#    p$base.ai.pers.BW.rate = (base.ai.pers.BB.rate + base.ai.pers.BW.rate +
-#                                base.ai.pers.WW.rate)/3
-#    p$base.ai.pers.WW.rate = (base.ai.pers.BB.rate + base.ai.pers.BW.rate +
-#                                base.ai.pers.WW.rate)/3
-#    p$cond.main.BB.prob = (cond.main.BB.prob + cond.main.BW.prob + cond.main.WW.prob)/3
-#    p$cond.main.BW.prob = (cond.main.BB.prob + cond.main.BW.prob + cond.main.WW.prob)/3
-#    p$cond.main.WW.prob = (cond.main.BB.prob + cond.main.BW.prob + cond.main.WW.prob)/3
-#    p$cond.pers.BB.prob = (cond.pers.BB.prob + cond.pers.BW.prob + cond.pers.WW.prob)/3
-#    p$cond.pers.BW.prob = (cond.pers.BB.prob + cond.pers.BW.prob + cond.pers.WW.prob)/3
-#    p$cond.pers.WW.prob = (cond.pers.BB.prob + cond.pers.BW.prob + cond.pers.WW.prob)/3
-#    p$cond.inst.BB.prob = (cond.inst.BB.prob + cond.inst.BW.prob + cond.inst.WW.prob)/3
-#    p$cond.inst.BW.prob = (cond.inst.BB.prob + cond.inst.BW.prob + cond.inst.WW.prob)/3
-#    p$cond.inst.WW.prob = (cond.inst.BB.prob + cond.inst.BW.prob + cond.inst.WW.prob)/3
-#    p$vv.iev.BB.prob = (vv.iev.BB.prob + vv.iev.BW.prob + vv.iev.WW.prob)/3
-#    p$vv.iev.BW.prob = (vv.iev.BB.prob + vv.iev.BW.prob + vv.iev.WW.prob)/3
-#    p$vv.iev.WW.prob = (vv.iev.BB.prob + vv.iev.BW.prob + vv.iev.WW.prob)/3
-#  }
 
   p$time.unit <- time.unit
 
@@ -808,13 +779,14 @@ param_shamp <- function(race.method = 1,
 }
 
 
-#' @title Epidemic Model Initial Conditions
+#' @title Epidemic Model Initial Conditions for SHAMP
 #'
 #' @description Sets the initial conditions for a stochastic epidemic models
 #'              simulated with \code{\link{netsim}}.
 #'
-#' @param prev.B Initial disease prevalence among black MSM.
-#' @param prev.W Initial disease prevalence among white MSM.
+#' @param prev.R.S Initial disease prevalence among persons of group R,
+#'  where R is a charater (B, BI, H, HI or W), and sex group S
+#'        where s is a charter (f, msf, msm, msmf)..
 #' @param ... Additional arguments passed to function.
 #'
 #' @return
@@ -915,6 +887,11 @@ init_shamp <- function(prev.B.f = 0.005,
 #' @param position.FUN Module function to simulate sexual position within acts.
 #' @param trans.FUN Module function to stochastically simulate disease transmission
 #'        over acts given individual and dyadic attributes.
+#' @param heatbath.FUN Module function to stochastically simulate disease aquisition by msmf via 
+#'        contact with an unsimulated msm population. 
+#'        over acts given individual and dyadic attributes.
+#' @param immigration.FUN Module function to stochastically simulate disease aquisition by migrants
+#'        via conatct with unsimulated populations in home counties during return trips.        
 #' @param prev.FUN Module function to calculate prevalence summary statistics.
 #' @param verbose.FUN Module function to print model progress to the console or
 #'        external text files.
@@ -930,7 +907,7 @@ init_shamp <- function(prev.B.f = 0.005,
 #' A list object of class \code{control_shamp}, which can be passed to the
 #' EpiModel function \code{netsim}.
 #'
-#' @keywords msm
+#' @keywords SHAMP 
 #'
 #' @export
 control_shamp <- function(simno = 1,
@@ -953,9 +930,11 @@ control_shamp <- function(simno = 1,
                         disclose.FUN = disclose_shamp,
                         acts.FUN = acts_shamp,
                         condoms.FUN = condoms_shamp,
-                        #riskhist.FUN = riskhist_shamp,
-                        #position.FUN = position_shamp,
-                        #trans.FUN = trans_msm,
+                        riskhist.FUN = riskhist_shamp,
+                        position.FUN = position_shamp,
+                        trans.FUN = trans_shamp,
+                        heatbath.FUN = heatbath_msmf_shamp,
+                        immigration.FUN = immigration_shamp,
                         prev.FUN = prevalence_shamp,
                         #verbose.FUN = verbose_msm,
                         save.nwstats = FALSE,

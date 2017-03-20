@@ -2,11 +2,12 @@
 #' @title PrEP Module for up to 5 race groups heterosexuals and MSM.
 #'
 #' @description Module function for implementation and uptake of pre-exposure
-#'              prophylaxis (PrEP) to prevent HIV infection.
+#'              prophylaxis (PrEP) to prevent HIV infection.  Only msm and msmf are eligible.
+#'              If dat$attr$immig.loc=1 PrEP can not be started or re-initiated.
 #'
 #' @inheritParams aging_msm
 #'
-#' @keywords module msm het
+#' @keywords module shamp msm msmf
 #'
 #' @export
 #'

@@ -27,7 +27,7 @@
 #' This function returns the \code{dat} object after updating the disease stage
 #' of infected individuals.
 #'
-#' @keywords module msm
+#' @keywords module 
 #' 
 #' @export
 #'

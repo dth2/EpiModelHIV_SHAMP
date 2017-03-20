@@ -6,7 +6,7 @@
 #'
 #' @inheritParams aging_msm
 #'
-#' @keywords module msm
+#' @keywords module SHAMP
 #'
 #' @export
 #'

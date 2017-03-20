@@ -10,12 +10,13 @@
 #' \code{testing.pattern} parameter: memoryless for stochastic and
 #' geometrically-distributed waiting times to test (constant hazard); and interval
 #' for deterministic tested after defined waiting time intervals.
+#' If immigration is used those with dat$attr$immig.loc=1 do not test.
 #'
 #' @return
 #' This function returns the \code{dat} object with updated \code{last.neg.test},
 #' \code{diag.status} and \code{diag.time} attributes.
 #'
-#' @keywords module msm het
+#' @keywords module shamp msm het
 #'
 #' @export
 #'

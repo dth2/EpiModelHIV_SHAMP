@@ -1,5 +1,5 @@
 
-#' @title Position Module
+#' @title Position Module for msm and heterosexual contacts.
 #'
 #' @description Module function for establishing sexual role or position in each
 #'              act on the discordant edgelist.
@@ -8,10 +8,11 @@
 #'
 #' @details
 #' The sexual role within each act is determined by each nodes "role identity"
-#' as exclusively receptive, exclusively insertive, or versatile. This function
+#' as exclusively receptive, exclusively insertive, or versatile. For heterosexual dyads
+#' the females node is always recpetive and the male is always incertive.  This function
 #' determines whether the infected or the susceptible partner is the insertive
-#' partner for that act. For the first two role identity types, that is
-#' deterministic based on identity. For versatile-versatile pairs, this is
+#' partner for that act. For male-male dyads the first two role identity types, that is
+#' deterministic based on identity. For male-male versatile-versatile pairs, this is
 #' determined stochastically for each act.
 #'
 #' @return
@@ -19,7 +20,7 @@
 #' attribute for values of whether the infected node is insertive or the
 #' susceptible node is insertive for that act.
 #'
-#' @keywords module msm
+#' @keywords module SHAMP het msm
 #' 
 #' @export
 #'
@@ -39,26 +40,17 @@ position_shamp <- function(dat, at) {
   role.class <- dat$attr$role.class
   ins.quot <- dat$attr$ins.quot
   race <- dat$attr$race
-  sex.p1 <- sex[dal[,1]]
-  sex.p2 <- sex[dal[,2]]
-  
-  ##Temp Make MSM
-  sex.p1[1:50]<"M"
-  sex.p1[1:50]<"M"
-  dal[1:50,"uai"]<-1
-  dal[1:50,"uvi"]<-0
-  
+
+
   vv.iev.B.prob <- dat$param$vv.iev.B.prob
   vv.iev.BI.prob <- dat$param$vv.iev.BI.prob
   vv.iev.H.prob <- dat$param$vv.iev.H.prob
   vv.iev.HI.prob <- dat$param$vv.iev.HI.prob
   vv.iev.W.prob <- dat$param$vv.iev.W.prob
 
-  ## Process for Male Male.
-  num.het <- (sex.p1 == "F") + (sex.p2 == "F")
-  
-  pos.role.class <- role.class[dal[, 1],num.het==0]
-  neg.role.class <- role.class[dal[, 2],num.het==0]
+
+  pos.role.class <- role.class[dal[, 1]]
+  neg.role.class <- role.class[dal[, 2]]
 
 
   ins <- rep(NA, length(pos.role.class))

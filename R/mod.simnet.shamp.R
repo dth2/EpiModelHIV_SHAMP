@@ -1,4 +1,4 @@
-# MSM -----------------------------------------------------------------
+# SHMAP -----------------------------------------------------------------
 
 #' @title Network Resimulation Module
 #'
@@ -7,7 +7,7 @@
 #'
 #' @inheritParams aging_msm
 #'
-#' @keywords module msm
+#' @keywords module shamp
 #'
 #' @export
 #'
@@ -138,7 +138,7 @@ calc_resim_nwstats <- function(dat, at) {
 #' composition effects in exponential-family random graph models." Statistical
 #' Methodology. 2011; 8.4: 319-339.
 #'
-#' @keywords module msm
+#' @keywords module msm shamp
 #'
 #' @export
 #'

@@ -22,7 +22,7 @@
 #' instant network until the \code{\link{simnet_shamp}} module for bookkeeping
 #' purposes.
 #'
-#' @keywords module msm het
+#' @keywords module shamp msm het
 #' @export
 #'
 deaths_shamp <- function(dat, at) {

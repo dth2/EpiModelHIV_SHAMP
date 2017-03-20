@@ -18,7 +18,7 @@
 #' This function returns the \code{dat} object with an updated summary of current
 #' attributes stored in \code{dat$epi}.
 #'
-#' @keywords module msm het
+#' @keywords module SHAMP msm het
 #'
 #' @export
 #'

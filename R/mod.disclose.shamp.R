@@ -11,13 +11,13 @@
 #' distinct time points: at relationship onset for newly formed discordant
 #' pairs; at diagnosis for pairs starting as both negative but with one newly
 #' infected; or post diagnosis for one recently infected. The rates of disclosure
-#' vary at these three points, and also by the partnership type.
+#' vary at these three points, and also by the partnership type race and sexual identity.
 #'
 #' @return
 #' This function returns the \code{dat} object with the updated disclosure list,
 #' on \code{temp$discl.list}.
 #'
-#' @keywords module msm het
+#' @keywords module SHAMP msm het
 #' @export
 #'
 disclose_shamp <- function(dat, at){

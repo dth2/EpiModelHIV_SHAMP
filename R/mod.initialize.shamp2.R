@@ -185,7 +185,7 @@ initialize_shamp <- function(x, param, init, control, s) {
 #  dat$attr$inst.ai.class <- inst.ai.class
 
   # Role class
-  if(num.msm>1){
+
   role.class <- get.vertex.attribute(nw[[1]], "role.class")
   dat$attr$role.class <- role.class
   
@@ -195,7 +195,7 @@ initialize_shamp <- function(x, param, init, control, s) {
   ins.quot[role.class == "R"]  <- 0
   ins.quot[role.class == "V"]  <- runif(sum(role.class == "V"))
   dat$attr$ins.quot <- ins.quot
-  }
+
   
   # HIV-related attributes
   dat <- init_status_shamp(dat)
@@ -236,7 +236,7 @@ initialize_shamp <- function(x, param, init, control, s) {
 #' @param dat Data object created in initialization module.
 #'
 #' @export
-#' @keywords initiation utility msm
+#' @keywords initiation utility shamp
 #'
 init_status_shamp <- function(dat) {
   
@@ -494,7 +494,7 @@ init_status_shamp <- function(dat) {
    }
   
     dat$attr$status <- status
-    dat$attr$aq.class[dat$attr$status==1] <- "L"
+    dat$attr$inf.class[dat$attr$status==1] <- "L"
 
   # Treatment trajectory
   tt.traj <- rep(NA, num)
@@ -589,6 +589,7 @@ init_status_shamp <- function(dat) {
   inf.diag <- rep(NA, num)
   inf.tx <- rep(NA, num)
   inf.stage <- rep(NA, num)
+  inf.class <- rep(NA, num)
 
   time.sex.active <- pmax(1,
                           round((365 / dat$param$time.unit) * age - (365 / dat$param$time.unit) *
@@ -2765,6 +2766,10 @@ init_status_shamp <- function(dat) {
   }
   last.neg.test[selected] <- -tslt
 
+  
+  ##Infection Class
+  selected <- which(status == 1)
+  inf.class[selected] <- "L"
 
   ## Set all onto dat$attr
   dat$attr$stage <- stage
@@ -2784,6 +2789,7 @@ init_status_shamp <- function(dat) {
   dat$attr$inf.diag <- inf.diag
   dat$attr$inf.tx <- inf.tx
   dat$attr$inf.stage <- inf.stage
+  dat$attr$inf.class <- inf.class
 
   return(dat)
 
