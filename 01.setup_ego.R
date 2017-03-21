@@ -3,7 +3,7 @@
 #Load required packages.
 library(EpiModelHIV)
 library(EpiModelHPC)
-#devtools::install_github("statnet/ergm.ego-private", auth_token = "a142079c32553b41c369f006d6c6f214bf626564")
+#devtools::install_github("statnet/ergm.ego-private", auth_token = )
 #devtools::install_github("statnet/tergmLite")
 suppressPackageStartupMessages(library(ergm.ego))
 
