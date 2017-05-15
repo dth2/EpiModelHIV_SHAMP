@@ -36,7 +36,7 @@ Given these transmission probabilities, transmission is stochastically
 simulating by drawing from a binomial distribution for each act conditional
 on the per-act probability.
 }
+\keyword{SHAMP}
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-

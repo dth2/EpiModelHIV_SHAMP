@@ -2,7 +2,7 @@
 % Please edit documentation in R/params.shamp.R
 \name{param_shamp}
 \alias{param_shamp}
-\title{Epidemic Model Parameters}
+\title{Epidemic Model Parameters for SHAMP}
 \usage{
 param_shamp(race.method = 1, time.unit = 7, method = 1,
   last.neg.test.B.f.int = 301, last.neg.test.BI.f.int = 301,
@@ -162,12 +162,11 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   disc.inst.H.msmf.prob = 0, disc.inst.HI.msmf.prob = 0,
   disc.inst.W.msmf.prob = 0, circ.B.prob = 0.874, circ.BI.prob = 0.874,
   circ.H.prob = 0.918, circ.HI.prob = 0.918, circ.W.prob = 0.918,
-  ccr5.B.f.prob = c(0, 0.034), ccr5.BI.f.prob = c(0, 0.034),
-  ccr5.H.f.prob = c(0, 0.034), ccr5.HI.f.prob = c(0, 0.034),
-  ccr5.W.f.prob = c(0.021, 0.176), ccr5.B.m.prob = c(0, 0.034),
-  ccr5.BI.m.prob = c(0, 0.034), ccr5.H.m.prob = c(0, 0.034),
-  ccr5.HI.m.prob = c(0, 0.034), ccr5.W.m.prob = c(0.021, 0.176),
-  ccr5.heteroz.rr = 0.3, num.inst.ai.classes = 1,
+  ccr5.B.f.prob = c(0, 0), ccr5.BI.f.prob = c(0, 0), ccr5.H.f.prob = c(0,
+  0), ccr5.HI.f.prob = c(0, 0), ccr5.W.f.prob = c(0.017, 0),
+  ccr5.B.m.prob = c(0, 0), ccr5.BI.m.prob = c(0, 0), ccr5.H.m.prob = c(0,
+  0), ccr5.HI.m.prob = c(0, 0), ccr5.W.m.prob = c(0.017, 0),
+  ccr5.heteroz.rr = 0, num.inst.ai.classes = 1,
   base.ai.main.B.rate = 0.17, base.ai.main.BI.rate = 0.26,
   base.ai.main.H.rate = 0.23, base.ai.main.HI.rate = 0.26,
   base.ai.main.W.rate = 0.23, base.ai.pers.B.rate = 0.11,
@@ -196,7 +195,6 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   cond.inst.B.prob.het = 0.27, cond.inst.BI.prob.het = 0.27,
   cond.inst.H.prob.het = 0.27, cond.inst.HI.prob.het = 0.27,
   cond.inst.W.prob.het = 0.27, cond.always.prob.corr.het = 0.5,
-  cond.rr.BB = 1, cond.rr.BW = 1, cond.rr.WW = 1,
   cond.diag.main.beta.msm = -0.67, cond.discl.main.beta.msm = -0.85,
   cond.diag.pers.beta.msm = -0.67, cond.discl.pers.beta.msm = -0.85,
   cond.diag.inst.beta.msm = -0.67, cond.discl.inst.beta.msm = -0.85,
@@ -282,12 +280,28 @@ viral load rises per time step from treatment halting until expected value.}
 time step, with \code{"fixed"} based on the number of persons at the
 initial time step and \code{"varying"} based on the current time step.}
 
+\item{msm.frac}{The fraction of males entering the population at each time step 
+as a male that has intercourse exclusivly with other males "msm" - 
+males not designated as msm or msmf are considered "msf".}
+
+\item{msmf.frac}{The fraction of males entering the population at each time step as
+as a male that has intercourse with both males and females "msmf" - 
+males not designated as msm or msmf are considered "msf".}
+
 \item{URAI.prob}{Probability of transmission for a man having unprotected
 receptive anal intercourse with an infected man at set point viral
 load.}
 
 \item{UIAI.prob}{Probability of transmission for an uncircumcised man having
 unprotected insertive anal intercourse with an infected man at set
+point viral load.}
+
+\item{URVI.prob}{Probability of transmission for a woman having unprotected
+receptive vaginal intercourse with an infected man at set point viral
+load.}
+
+\item{UIVI.prob}{Probability of transmission for an uncircumcised man having
+unprotected insertive vaginal intercourse with an infected women at set
 point viral load.}
 
 \item{acute.rr}{Relative risk of infection (compared to that predicted by
@@ -299,29 +313,81 @@ negative insertive partner is circumcised.}
 \item{condom.rr}{Relative risk of infection from anal sex when a condom is
 used.}
 
-\item{circ.B.prob}{Probablity that a black new arrival in the population
-will be circumcised.}
-
-\item{circ.W.prob}{Probablity that a white new arrival in the population
-will be circumcised.}
-
-\item{ccr5.heteroz.rr}{Relative risk of infection for men who are heterozygous
+\item{ccr5.heteroz.rr}{Relative risk of infection for people who are heterozygous
 in the CCR5 mutation.}
 
 \item{num.inst.ai.classes}{Number of quantiles into which men should be
 divided in determining their levels of one-off anal intercourse.}
 
-\item{ai.scale}{General relative scaler for all act rates for model
+\item{ai.scale}{General relative scaler for all ai act rates for model
 calibration.}
 
-\item{cond.rr.BB}{Condom probability scaler for black-black partnerships for
-model calibration purposes.}
+\item{vi.scale}{General relative scaler for all vi act rates for model
+calibration.}
 
-\item{cond.rr.BW}{Condom probability scaler for black-white partnerships for
-model calibration purposes.}
+\item{cond.pers.always.prob.msm}{Fraction of men in male-male casual partnerships who always
+use condoms in those partnerships.}
 
-\item{cond.rr.WW}{Condom probability scaler for white-white partnerships for
-model calibration purposes.}
+\item{cond.inst.always.prob.msm}{Fraction of men in male-male one-time partnerships who always
+use condoms in those partnerships.}
+
+\item{cond.always.prob.corr.msm}{Correlation coefficient for probability of always
+using condoms in both casual and one-off male-male partnerships}
+
+\item{cond.pers.always.prob.het}{Fraction of people in heterosexual casual partnerships who always
+use condoms in those partnerships.}
+
+\item{cond.inst.always.prob.het}{Fraction of people in heterosexual one-time partnerships who always
+use condoms in those partnerships.}
+
+\item{cond.always.prob.corr.het}{Correlation coefficient for probability of always
+using condoms in both casual and one-off heterosexual partnerships}
+
+\item{cond.diag.main.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male main partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.main.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male main partnership if the HIV-infected man has disclosed.}
+
+\item{cond.diag.pers.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male casual partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.pers.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male casual partnership if the HIV-infected man has disclosed
+his status.}
+
+\item{cond.diag.inst.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male one-off partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.inst.beta.msm}{Beta multiplier for the log odds of using a
+condom in a male-male one-off partnership if the HIV-infected man has disclosed
+his status.}
+
+\item{cond.diag.main.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual main partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.main.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual main partnership if the HIV-infected man has disclosed.}
+
+\item{cond.diag.pers.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual casual partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.pers.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual casual partnership if the HIV-infected man has disclosed
+his status.}
+
+\item{cond.diag.inst.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual one-off partnership if the HIV-infected man has been
+diagnosed.}
+
+\item{cond.discl.inst.beta.het}{Beta multiplier for the log odds of using a
+condom in a heterosexual one-off partnership if the HIV-infected man has disclosed
+his status.}
 
 \item{prep.start}{Time step at which the PrEP intervention should start.}
 
@@ -357,190 +423,130 @@ each testing visit.}
 
 \item{...}{Additional arguments passed to the function.}
 
-\item{last.neg.test.B.int}{Time range in days for last negative test for
-black men.}
+\item{last.neg.test.R.S.int}{Time range in days for last negative test for
+race group R where R is a charater (B, BI, H, HI or W) and sex group S
+where s is a charter (f, msf, msm, msmf).}
 
-\item{mean.test.B.int}{Mean intertest interval in days for black MSM who test.}
+\item{mean.test.B.int}{Mean intertest interval in days for race group R where R 
+is a charater (B, BI, H, HI or W) and sex group S
+where s is a charter (f, msf, msm, msmf) who test.}
 
-\item{last.neg.test.W.int}{Time range in days for last negative test for
-white men.}
-
-\item{mean.test.W.int}{Mean intertest interval in days for white MSM who test.}
-
-\item{tt.traj.B.prob}{Proportion of black MSM who enter one of four
+\item{tt.traj.R.S.prob}{Proportion of race group R, where R is a charater (B, BI, H, HI or W), 
+and sex group S, where s is a charter (f, msf, msm, msmf), who enter one of four
 testing/treatment trajectories: never test or treat, test and never
 initiate treatment, test and treated with partial viral suppression,
 and test and treated with full suppression.}
 
-\item{tt.traj.W.prob}{Proportion of white MSM who enter into the four
-testing/treatment trajectories, as defined above.}
+\item{tx.init.R.S.prob}{Probability per time step that a person in race group R, where R is a 
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+who has tested positive will initiate treatment.}
 
-\item{tx.init.B.prob}{Probability per time step that a black MSM who has
-tested positive will initiate treatment.}
+\item{tx.halt.R.S.prob}{Probability per time step that a person in race group R, where R is a 
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+who is currently on treatment will halt treatment.}
 
-\item{tx.init.W.prob}{Probability per time step that a white MSM who has
-tested positive will initiate treatment.}
-
-\item{tx.halt.B.prob}{Probability per time step that a black MSM who is
-currently on treatment will halt treatment.}
-
-\item{tx.halt.W.prob}{Probability per time step that a white MSM who is
-currently on treatment will halt treatment.}
-
-\item{tx.reinit.B.prob}{Probability per time step that a black MSM who is
-not currently on treatment but who has been in the past will
+\item{tx.reinit.R.S.prob}{Probability per time step that a person in race group R, where R is a 
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+who is not currently on treatment but who has been in the past will
 re-initiate treatment.}
 
-\item{tx.reinit.W.prob}{Probability per time step that a white MSM who is
-not currently on treatment but who has been in the past will
-re-initiate treatment.}
+\item{b.R.S.rate}{Rate at which a person in race group R, where R is a 
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+enters the population.}
 
-\item{b.B.rate}{Rate at which black MSM enter the population.}
+\item{disc.outset.main.R.S.prob}{Probability that an HIV-infected person in race group R,
+where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+(f, msf, msm, msmf), will disclose their status at the start of a main partnership.}
 
-\item{b.W.rate}{Rate at which white MSM enter the population.}
+\item{disc.at.diag.main.R.S.prob}{Probability that a a person in race group R, where R is a 
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+already in a main partnership will disclose at the time of diagnosis.}
 
-\item{disc.outset.main.B.prob}{Probability that an HIV-infected black MSM will
-disclose his status at the start of a main partnership.}
-
-\item{disc.outset.main.W.prob}{Probability that an HIV-infected white MSM will
-disclose his status at the start of a main partnership.}
-
-\item{disc.at.diag.main.B.prob}{Probability that a black MSM already in a main
-partnership will disclose at the time of diagnosis.}
-
-\item{disc.at.diag.main.W.prob}{Probability that a white MSM already in a main
-partnership will disclose at the time of diagnosis.}
-
-\item{disc.post.diag.main.B.prob}{Probability that an HIV-infected black MSM
-in a main partnership will disclose his status, assuming he didn't
+\item{disc.post.diag.main.R.S.prob}{Probability that an HIV-infected a person in race group R, 
+where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+(f, msf, msm, msmf), in a main partnership will disclose their status, assuming they didn't
 at the start of the partnership or at diagnosis.}
 
-\item{disc.post.diag.main.W.prob}{Probability that an HIV-infected white MSM
-in a main partnership will disclose his status, assuming he didn't
-at the start of the partnership or at diagnosis.}
+\item{disc.outset.pers.R.S.prob}{Probability that an HIV-infected a person in race group R, 
+where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter
+(f, msf, msm, msmf), will disclose their status at the start of a casual partnership.}
 
-\item{disc.outset.pers.B.prob}{Probability that an HIV-infected black MSM will
-disclose his status at the start of a casual partnership.}
+\item{disc.at.diag.pers.R.S.prob}{Probability that a person in race group R, where R is a
+charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
+already in a casual partnership will disclose at the time of diagnosis.}
 
-\item{disc.outset.pers.W.prob}{Probability that an HIV-infected white MSM will
-disclose his status at the start of a casual partnership.}
-
-\item{disc.at.diag.pers.B.prob}{Probability that a black MSM already in a
-casual partnership will disclose at the time of diagnosis.}
-
-\item{disc.at.diag.pers.W.prob}{Probability that a white MSM already in a
-casual partnership will disclose at the time of diagnosis.}
-
-\item{disc.post.diag.pers.B.prob}{Probability that an HIV-infected black MSM
-in a casual partnership will disclose his status, assuming he
+\item{disc.post.diag.pers.R.S.prob}{Probability that an HIV-infected person in race group R,
+where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
+(f, msf, msm, msmf), in a casual partnership will disclose their status, assuming they
 didn't at the start of the partnership or at diagnosis.}
 
-\item{disc.post.diag.pers.W.prob}{Probability that an HIV-infected white MSM
-in a casual partnership will disclose his status, assuming he
-didn't at the start of the partnership or at diagnosis.}
+\item{disc.inst.R.S.prob}{Probability that an HIV-infected person in race group R, 
+where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter
+(f, msf, msm, msmf), will disclose ther status to a one-off partner.}
 
-\item{disc.inst.B.prob}{Probability that an HIV-infected black MSM will
-disclose his status to a one-off partner.}
+\item{circ.R.prob}{Probablity that a male in race group R, where R is a 
+charater (B, BI, H, HI or W), newly arriving in the population
+will be circumcised.}
 
-\item{disc.inst.W.prob}{Probability that an HIV-infected white MSM will
-disclose his status to a one-off partner.}
-
-\item{ccr5.B.prob}{Vector of length two of frequencies of the Delta 32
+\item{ccr5.R.S.prob}{Vector of length two of frequencies of the Delta 32
 mutation (homozygous and heterozygous, respectively) in the CCR5 gene
-among black MSM.}
+among people in race group R, where R is a charater (B, BI, H, HI or W), 
+and sex group S, where s is a charter (f or m).}
 
-\item{ccr5.W.prob}{Vector of length two of frequencies of the Delta 32
-mutation (homozygous and heterozygous, respectively) in the CCR5 gene
-among white MSM.}
+\item{base.ai.main.R.rate}{Expected coital frequency (for anal intercourse) for males 
+(msm and msmf) in race group R, where R is a charater (B, BI, H, HI or W), 
+in main partnerships (acts per day).}
 
-\item{base.ai.main.BB.rate}{Expected coital frequency in black-black main
-partnerships (acts per day).}
+\item{base.vi.main.R.rate}{Expected coital frequency (for vaginal intercourse) for 
+males and females in race group R, where R is a charater (B, BI, H, HI or W), 
+in main partnerships (acts per day).}
 
-\item{base.ai.main.BW.rate}{Expected coital frequency in black-white main
-partnerships (acts per day).}
+\item{base.ai.pers.R.rate}{Expected coital frequency (for anal intercourse) for males 
+(msm and msmf) in race group R, where R is a charater (B, BI, H, HI or W), 
+in casual partnerships (acts per day).}
 
-\item{base.ai.main.WW.rate}{Expected coital frequency in white-white main
-partnerships (acts per day).}
+\item{base.vi.pers.R.rate}{Expected coital frequency (for vaginal intercourse) for 
+males and females in race group R, where R is a charater (B, BI, H, HI or W), 
+in casual partnerships (acts per day).}
 
-\item{base.ai.pers.BB.rate}{Expected coital frequency in black-black casual
-partnerships (acts per day).}
+\item{cond.main.R.prob.msm}{Probability of condom use by an male of race group R, 
+where R is a charater (B, BI, H, HI or W), in a male-male main partnership.}
 
-\item{base.ai.pers.BW.rate}{Expected coital frequency in black-white casual
-partnerships (acts per day).}
+\item{cond.pers.R.prob.msm}{Of men who are not consistent condom users, per-act
+probability of condom use in a casual male-male partnership by 
+males of race group R, where R is a charater (B, BI, H, HI or W).}
 
-\item{base.ai.pers.WW.rate}{Expected coital frequency in white-white casual
-partnerships (acts per day).}
+\item{cond.inst.R.prob.msm}{Of men who are not consistent condom users, per-act
+probability of condom use in a one-time male-male partnership by 
+males of race group R, where R is a charater (B, BI, H, HI or W).}
 
-\item{cond.main.BB.prob}{Probability of condom use in a black-black main
-partnership.}
+\item{cond.main.R.prob.het}{Probability of condom use by an person of race group R, 
+where R is a charater (B, BI, H, HI or W), in a heterosexual main partnership.}
 
-\item{cond.main.BW.prob}{Probability of condom use in a black-white main
-partnership.}
+\item{cond.pers.R.prob.het}{Of people who are not consistent condom users, per-act
+probability of condom use in a casual heterosexual partnership by 
+people of race group R, where R is a charater (B, BI, H, HI or W).}
 
-\item{cond.main.WW.prob}{Probability of condom use in a white-white main
-partnership.}
+\item{cond.inst.R.prob.het}{Of people who are not consistent condom users, per-act
+probability of condom use in a one-time heterosexual partnership by 
+males of race group R, where R is a charater (B, BI, H, HI or W).}
 
-\item{cond.pers.always.prob}{Fraction of men in casual partnerships who always
-use condoms in those partnerships.}
-
-\item{cond.pers.BB.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a black-black casual partnerships.}
-
-\item{cond.pers.BW.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a black-white casual partnerships.}
-
-\item{cond.pers.WW.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a white-white casual partnerships.}
-
-\item{cond.inst.always.prob}{Fraction of men in instant partnerships who always
-use condoms in those partnerships.}
-
-\item{cond.inst.BB.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a black-black one-off partnerships.}
-
-\item{cond.inst.BW.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a black-white one-off partnerships.}
-
-\item{cond.inst.WW.prob}{Of men who are not consistent condom users, per-act
-probability of condom use in a white-white one-off partnerships.}
-
-\item{cond.always.prob.corr}{Correlation coefficient for probability of always
-using condoms in both casual and one-off}
-
-\item{cond.diag.main.beta}{Beta multiplier for the log odds of using a
-condom in a main partnership if the HIV-infected man has been
-diagnosed.}
-
-\item{cond.discl.main.beta}{Beta multiplier for the log odds of using a
-condom in a main partnership if the HIV-infected man has disclosed.}
-
-\item{cond.diag.pers.beta}{Beta multiplier for the log odds of using a
-condom in a casual partnership if the HIV-infected man has been
-diagnosed.}
-
-\item{cond.discl.pers.beta}{Beta multiplier for the log odds of using a
-condom in a casual partnership if the HIV-infected man has disclosed
-his status.}
-
-\item{cond.diag.inst.beta}{Beta multiplier for the log odds of using a
-condom in a one-off partnership if the HIV-infected man has been
-diagnosed.}
-
-\item{cond.discl.inst.beta}{Beta multiplier for the log odds of using a
-condom in a one-off partnership if the HIV-infected man has disclosed
-his status.}
-
-\item{vv.iev.BB.prob}{Probability that in a black-black partnership of
-two versatile men, they will engage in intra-event versatility
+\item{vv.iev.R.prob}{Probability that a person of group R, where R is a charater (B, BI, H, HI or W),
+in a male male relationship will engage in intra-event versatility
 ("flipping") given that they're having AI.}
 
-\item{vv.iev.BW.prob}{Probability that in a black-white partnership of
-two versatile men, they will engage in intra-event versatility
-("flipping") given that they're having AI.}
+\item{immig.depart.R.S}{The probability per time step that a person of group R,
+where R is a charater (BI or HI), and sex S, were S is a charater (f or m), leaves the population
+being simulated by returning to their home country.}
 
-\item{vv.iev.WW.prob}{Probability that in a white-white partnership of
-two versatile men, they will engage in intra-event versatility
-("flipping") given that they're having AI.}
+\item{immig.return.R.S}{The probability per time step that a person of group R,
+where R is a charater (BI or HI), and sex S, were S is a charater (f or m), who has left
+the population being simulated by returning to their home country returns to the population
+being simulated.}
+
+\item{immig.aq.prob.R.S}{The probability per time step that a person of group R,
+where R is a charater (BI or HI), and sex S, were S is a charater (f or m), who has left
+the population being simulated aquires HIV while in their home country.}
 }
 \value{
 A list object of class \code{param_shamp}, which can be passed to
@@ -551,4 +557,3 @@ Sets the epidemic parameters for stochastic network models
              simulated with \code{\link{netsim}} for EpiModelHIV
 }
 \keyword{shamp}
-

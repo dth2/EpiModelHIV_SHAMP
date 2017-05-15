@@ -16,6 +16,5 @@ individual-level attributes, and summary statistics.}
 Module function to track the risk history of uninfected persons
              for purpose of intervention targeting.
 }
+\keyword{SHAMP}
 \keyword{module}
-\keyword{msm}
-

@@ -33,7 +33,5 @@ non-adherence is associated with an equal level of increase to VL. All persons
 who have reached AIDS, regardless of how they arrived, have a similar rate of
 VL increase.
 }
-\keyword{het}
 \keyword{module}
-\keyword{msm}
-
+\keyword{shamp}

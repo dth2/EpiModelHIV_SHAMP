@@ -24,8 +24,9 @@ This testing module supports two testing parameterizations, input via the
 \code{testing.pattern} parameter: memoryless for stochastic and
 geometrically-distributed waiting times to test (constant hazard); and interval
 for deterministic tested after defined waiting time intervals.
+If immigration is used those with dat$attr$immig.loc=1 do not test.
 }
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-
+\keyword{shamp}

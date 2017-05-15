@@ -26,11 +26,10 @@ tested, tested but never treated, treated and achieving partial HIV viral
 suppression, or treated with full viral suppression (these types are stored
 as individual-level attributes in \code{tt.traj}). This module initiates ART
 for treatment naive persons in the latter two types, and then cycles them on
-and off treatment conditional on empirical race-specific adherence rates. ART
+and off treatment conditional on empirical race and sexual idenitity adherence rates. ART
 initiation, non-adherence, and restarting are all stochastically simulated
 based on binomial statistical models.
 }
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-
