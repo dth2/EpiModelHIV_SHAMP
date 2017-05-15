@@ -20,13 +20,14 @@
 #' @export
 #' @keywords module HET MSM ego 
 #'
-initialize_shamp <- function(x, param, init, control, s) {
+initialize_shamp <- function(x, param, init, control, data.params, s) {
 
   # Master data list
   dat <- list()
   dat$param <- param
   dat$init <- init
   dat$control <- control
+  dat$data.params <- data.params
 
   dat$attr <- list()
   dat$stats <- list()
@@ -400,22 +401,22 @@ init_status_shamp <- function(dat) {
   
 
   if(num.het>0){
-  if (any(probInfB.f <= 0 | probInfBI.f <= 0 | probInfH.f <= 0 | probInfHI.f <= 0 | probInfW.f <= 0 | 
-          probInfB.msf <= 0 | probInfBI.msf <= 0 | probInfH.msf <= 0 | probInfHI.msf <= 0 | probInfW.msf <= 0)) {
+  if (any(probInfB.f < 0 , probInfBI.f < 0 , probInfH.f < 0 , probInfHI.f < 0 , probInfW.f < 0 , 
+          probInfB.msf < 0 , probInfBI.msf < 0 , probInfH.msf < 0 , probInfHI.msf < 0 , probInfW.msf < 0)) {
     stop("Slope of initial prevalence by age must be sufficiently low to ",
          "avoid non-positive probabilities.", call. = FALSE)
   }
 }
 
   if(num.msm>0){
-  if (any(probInfB.msm <= 0 | probInfBI.msm <= 0 | probInfH.msm <= 0 | probInfHI.msm <= 0 | probInfW.msm <= 0)) {
+  if (any(probInfB.msm < 0 , probInfBI.msm < 0 , probInfH.msm < 0 , probInfHI.msm < 0 , probInfW.msm < 0)) {
     stop("Slope of initial prevalence by age must be sufficiently low to ",
          "avoid non-positive probabilities.", call. = FALSE)
   }
   }  
 
   if(num.bi>0){
-    if (any(probInfB.msmf <= 0 | probInfBI.msmf <= 0 | probInfH.msmf <= 0 | probInfHI.msmf <= 0 | probInfW.msmf <= 0)) {
+    if (any(probInfB.msmf < 0 , probInfBI.msmf < 0 , probInfH.msmf < 0 , probInfHI.msmf < 0 , probInfW.msmf < 0)) {
       stop("Slope of initial prevalence by age must be sufficiently low to ",
            "avoid non-positive probabilities.", call. = FALSE)
     }
