@@ -23,13 +23,14 @@ Module function for setting the number of sexual acts on the
 }
 \details{
 The number of acts at each time step is specified as a function of the race of
-both members in a pair.  Rates are averages of the reported rates by each race.
+both members in a pair and whether the relationship is male male
+or heterosexual.  Rates are averages of the reported rates by each race.
 For one-off partnerships, this is deterministically
 set at 1, whereas for main and causal partnerships it is a stochastic draw
 from a Poisson distribution. The number of total acts may further be modified
 by the level of HIV viral suppression in an infected person.
 }
+\keyword{SHAMP}
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-

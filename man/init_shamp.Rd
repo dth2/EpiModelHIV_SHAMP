@@ -2,22 +2,21 @@
 % Please edit documentation in R/params.shamp.R
 \name{init_shamp}
 \alias{init_shamp}
-\title{Epidemic Model Initial Conditions}
+\title{Epidemic Model Initial Conditions for SHAMP}
 \usage{
-init_shamp(prev.B.f = 0.005, prev.BI.f = 0.005, prev.H.f = 0.005,
-  prev.HI.f = 0.005, prev.W.f = 0.005, prev.B.msf = 0.005,
-  prev.BI.msf = 0.005, prev.H.msf = 0.005, prev.HI.msf = 0.005,
-  prev.W.msf = 0.5, prev.B.msm = 0.1, prev.BI.msm = 0.1,
-  prev.H.msm = 0.1, prev.HI.msm = 0.1, prev.W.msm = 0.1,
-  prev.B.msmf = 0.05, prev.BI.msmf = 0.05, prev.H.msmf = 0.05,
-  prev.HI.msmf = 0.05, prev.W.msmf = 0.05, ...)
+init_shamp(prev.B.f = 0, prev.BI.f = 0, prev.H.f = 0, prev.HI.f = 0,
+  prev.W.f = 0, prev.B.msf = 0, prev.BI.msf = 0, prev.H.msf = 0,
+  prev.HI.msf = 0, prev.W.msf = 0, prev.B.msm = 0, prev.BI.msm = 0,
+  prev.H.msm = 0, prev.HI.msm = 0, prev.W.msm = 0, prev.B.msmf = 0,
+  prev.BI.msmf = 0, prev.H.msmf = 0, prev.HI.msmf = 0, prev.W.msmf = 0,
+  ...)
 }
 \arguments{
 \item{...}{Additional arguments passed to function.}
 
-\item{prev.B}{Initial disease prevalence among black MSM.}
-
-\item{prev.W}{Initial disease prevalence among white MSM.}
+\item{prev.R.S}{Initial disease prevalence among persons of group R,
+where R is a charater (B, BI, H, HI or W), and sex group S
+      where s is a charter (f, msf, msm, msmf)..}
 }
 \value{
 A list object of class \code{init_shamp}, which can be passed to EpiModel
@@ -28,4 +27,3 @@ Sets the initial conditions for a stochastic epidemic models
              simulated with \code{\link{netsim}}.
 }
 \keyword{SHAMP}
-

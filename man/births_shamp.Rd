@@ -23,8 +23,8 @@ Module function for births or entries into the sexually active
 \details{
 New population members are added based on expected numbers of entries among
 all five race/immigrant groups and two sexes, stochastically determined with draws from Poisson
-distributions. THe proportion of men who are MSM are determined by \code{msm.frac}. 
-THe proportion of men who are MSMF are determined by \code{msmf.frac}. 
+distributions. The proportion of men who are MSM are determined by \code{msm.frac}. 
+The proportion of men who are MSMF are determined by \code{msmf.frac}. 
 For each new entry, a set of attributes is added for that node,
 and the nodes are added onto the network objects. Only attributes that are
 a part of the network model formula are updated as vertex attributes on the
@@ -33,4 +33,3 @@ network objects.
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-

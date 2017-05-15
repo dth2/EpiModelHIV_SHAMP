@@ -25,9 +25,9 @@ Persons who are infected may disclose their status to partners at three
 distinct time points: at relationship onset for newly formed discordant
 pairs; at diagnosis for pairs starting as both negative but with one newly
 infected; or post diagnosis for one recently infected. The rates of disclosure
-vary at these three points, and also by the partnership type.
+vary at these three points, and also by the partnership type race and sexual identity.
 }
+\keyword{SHAMP}
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-

@@ -15,6 +15,5 @@ Sets the initial individual-level disease status of persons
              infected persons.
 }
 \keyword{initiation}
-\keyword{msm}
+\keyword{shamp}
 \keyword{utility}
-

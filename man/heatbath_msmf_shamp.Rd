@@ -29,10 +29,11 @@ which incorperates race specific prevalence estiamtes for determining risk.
 After transmission events, individual-level attributes for the infected
 persons are updated and summary statistics for incidence calculated.
 
-#' The input values \code{dat$param$msm.aq.prob.'R'} were R is a race specific probability taking values (B,BI,H,HI,W).
+The input values \code{dat$param$msm.aq.prob.'R'} 
+where R is a race specific probability taking values (B,BI,H,HI,W).
 }
+\keyword{SHAMP}
 \keyword{heatbath}
 \keyword{module}
 \keyword{msm}
 \keyword{msmf}
-

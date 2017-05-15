@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod.condoms.shamp.R
 \name{condoms_shamp}
 \alias{condoms_shamp}
-\title{Condom Use Module}
+\title{Condom Use Module for 5 race groups and het/msm.}
 \usage{
 condoms_shamp(dat, at)
 }
@@ -14,7 +14,8 @@ individual-level attributes, and summary statistics.}
 }
 \value{
 Updates the discordant edgelist with a \code{uai} variable indicating whether
-condoms were used in that act.
+condoms were used in that act for male-male dyads and a \code{uvi} variable 
+indicating whether condoms were used in that act for heterosexual dyads.
 }
 \description{
 Module function stochastically simulates potential condom use
@@ -22,11 +23,15 @@ Module function stochastically simulates potential condom use
 }
 \details{
 For each act on the discordant edgelist, condom use is stochastically simulated
-based on the partnership type and racial combination of the dyad. Other
+based on the partnership type, racial combination of the dyad and whether the
+relationship is male-male (ai) or hetersexual (vi). Other
 modifiers for the probability of condom use in that pair are diagnosis of
 disease, disclosure of status, and full or partial HIV viral suppression
 given HIV anti-retroviral therapy.
 }
+\keyword{SHAMP}
+\keyword{ai}
+\keyword{het}
 \keyword{module}
 \keyword{msm}
-
+\keyword{vi}

@@ -12,9 +12,9 @@ control_shamp(simno = 1, nsims = 1, ncores = 1, nsteps = 100,
   resim_nets.FUN = simnet_shamp, disclose.FUN = disclose_shamp,
   acts.FUN = acts_shamp, condoms.FUN = condoms_shamp,
   riskhist.FUN = riskhist_shamp, position.FUN = position_shamp,
-  trans.FUN = trans_shamp, heatbath.FUN = heatbath_msmf_shamp,
-  immigration.FUN = immigration_shamp, prev.FUN = prevalence_shamp,
-  save.nwstats = FALSE, verbose = TRUE, verbose.int = 1, ...)
+  heatbath.FUN = heatbath_msmf_shamp, immigration.FUN = immigration_shamp,
+  prev.FUN = prevalence_shamp, save.nwstats = FALSE, verbose = TRUE,
+  verbose.int = 1, ...)
 }
 \arguments{
 \item{simno}{Unique ID for the simulation run, used for file naming purposes
@@ -66,8 +66,12 @@ persons in the population.}
 
 \item{position.FUN}{Module function to simulate sexual position within acts.}
 
-\item{trans.FUN}{Module function to stochastically simulate disease transmission
+\item{heatbath.FUN}{Module function to stochastically simulate disease aquisition by msmf via 
+contact with an unsimulated msm population. 
 over acts given individual and dyadic attributes.}
+
+\item{immigration.FUN}{Module function to stochastically simulate disease aquisition by migrants
+via conatct with unsimulated populations in home counties during return trips.}
 
 \item{prev.FUN}{Module function to calculate prevalence summary statistics.}
 
@@ -86,6 +90,9 @@ progress is printed.}
 
 \item{roleclass.FUN}{Module function for transitions in sexual roles.}
 
+\item{trans.FUN}{Module function to stochastically simulate disease transmission
+over acts given individual and dyadic attributes.}
+
 \item{verbose.FUN}{Module function to print model progress to the console or
 external text files.}
 }
@@ -97,5 +104,4 @@ EpiModel function \code{netsim}.
 Sets the controls for stochastic network models simulated with
              \code{\link{netsim}}.
 }
-\keyword{msm}
-
+\keyword{SHAMP}

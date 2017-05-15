@@ -24,15 +24,14 @@ Stochastically simulates disease transmission from the heat bath given the curre
 }
 \details{
 This function takes all active HIV negative MSMF nodes and calculates a
-transmission probability for each individual based race specific exposure to the heatbath
+transmission probability for each individual based on race specific exposure to the heatbath
 which incorperates race specific prevalence estiamtes for determining risk.
 After transmission events, individual-level attributes for the infected
 persons are updated and summary statistics for incidence calculated.
 
-#' The input values \code{dat$param$msm.aq.prob.'R'} were R is a race specific probability taking values (B,BI,H,HI,W).
+The input values \code{dat$param$msm.aq.prob.'R'} were R is a race specific probability taking values (B,BI,H,HI,W).
 }
 \keyword{heatbath}
 \keyword{module}
 \keyword{msm}
 \keyword{msmf}
-
