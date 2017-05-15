@@ -38,4 +38,3 @@ off treatment exceeds a time threshold specified in the \code{max.time.off.tx.fu
 parameter.
 }
 \keyword{module}
-

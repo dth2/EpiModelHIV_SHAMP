@@ -14,9 +14,10 @@ individual-level attributes, and summary statistics.}
 }
 \description{
 Module function for implementation and uptake of pre-exposure
-             prophylaxis (PrEP) to prevent HIV infection.
+             prophylaxis (PrEP) to prevent HIV infection.  Only msm and msmf are eligible.
+             If dat$attr$immig.loc=1 PrEP can not be started or re-initiated.
 }
-\keyword{het}
 \keyword{module}
 \keyword{msm}
-
+\keyword{msmf}
+\keyword{shamp}

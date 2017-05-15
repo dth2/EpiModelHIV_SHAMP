@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod.position.shamp.R
 \name{position_shamp}
 \alias{position_shamp}
-\title{Position Module}
+\title{Position Module for msm and heterosexual contacts.}
 \usage{
 position_shamp(dat, at)
 }
@@ -23,12 +23,14 @@ Module function for establishing sexual role or position in each
 }
 \details{
 The sexual role within each act is determined by each nodes "role identity"
-as exclusively receptive, exclusively insertive, or versatile. This function
+as exclusively receptive, exclusively insertive, or versatile. For heterosexual dyads
+the females node is always recpetive and the male is always incertive.  This function
 determines whether the infected or the susceptible partner is the insertive
-partner for that act. For the first two role identity types, that is
-deterministic based on identity. For versatile-versatile pairs, this is
+partner for that act. For male-male dyads the first two role identity types, that is
+deterministic based on identity. For male-male versatile-versatile pairs, this is
 determined stochastically for each act.
 }
+\keyword{SHAMP}
+\keyword{het}
 \keyword{module}
 \keyword{msm}
-

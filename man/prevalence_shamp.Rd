@@ -28,7 +28,7 @@ statistics for times 2 onward. Incidence statistics (e.g., number of new
 infections or deaths) are calculated within the modules as they depend on
 vectors that are not stored external to the module.
 }
+\keyword{SHAMP}
 \keyword{het}
 \keyword{module}
 \keyword{msm}
-
