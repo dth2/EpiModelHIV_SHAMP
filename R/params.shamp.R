@@ -580,16 +580,16 @@ param_shamp <- function(race.method = 1,
                       circ.HI.prob = 0.918,
                       circ.W.prob = 0.918,
                       
-                      ccr5.B.f.prob = c(0, 0.034),
-                      ccr5.BI.f.prob = c(0, 0.034),
-                      ccr5.H.f.prob = c(0, 0.034),
-                      ccr5.HI.f.prob = c(0, 0.034),
-                      ccr5.W.f.prob = c(0.021, 0.176),
-                      ccr5.B.m.prob = c(0, 0.034),
-                      ccr5.BI.m.prob = c(0, 0.034),
-                      ccr5.H.m.prob = c(0, 0.034),
-                      ccr5.HI.m.prob = c(0, 0.034),
-                      ccr5.W.m.prob = c(0.021, 0.176),
+                      ccr5.B.f.prob = c(0, 0.0),
+                      ccr5.BI.f.prob = c(0, 0.0),
+                      ccr5.H.f.prob = c(0, 0.0),
+                      ccr5.HI.f.prob = c(0, 0.0),
+                      ccr5.W.f.prob = c(0.017, 0.0),
+                      ccr5.B.m.prob = c(0, 0.0),
+                      ccr5.BI.m.prob = c(0, 0.0),
+                      ccr5.H.m.prob = c(0, 0.0),
+                      ccr5.HI.m.prob = c(0, 0.0),
+                      ccr5.W.m.prob = c(0.017, 0.0),
                       ccr5.heteroz.rr = 0,
 
                       num.inst.ai.classes = 1,
@@ -796,52 +796,52 @@ param_shamp <- function(race.method = 1,
 #' @keywords SHAMP
 #'
 #' @export
-init_shamp <- function(prev.B.f = 0.005,
-                     prev.BI.f =0.005,
-                     prev.H.f =0.005,
-                     prev.HI.f =0.005,
-                     prev.W.f = 0.005,
-                     prev.B.msf = 0.005,
-                     prev.BI.msf =0.005,
-                     prev.H.msf =0.005,
-                     prev.HI.msf =0.005,
-                     prev.W.msf = 0.5,
-                     prev.B.msm = 0.1,
-                     prev.BI.msm =0.1,
-                     prev.H.msm =0.1,
-                     prev.HI.msm =0.1,
-                     prev.W.msm = 0.1,
-                     prev.B.msmf = 0.05,
-                     prev.BI.msmf =0.05,
-                     prev.H.msmf =0.05,
-                     prev.HI.msmf =0.05,
-                     prev.W.msmf = 0.05,
+init_shamp <- function(prev.B.f = 0.0,
+                     prev.BI.f =0.0,
+                     prev.H.f =0.0,
+                     prev.HI.f =0.0,
+                     prev.W.f = 0.0,
+                     prev.B.msf = 0.0,
+                     prev.BI.msf =0.0,
+                     prev.H.msf =0.0,
+                     prev.HI.msf =0.0,
+                     prev.W.msf = 0.0,
+                     prev.B.msm = 0.0,
+                     prev.BI.msm =0.0,
+                     prev.H.msm =0.0,
+                     prev.HI.msm =0.0,
+                     prev.W.msm = 0.0,
+                     prev.B.msmf = 0.0,
+                     prev.BI.msmf =0.0,
+                     prev.H.msmf =0.0,
+                     prev.HI.msmf =0.0,
+                     prev.W.msmf = 0.0,
                      ...) {
 
   p <- get_args(formal.args = formals(sys.function()),
                 dot.args = list(...))
 
   
-  p$init.prev.age.slope.B.f <- prev.B.f / 38
-  p$init.prev.age.slope.BI.f <- prev.BI.f / 38
-  p$init.prev.age.slope.H.f <- prev.H.f / 38
-  p$init.prev.age.slope.HI.f <- prev.HI.f / 38
-  p$init.prev.age.slope.W.f <- prev.W.f / 38
-  p$init.prev.age.slope.B.msf <- prev.B.msf / 38
-  p$init.prev.age.slope.BI.msf <- prev.BI.msf / 38
-  p$init.prev.age.slope.H.msf <- prev.H.msf / 38
-  p$init.prev.age.slope.HI.msf <- prev.HI.msf / 38
-  p$init.prev.age.slope.W.msf <- prev.W.msf / 38
-  p$init.prev.age.slope.B.msm <- prev.B.msm / 38
-  p$init.prev.age.slope.BI.msm <- prev.BI.msm / 38
-  p$init.prev.age.slope.H.msm <- prev.H.msm / 38
-  p$init.prev.age.slope.HI.msm <- prev.HI.msm / 38
-  p$init.prev.age.slope.W.msm <- prev.W.msm / 38
-  p$init.prev.age.slope.B.msmf <- prev.B.msmf / 38
-  p$init.prev.age.slope.BI.msmf <- prev.BI.msmf / 38
-  p$init.prev.age.slope.H.msmf <- prev.H.msmf / 38
-  p$init.prev.age.slope.HI.msmf <- prev.HI.msmf / 38
-  p$init.prev.age.slope.W.msmf <- prev.W.msmf / 38
+  p$init.prev.age.slope.B.f <- prev.B.f / 41
+  p$init.prev.age.slope.BI.f <- prev.BI.f / 41
+  p$init.prev.age.slope.H.f <- prev.H.f / 41
+  p$init.prev.age.slope.HI.f <- prev.HI.f / 41
+  p$init.prev.age.slope.W.f <- prev.W.f / 41
+  p$init.prev.age.slope.B.msf <- prev.B.msf / 41
+  p$init.prev.age.slope.BI.msf <- prev.BI.msf / 41
+  p$init.prev.age.slope.H.msf <- prev.H.msf / 41
+  p$init.prev.age.slope.HI.msf <- prev.HI.msf / 41
+  p$init.prev.age.slope.W.msf <- prev.W.msf / 41
+  p$init.prev.age.slope.B.msm <- prev.B.msm / 41
+  p$init.prev.age.slope.BI.msm <- prev.BI.msm / 41
+  p$init.prev.age.slope.H.msm <- prev.H.msm / 41
+  p$init.prev.age.slope.HI.msm <- prev.HI.msm / 41
+  p$init.prev.age.slope.W.msm <- prev.W.msm / 41
+  p$init.prev.age.slope.B.msmf <- prev.B.msmf / 41
+  p$init.prev.age.slope.BI.msmf <- prev.BI.msmf / 41
+  p$init.prev.age.slope.H.msmf <- prev.H.msmf / 41
+  p$init.prev.age.slope.HI.msmf <- prev.HI.msmf / 41
+  p$init.prev.age.slope.W.msmf <- prev.W.msmf / 41
  
 
   class(p) <- "init.net"
@@ -932,7 +932,7 @@ control_shamp <- function(simno = 1,
                         condoms.FUN = condoms_shamp,
                         riskhist.FUN = riskhist_shamp,
                         position.FUN = position_shamp,
-                        trans.FUN = trans_shamp,
+                        #trans.FUN = trans_shamp,
                         heatbath.FUN = heatbath_msmf_shamp,
                         immigration.FUN = immigration_shamp,
                         prev.FUN = prevalence_shamp,
