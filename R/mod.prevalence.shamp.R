@@ -154,6 +154,7 @@ prevalence_shamp <- function(dat, at) {
     dat$epi$nBirths <- rNA
     dat$epi$dth.gen <- rNA
     dat$epi$dth.dis <- rNA
+    dat$epi$dth.age <- rNA
     dat$epi$incid <- rNA
 
     dat$epi$prepCurr <- rNA
