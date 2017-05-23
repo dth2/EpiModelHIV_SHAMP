@@ -92,6 +92,9 @@ deaths_shamp <- function(dat, at) {
 
   dth.all <- NULL
   dth.all <- unique(c(dth.gen, dth.dis))
+  
+  ##Those that will age out this time step.
+  dth.age<-which(age >= dat$param$exit.age)
 
   if (length(dth.all) > 0) {
     dat$attr$active[dth.all] <- 0
@@ -105,10 +108,12 @@ deaths_shamp <- function(dat, at) {
   }
 
 
-  ## Summary Output
-  dat$epi$dth.gen[at] <- length(dth.gen)
-  dat$epi$dth.dis[at] <- length(dth.dis)
 
+  ## Summary Output
+  dat$epi$dth.gen[at] <- max(0,length(dth.gen)-length(dth.age))
+  dat$epi$dth.dis[at] <- max(0,length(dth.dis))
+  dat$epi$dth.age[at] <-max(0,length(dth.age))
+  
   return(dat)
 }
 
