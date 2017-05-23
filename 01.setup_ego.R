@@ -10,10 +10,11 @@ suppressPackageStartupMessages(library(ergm.ego))
 #Load the ego and alter data frames and look at them
 load("~/SHAMP/egonet/data/nsfg.egodata.rda")
 str(nsfg.egodata)
-data.params<-NULL
+data.params<-list ()
 
 #change the age range to 18-59.
 nsfg.egodata$egos$age<-sample(18:59, size=length(nsfg.egodata$egos$age), replace = TRUE, prob = NULL)
+nsfg.egodata$egos$sqrt.age<-sqrt(nsfg.egodata$egos$age)
 
 ##TEMP get rid of race "O".
 nsfg.egodata$egos$race<-ifelse(nsfg.egodata$egos$race=="O","W",nsfg.egodata$egos$race)
@@ -26,8 +27,8 @@ nsfg.egodata$egos$deg.pers<-as.numeric(nsfg.egodata$egos$casual)
 nsfg.egodata$egos$deg.main<-as.numeric(nsfg.egodata$egos$main)
 
 
-new_data<-input_shamp(nsfg.egodata,data.params,immigration=TRUE, msm.msmf=TRUE)
-params_data<-as.list(new_data[1])
+new_data<-input_shamp(nsfg.egodata, data.params, immigration=TRUE, msm.msmf=TRUE)
+data.params<-as.list(new_data[1])
 
 
 
@@ -72,7 +73,7 @@ sim.size<-38362
 
 
 # Mean durations
-diss_m = ~offset(edges)
+diss_m = ~offset(edges) 
 
 diss_c = ~offset(edges)
 
@@ -140,11 +141,11 @@ exp.mort <- (mean(asmr.B.f[ages]) + mean(asmr.BI.f[ages]) + mean(asmr.H.f[ages])
              + mean(asmr.HI.m[ages]) + mean(asmr.W.m[ages]) ) / 10
 
 coef.diss_m <- dissolution_coefs(dissolution = diss_m,
-                               duration = params_data[[1]]$durs_m / time.unit,
+                               duration = data.params[[1]]$durs_m / time.unit,
                                d.rate = exp.mort)
 
 coef.diss_c <- dissolution_coefs(dissolution = diss_c,
-                               duration = params_data[[1]]$durs_c / time.unit,
+                               duration = data.params[[1]]$durs_c / time.unit,
                                d.rate = exp.mort)
 
 
@@ -191,13 +192,18 @@ fit.i <- list(fit= fit.i, formation=fit.i$formula, target.stats= target.stats_i,
               coef.form.crude= coef.form.crude_i, coef.diss=coef.diss_i, constraints= constraints_i,
               edapprox=TRUE)
 
-param <- param_shamp()
+param <- param_shamp(data.params)
 init <- init_shamp()
-control <- control_shamp(nsteps = 3)
-#est <- list(fit.m, fit.c, fit.i)
-#save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
+control <- control_shamp(nsteps = 5)
+est <- list(fit.m, fit.c, fit.i)
+save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 
 load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 
-netsim(est, param, init, control)
+sim<-netsim(est, param, init, control)
+save(sim, file = "~/EpiModelHIV_shamp_modeling/scenarios/sim.rda")
+save(demog4, file = "~/EpiModelHIV_shamp_modeling/scenarios/demogs.rda")
+save(c(demog4,demog52,demog104,demog1040), file = "~/EpiModelHIV_shamp_modeling/scenarios/demogs.rda")
+
+
 #sim <- netsim(est, param, init, control)
