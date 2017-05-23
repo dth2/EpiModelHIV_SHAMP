@@ -20,14 +20,13 @@
 #' @export
 #' @keywords module HET MSM ego 
 #'
-initialize_shamp <- function(x, param, init, control, data.params, s) {
+initialize_shamp <- function(x, param, init, control, s) {
 
   # Master data list
   dat <- list()
   dat$param <- param
   dat$init <- init
   dat$control <- control
-  dat$data.params <- data.params
 
   dat$attr <- list()
   dat$stats <- list()
@@ -127,8 +126,13 @@ initialize_shamp <- function(x, param, init, control, data.params, s) {
   dat$temp$max.uid <- num
 
   # Age
-  dat$attr$sqrt.age <- get.vertex.attribute(nw[[1]], "sqrt.age")
-  dat$attr$age <- dat$attr$sqrt.age^2
+  dat$attr$age <- get.vertex.attribute(nw[[1]], "age")
+  partial<-(0:51)* (time.unit / 365)
+  partial<-sample(partial,length(dat$attr$age),replace=TRUE)
+  
+  dat$attr$age<-dat$attr$age+partial
+  
+  dat$attr$sqrt.age <- sqrt(dat$attr$age)
 
   # Risk group
   dat$attr$riskg <- get.vertex.attribute(nw[[1]], "riskg")
