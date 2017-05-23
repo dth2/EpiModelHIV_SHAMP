@@ -217,7 +217,19 @@ if(length(alter.list>0)){warning("OT alters deleted: missing values",call. = FAL
   data.params$demog.list<-as.numeric(names(temp))
   data.params$demog.dist<-as.numeric(temp)
   data.params$demog.dist<-data.params$demog.dist/(sum(data.params$demog.dist))
+  data.params$sex.groups<-sex.groups
+  data.params$race.groups<-race.groups
+  data.params$age.groups<-age.groups
   
+  ##Weight the demog.dist vector
+  if(any(data$egos$weight>0)){
+    for(i in 1:(length(data.params$demog.list))){
+      ids<-which(data$egos$demog.cat==data.params$demog.list[i])
+      weight<-mean(data$egos$weight[ids])
+      data.params$demog.dist[i]<-data.params$demog.dist[i]*weight}
+  } 
+  
+  data.params$demog.dist<-data.params$demog.dist/mean(data$egos$weight)
   #class(data.params) <- "data.params"
  
   return(list(data.params,data))
