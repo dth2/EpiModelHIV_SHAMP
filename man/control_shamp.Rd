@@ -5,10 +5,10 @@
 \title{Epidemic Model Control Settings}
 \usage{
 control_shamp(simno = 1, nsims = 1, ncores = 1, nsteps = 100,
-  start = 1, initialize.FUN = initialize_shamp, aging.FUN = aging_msm,
-  deaths.FUN = deaths_shamp, births.FUN = births_shamp2,
-  test.FUN = test_shamp, tx.FUN = tx_shamp, prep.FUN = prep_shamp,
-  progress.FUN = progress_msm, vl.FUN = vl_shamp,
+  start = 1, initialize.FUN = initialize_shamp, size.test.FUN = size.test,
+  aging.FUN = aging_msm, deaths.FUN = deaths_shamp,
+  births.FUN = births_shamp2, test.FUN = test_shamp, tx.FUN = tx_shamp,
+  prep.FUN = prep_shamp, progress.FUN = progress_msm, vl.FUN = vl_shamp,
   resim_nets.FUN = simnet_shamp, disclose.FUN = disclose_shamp,
   acts.FUN = acts_shamp, condoms.FUN = condoms_shamp,
   riskhist.FUN = riskhist_shamp, position.FUN = position_shamp,
