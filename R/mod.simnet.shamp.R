@@ -26,6 +26,7 @@ simnet_shamp <- function(dat, at) {
   }
   dat <- tergmLite::updateModelTermInputs(dat, network = 1)
   
+
   dat$el[[1]] <- tergmLite::simulate_network(p = dat$p[[1]],
                                              el = dat$el[[1]],
                                              coef.form = nwparam.m$coef.form,
