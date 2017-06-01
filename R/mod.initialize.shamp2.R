@@ -250,33 +250,33 @@ init_status_shamp <- function(dat) {
   sex<- dat$attr$sex
   sex.ident<-dat$attr$sex.ident
   
-  num.msm<-sum(dat$attr$sex.ident=="msm")
-  num.het<-sum(dat$attr$sex.ident=="f")+sum(dat$attr$sex.ident=="msf")
-  num.bi<-sum(dat$attr$sex.ident=="msmf")
+  num.msm<-max(0,sum(dat$attr$sex.ident=="msm"))
+  num.het<-max(0,sum(dat$attr$sex.ident=="f")+sum(dat$attr$sex.ident=="msf"))
+  num.bi<-max(0,sum(dat$attr$sex.ident=="msmf"))
                             
-  num.B.f <- length(which(dat$attr$race == "B" & dat$attr$sex.ident=="f"))
-  num.BI.f <- length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="f"))
-  num.H.f <- length(which(dat$attr$race == "H" & dat$attr$sex.ident=="f"))
-  num.HI.f <- length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="f"))
-  num.W.f <- length(which(dat$attr$race == "W" & dat$attr$sex.ident=="f"))
+  num.B.f <- max(0,length(which(dat$attr$race == "B" & dat$attr$sex.ident=="f")))
+  num.BI.f <- max(0,length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="f")))
+  num.H.f <- max(0,length(which(dat$attr$race == "H" & dat$attr$sex.ident=="f")))
+  num.HI.f <- max(0,length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="f")))
+  num.W.f <- max(0,length(which(dat$attr$race == "W" & dat$attr$sex.ident=="f")))
   
-  num.B.msf <- length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msf"))
-  num.BI.msf <- length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msf"))
-  num.H.msf <- length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msf"))
-  num.HI.msf <- length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msf"))
-  num.W.msf <- length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msf"))
+  num.B.msf <- max(0,length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msf")))
+  num.BI.msf <- max(0,length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msf")))
+  num.H.msf <- max(0,length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msf")))
+  num.HI.msf <- max(0,length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msf")))
+  num.W.msf <- max(0,length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msf")))
   
-  num.B.msm <- length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msm"))
-  num.BI.msm <- length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msm"))
-  num.H.msm <- length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msm"))
-  num.HI.msm <- length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msm"))
-  num.W.msm <- length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msm"))
+  num.B.msm <- max(0,length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msm")))
+  num.BI.msm <- max(0,length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msm")))
+  num.H.msm <- max(0,length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msm")))
+  num.HI.msm <- max(0,length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msm")))
+  num.W.msm <- max(0,length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msm")))
   
-  num.B.msmf <- length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msmf"))
-  num.BI.msmf <- length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msmf"))
-  num.H.msmf <- length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msmf"))
-  num.HI.msmf <- length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msmf"))
-  num.W.msmf <- length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msmf"))
+  num.B.msmf <- max(0,length(which(dat$attr$race == "B" & dat$attr$sex.ident=="msmf")))
+  num.BI.msmf <- max(0,length(which(dat$attr$race == "BI" & dat$attr$sex.ident=="msmf")))
+  num.H.msmf <- max(0,length(which(dat$attr$race == "H" & dat$attr$sex.ident=="msmf")))
+  num.HI.msmf <- max(0,length(which(dat$attr$race == "HI" & dat$attr$sex.ident=="msmf")))
+  num.W.msmf <- max(0,length(which(dat$attr$race == "W" & dat$attr$sex.ident=="msmf")))
   
   num <- num.B.f + num.BI.f + num.H.f + num.HI.f + num.W.f + 
          num.B.msf + num.BI.msf + num.H.msf + num.HI.msf + num.W.msf +
