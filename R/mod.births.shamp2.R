@@ -102,7 +102,7 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
 
   dat$attr$arrival.time[newIds] <- rep(at, nBirths)
 
-  ##SAMPLE NOT WORKING CHECK HERE
+ 
   demog.cat <- sample(demog.list,size=nBirths,prob=demog.dist,replace=TRUE)
   dat$attr$demog.cat[newIds]<-demog.cat
 
