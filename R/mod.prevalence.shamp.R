@@ -156,6 +156,22 @@ prevalence_shamp <- function(dat, at) {
     dat$epi$dth.dis <- rNA
     dat$epi$dth.age <- rNA
     dat$epi$incid <- rNA
+    
+    
+    dat$epi$incid.B <- rNA
+    dat$epi$incid.BI <- rNA
+    dat$epi$incid.H <- rNA
+    dat$epi$incid.HI <- rNA
+    dat$epi$incid.W <- rNA
+    
+    dat$epi$incid.m <- rNA
+    dat$epi$incid.f <- rNA
+    dat$epi$incid.msf <- rNA
+    dat$epi$incid.msm <- rNA
+    dat$epi$incid.msmf <- rNA
+    
+    dat$epi$incid.FA <- rNA
+    dat$epi$incid.H <- rNA
 
     dat$epi$prepCurr <- rNA
     dat$epi$prepCov <- rNA
