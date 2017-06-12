@@ -62,28 +62,7 @@ heatbath_msmf_shamp <- function(dat, at){
   
   #Determine who becomes infected 
  
-  status.B<-status[ids.B]
-  prepStat.B<-prepStat[ids.B]
-  prepClass.B<-prepClass[ids.B]
-  
-  status.BI<-status[ids.BI]
-  prepStat.BI<-prepStat[ids.BI]
-  prepClass.BI<-prepClass[ids.BI]
 
-  status.H<-status[ids.H]
-  prepStat.H<-prepStat[ids.H]
-  prepClass.H<-prepClass[ids.H]
-  
-  status.HI<-status[ids.HI]
-  prepStat.HI<-prepStat[ids.HI]
-  prepClass.HI<-prepClass[ids.HI]
-  
-  status.W<-status[ids.W]
-  prepStat.W<-prepStat[ids.W]
-  prepClass.W<-prepClass[ids.W]
-
-  
-  
   infected.B <- rep(0,length(ids.B))
   infected.BI <- rep(0,length(ids.BI))
   infected.H <- rep(0,length(ids.H))
