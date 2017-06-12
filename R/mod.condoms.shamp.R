@@ -36,6 +36,7 @@ condoms_shamp <- function(dat, at) {
     sex <- dat$attr$sex
     status<-dat$attr$status
 
+    # Parameters
 
     if (type == "main") {
       cond.B.prob.msm <- dat$param$cond.main.B.prob.msm
@@ -60,7 +61,7 @@ condoms_shamp <- function(dat, at) {
     }
     if (type == "pers") {
       cond.B.prob.msm <- dat$param$cond.pers.B.prob.msm
-      cond.BI.prob.msm <- dat$param$cond.pers.I.prob.msm
+      cond.BI.prob.msm <- dat$param$cond.pers.BI.prob.msm
       cond.H.prob.msm <- dat$param$cond.pers.H.prob.msm
       cond.HI.prob.msm <- dat$param$cond.pers.HI.prob.msm
       cond.W.prob.msm <- dat$param$cond.pers.W.prob.msm
@@ -75,8 +76,8 @@ condoms_shamp <- function(dat, at) {
       
       diag.beta.msm <- dat$param$cond.diag.pers.beta.msm
       discl.beta.msm <- dat$param$cond.discl.pers.beta.msm
-      diag.beta.het <- dat$param$cond.diag.pers.beta.msm
-      discl.beta.het <- dat$param$cond.discl.pers.beta.msm
+      diag.beta.het <- dat$param$cond.diag.pers.beta.het
+      discl.beta.het <- dat$param$cond.discl.pers.beta.het
      
       ptype <- 2
     }
