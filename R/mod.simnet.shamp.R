@@ -21,8 +21,13 @@ simnet_shamp <- function(dat, at) {
   
   if (dat$param$method == 1) {
     dat$attr$deg.pers <- get_degree(dat$el[[2]])
+    dat$attr$deg.pers.c <- dat$attr$deg.pers
+    dat$attr$deg.pers.c<-ifelse(dat$attr$deg.pers.c>=2,2,dat$attr$deg.pers.c)
+    
   } else {
     dat$attr$deg.pers <- paste0(dat$attr$race, get_degree(dat$el[[2]]))
+    dat$attr$deg.pers.c <- dat$attr$deg.pers
+    dat$attr$deg.pers.c<-ifelse(dat$attr$deg.pers.c>=2,2,dat$attr$deg.pers.c)
   }
   dat <- tergmLite::updateModelTermInputs(dat, network = 1)
   
@@ -48,8 +53,13 @@ simnet_shamp <- function(dat, at) {
   
   if (dat$param$method == 1) {
     dat$attr$deg.main <- get_degree(dat$el[[1]])
+    dat$attr$deg.main.c <- dat$attr$deg.main
+    dat$attr$deg.main.c<-ifelse(dat$attr$deg.main.c>=1,1,dat$attr$deg.main.c)
+    
   } else {
     dat$attr$deg.main <- paste0(dat$attr$race, get_degree(dat$el[[1]]))
+    dat$attr$deg.main.c <- dat$attr$deg.main
+    dat$attr$deg.main.c<-ifelse(dat$attr$deg.main.c>=1,1,dat$attr$deg.main.c)
   }
   dat <- tergmLite::updateModelTermInputs(dat, network = 2)
   
@@ -74,8 +84,13 @@ simnet_shamp <- function(dat, at) {
   
   if (dat$param$method == 1) {
     dat$attr$deg.pers <- get_degree(dat$el[[2]])
+    dat$attr$deg.pers.c <- dat$attr$deg.pers
+    dat$attr$deg.pers.c<-ifelse(dat$attr$deg.pers.c>=1,1,dat$attr$deg.pers.c)
+    
   } else {
     dat$attr$deg.pers <- paste0(dat$attr$race, get_degree(dat$el[[2]]))
+    dat$attr$deg.pers.c <- dat$attr$deg.pers
+    dat$attr$deg.pers.c<-ifelse(dat$attr$deg.pers.c>=1,1,dat$attr$deg.pers.c)
   }
   dat <- tergmLite::updateModelTermInputs(dat, network = 3)
   
