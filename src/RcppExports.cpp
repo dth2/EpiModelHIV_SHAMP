@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // aging_msm
 List aging_msm(List dat, int at);
-RcppExport SEXP EpiModelHIV_aging_msm(SEXP datSEXP, SEXP atSEXP) {
+RcppExport SEXP EpiModelHIV_SHAMP_aging_msm(SEXP datSEXP, SEXP atSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // aging_het
 List aging_het(List dat, int at);
-RcppExport SEXP EpiModelHIV_aging_het(SEXP datSEXP, SEXP atSEXP) {
+RcppExport SEXP EpiModelHIV_SHAMP_aging_het(SEXP datSEXP, SEXP atSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
