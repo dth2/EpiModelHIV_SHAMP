@@ -1,15 +1,14 @@
-Package: EpiModelHIV.SHAMP
+Package: EpiModelHIV
 Version: 1.0.0
-Date: 2017-06-27
+Date: 2016-06-25
 Type: Package
 Title: Epidemic Modeling of HIV Transmission among MSM, MSMF and Heterosexual Populations
-Authors@R: c(person("Deven T.", "Hamilton", role = c("cre", "aut"), email = "dth2@u.washington.edu"),
-             person("Samual M.", "Jenness", role="aut", email="samuel.m.jenness@emory.edu"),
+Authors@R: c(person("Samual M.", "Jenness", role = c("cre", "aut"), email = "samuel.m.jenness@emory.edu"),
+             person("Deven T.", "Hamilton", role="aut", email="dth2@u.washington.edu"),
              person("Steven M.", "Goodreau", role="aut", email="goodeau@uw.edu"),
              person("Emily", "Beylerian", role = "ctb", email = "ebey@uw.edu"))
-Maintainer: Deven T. Hamilton <dth2@u.washington.edu>
-Description: EpiModelHIV.SHAMP provides extensions to EpiModel HIV to allow for simulating HIV transmission
-  dynamics among heterosexual and MSM of up to 5 race catagories simultaniously along with immigration.
+Maintainer: Samual M. Jenness <samuel.m.jenness@emory.edu>
+Description: EpiModelHIV provides extensions to EpiModel HIV.
 License: GPL-3
 Depends:
     R (>= 3.2.0),
