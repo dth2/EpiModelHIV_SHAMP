@@ -154,8 +154,15 @@ if(length(alter.list>0)){warning("OT alters deleted: missing values",call. = FAL
 ###  Calculate the paramters needed for estimation that are not line data.
   
   #Limit Main and casual to a 2 by 3 set (Main 0:1, Casual 0:2)  
+
   nsfg.egodata$egos$deg.pers<-ifelse(nsfg.egodata$egos$deg.pers > 1, 2, nsfg.egodata$egos$deg.pers)
   nsfg.egodata$egos$deg.main<-ifelse(nsfg.egodata$egos$deg.main > 0, 1, nsfg.egodata$egos$deg.main)
+  
+  ##Create deg.pers.c and deg.main.c for capping main at 1 and pers at 2 for model fit.
+  nsfg.egodata$egos$deg.pers.c<-nsfg.egodata$egos$deg.pers
+  nsfg.egodata$egos$deg.pers.c<-ifelse(nsfg.egodata$egos$deg.pers.c>=2,2,nsfg.egodata$egos$deg.pers.c)
+  nsfg.egodata$egos$deg.main.c<-nsfg.egodata$egos$deg.main.c
+  nsfg.egodata$egos$deg.main.c<-ifelse(nsfg.egodata$egos$deg.main.c >=1,1,nsfg.egodata$egos$deg.main.c)
     
   
   # Mean durations
@@ -184,7 +191,7 @@ if(length(alter.list>0)){warning("OT alters deleted: missing values",call. = FAL
   }
 
   
-  ##If using immigration set Black and Hispanic immigrants to BI and HI.
+  ##If using msm.msmf set the population proportions to those in the data for msm and msmf.
   if(msm.msmf==TRUE){
 
     data.params$msm.frac<-max(0,sum(data$egos$sex.ident=="msm")/sum(data$egos$sex=="M"))
