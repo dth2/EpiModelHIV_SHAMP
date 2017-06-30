@@ -5,19 +5,60 @@
 \title{Epidemic Model Parameters for SHAMP}
 \usage{
 param_shamp(race.method = 1, time.unit = 7, method = 1,
+  last.neg.test.B.f.int = 1464, last.neg.test.BI.f.int = 1464,
+  last.neg.test.H.f.int = 1464, last.neg.test.HI.f.int = 1464,
+  last.neg.test.W.f.int = 1464, last.neg.test.B.msf.int = 1708,
+  last.neg.test.BI.msf.int = 1708, last.neg.test.H.msf.int = 1708,
+  last.neg.test.HI.msf.int = 1708, last.neg.test.W.msf.int = 1708,
+  last.neg.test.B.msm.int = 1037, last.neg.test.BI.msm.int = 1037,
+  last.neg.test.H.msm.int = 1037, last.neg.test.HI.msm.int = 1037,
+  last.neg.test.W.msm.int = 1037, last.neg.test.B.msmf.int = 1129,
+  last.neg.test.BI.msmf.int = 1129, last.neg.test.H.msmf.int = 1129,
+  last.neg.test.HI.msmf.int = 1129, last.neg.test.W.msmf.int = 1129,
+  mean.test.B.f.int = 1464, mean.test.BI.f.int = 1464,
+  mean.test.H.f.int = 1464, mean.test.HI.f.int = 1464,
+  mean.test.W.f.int = 1464, mean.test.B.msf.int = 1708,
+  mean.test.BI.msf.int = 1708, mean.test.H.msf.int = 1708,
+  mean.test.HI.msf.int = 1708, mean.test.W.msf.int = 1708,
+  mean.test.B.msm.int = 1037, mean.test.BI.msm.int = 1037,
+  mean.test.H.msm.int = 1037, mean.test.HI.msm.int = 1037,
+  mean.test.W.msm.int = 1037, mean.test.B.msmf.int = 1129,
+  mean.test.BI.msmf.int = 1129, mean.test.H.msmf.int = 1129,
+  mean.test.HI.msmf.int = 1129, mean.test.W.msmf.int = 1129,
   testing.pattern = "memoryless", test.window.int = 15,
+  tt.traj.B.f.prob = c(0.741, 0, 0.053, 0.206), tt.traj.BI.f.prob = c(0.741,
+  0, 0.053, 0.206), tt.traj.H.f.prob = c(0.741, 0, 0.041, 0.218),
+  tt.traj.HI.f.prob = c(0.741, 0, 0.041, 0.218), tt.traj.W.f.prob = c(0.741,
+  0, 0.057, 0.202), tt.traj.B.msf.prob = c(0.741, 0, 0.066, 0.193),
+  tt.traj.BI.msf.prob = c(0.741, 0, 0.066, 0.193),
+  tt.traj.H.msf.prob = c(0.741, 0, 0.067, 0.192),
+  tt.traj.HI.msf.prob = c(0.741, 0, 0.067, 0.192),
+  tt.traj.W.msf.prob = c(0.741, 0, 0.052, 0.207),
   tt.traj.B.msm.prob = c(0.025, 0, 0.065, 0.911),
   tt.traj.BI.msm.prob = c(0.025, 0, 0.065, 0.911),
   tt.traj.H.msm.prob = c(0.025, 0, 0.065, 0.911),
   tt.traj.HI.msm.prob = c(0.025, 0, 0.065, 0.911),
   tt.traj.W.msm.prob = c(0.025, 0, 0.065, 0.911),
+  tt.traj.B.msmf.prob = c(0.741, 0, 0.066, 0.193),
+  tt.traj.BI.msmf.prob = c(0.741, 0, 0.066, 0.193),
+  tt.traj.H.msmf.prob = c(0.741, 0, 0.041, 0.218),
+  tt.traj.HI.msmf.prob = c(0.741, 0, 0.041, 0.218),
+  tt.traj.W.msmf.prob = c(0.741, 0, 0.052, 0.207),
+  tx.init.B.f.prob = 0.2331, tx.init.BI.f.prob = 0.2331,
+  tx.init.H.f.prob = 0.2331, tx.init.HI.f.prob = 0.2331,
+  tx.init.W.f.prob = 0.2331, tx.init.B.msf.prob = 0.2331,
+  tx.init.BI.msf.prob = 0.2331, tx.init.H.msf.prob = 0.2331,
+  tx.init.HI.msf.prob = 0.2331, tx.init.W.msf.prob = 0.2331,
   tx.init.B.msm.prob = 0.1467, tx.init.BI.msm.prob = 0.1467,
   tx.init.H.msm.prob = 0.1467, tx.init.HI.msm.prob = 0.1467,
-  tx.init.W.msm.prob = 0.1467, tx.halt.B.f.prob = 0,
-  tx.halt.BI.f.prob = 0, tx.halt.H.f.prob = 0, tx.halt.HI.f.prob = 0,
-  tx.halt.W.f.prob = 0, tx.halt.B.msf.prob = 0, tx.halt.BI.msf.prob = 0,
-  tx.halt.H.msf.prob = 0, tx.halt.HI.msf.prob = 0, tx.halt.W.msf.prob = 0,
-  tx.halt.B.msm.prob = 0, tx.halt.BI.msm.prob = 0, tx.halt.H.msm.prob = 0,
+  tx.init.W.msm.prob = 0.1467, tx.init.B.msmf.prob = 0.2331,
+  tx.init.BI.msmf.prob = 0.2331, tx.init.H.msmf.prob = 0.2331,
+  tx.init.HI.msmf.prob = 0.2331, tx.init.W.msmf.prob = 0.2331,
+  tx.halt.B.f.prob = 0, tx.halt.BI.f.prob = 0, tx.halt.H.f.prob = 0,
+  tx.halt.HI.f.prob = 0, tx.halt.W.f.prob = 0, tx.halt.B.msf.prob = 0,
+  tx.halt.BI.msf.prob = 0, tx.halt.H.msf.prob = 0,
+  tx.halt.HI.msf.prob = 0, tx.halt.W.msf.prob = 0, tx.halt.B.msm.prob = 0,
+  tx.halt.BI.msm.prob = 0, tx.halt.H.msm.prob = 0,
   tx.halt.HI.msm.prob = 0, tx.halt.W.msm.prob = 0,
   tx.halt.B.msmf.prob = 0, tx.halt.BI.msmf.prob = 0,
   tx.halt.H.msmf.prob = 0, tx.halt.HI.msmf.prob = 0,
@@ -38,9 +79,9 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   7, vl.fatal = 7, vl.full.supp = 1.5, vl.part.supp = 3.5,
   full.supp.down.slope = 0.25, full.supp.up.slope = 0.25,
   part.supp.down.slope = 0.25, part.supp.up.slope = 0.25, birth.age = 18,
-  exit.age = 60, b.method = "fixed", msm.frac = 0, msmf.frac = 0,
+  exit.age = 60, b.method = "fixed", msm.frac = 0.012, msmf.frac = 0,
   URAI.prob = 138/10000, UIAI.prob = 11/10000, URVI.prob = 8/10000,
-  UIVI.prob = 4/10000, acute.rr = 4, circ.rr = 1, condom.rr = 0.25,
+  UIVI.prob = 4/10000, acute.rr = 4, circ.rr = 0.4, condom.rr = 0.25,
   disc.outset.main.B.f.prob = 0, disc.outset.main.BI.f.prob = 0,
   disc.outset.main.H.f.prob = 0, disc.outset.main.HI.f.prob = 0,
   disc.outset.main.W.f.prob = 0, disc.outset.main.B.msf.prob = 0,
@@ -122,7 +163,12 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   base.ai.main.W.rate = 1.379/7, base.ai.pers.B.rate = 0.883/7,
   base.ai.pers.BI.rate = 0.883/7, base.ai.pers.H.rate = 0.883/7,
   base.ai.pers.HI.rate = 0.883/7, base.ai.pers.W.rate = 0.883/7,
-  ai.scale = 1, vi.scale = 1, cond.main.B.prob.msm = 0.062,
+  base.vi.main.B.rate = 0.25, base.vi.main.BI.rate = 0.19,
+  base.vi.main.H.rate = 0.26, base.vi.main.HI.rate = 0.24,
+  base.vi.main.W.rate = 0.22, base.vi.pers.B.rate = 0.12,
+  base.vi.pers.BI.rate = 0.09, base.vi.pers.H.rate = 0.12,
+  base.vi.pers.HI.rate = 0.09, base.vi.pers.W.rate = 0.12, ai.scale = 1,
+  vi.scale = 1, cond.main.B.prob.msm = 0.062,
   cond.main.BI.prob.msm = 0.062, cond.main.H.prob.msm = 0.062,
   cond.main.HI.prob.msm = 0.062, cond.main.W.prob.msm = 0.062,
   cond.pers.always.prob.msm = 0.001, cond.pers.B.prob.msm = 0.0304,
@@ -131,26 +177,47 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   cond.inst.always.prob.msm = 0.001, cond.inst.B.prob.msm = 0.413,
   cond.inst.BI.prob.msm = 0.413, cond.inst.H.prob.msm = 0.413,
   cond.inst.HI.prob.msm = 0.413, cond.inst.W.prob.msm = 0.413,
-  cond.always.prob.corr.msm = 0.001, cond.diag.main.beta.msm = -0.67,
+  cond.always.prob.corr.msm = 0.001, cond.main.B.prob.het = 0.12,
+  cond.main.BI.prob.het = 0.17, cond.main.H.prob.het = 0.17,
+  cond.main.HI.prob.het = 0.19, cond.main.W.prob.het = 0.16,
+  cond.pers.always.prob.het = 0, cond.pers.B.prob.het = 0.54,
+  cond.pers.BI.prob.het = 0.65, cond.pers.H.prob.het = 0.5,
+  cond.pers.HI.prob.het = 0.49, cond.pers.W.prob.het = 0.48,
+  cond.inst.always.prob.het = 0, cond.inst.B.prob.het = 0.85,
+  cond.inst.BI.prob.het = 0.73, cond.inst.H.prob.het = 0.78,
+  cond.inst.HI.prob.het = 0.76, cond.inst.W.prob.het = 0.72,
+  cond.always.prob.corr.het = 0, cond.diag.main.beta.msm = -0.67,
   cond.discl.main.beta.msm = -0.85, cond.diag.pers.beta.msm = -0.67,
   cond.discl.pers.beta.msm = -0.85, cond.diag.inst.beta.msm = -0.67,
-  cond.discl.inst.beta.msm = -0.85, cond.diag.main.beta.het = -0.67,
-  cond.discl.main.beta.het = -0.85, cond.diag.pers.beta.het = -0.67,
-  cond.discl.pers.beta.het = -0.85, cond.diag.inst.beta.het = -0.67,
-  cond.discl.inst.beta.het = -0.85, role.B.msm.prob = c(0.242, 0.321,
-  0.437), role.BI.msm.prob = c(0.242, 0.321, 0.437),
-  role.H.msm.prob = c(0.242, 0.321, 0.437), role.HI.msm.prob = c(0.242,
-  0.321, 0.437), role.W.msm.prob = c(0.242, 0.321, 0.437),
-  role.B.msmf.prob = c(0.242, 0.321, 0.437), role.BI.msmf.prob = c(0.242,
-  0.321, 0.437), role.H.msmf.prob = c(0.242, 0.321, 0.437),
-  role.HI.msmf.prob = c(0.242, 0.321, 0.437), role.W.msmf.prob = c(0.242,
-  0.321, 0.437), vv.iev.B.prob = 0.47874, vv.iev.BI.prob = 0.47874,
+  cond.discl.inst.beta.msm = -0.85, cond.diag.main.beta.het = 0,
+  cond.discl.main.beta.het = 0, cond.diag.pers.beta.het = 0,
+  cond.discl.pers.beta.het = 0, cond.diag.inst.beta.het = 0,
+  cond.discl.inst.beta.het = 0, role.B.msm.prob = c(0.242, 0.321, 0.437),
+  role.BI.msm.prob = c(0.242, 0.321, 0.437), role.H.msm.prob = c(0.242,
+  0.321, 0.437), role.HI.msm.prob = c(0.242, 0.321, 0.437),
+  role.W.msm.prob = c(0.242, 0.321, 0.437), role.B.msmf.prob = c(0.242,
+  0.321, 0.437), role.BI.msmf.prob = c(0.242, 0.321, 0.437),
+  role.H.msmf.prob = c(0.242, 0.321, 0.437), role.HI.msmf.prob = c(0.242,
+  0.321, 0.437), role.W.msmf.prob = c(0.242, 0.321, 0.437),
+  vv.iev.B.prob = 0.47874, vv.iev.BI.prob = 0.47874,
   vv.iev.H.prob = 0.47874, vv.iev.HI.prob = 0.47874,
   vv.iev.W.prob = 0.47874, prep.start = Inf, prep.elig.model = "base",
-  prep.class.prob = c(0.211, 0.07, 0.1, 0.619), prep.class.hr = c(1, 0.69,
-  0.19, 0.05), prep.coverage = 0, prep.cov.method = "curr",
-  prep.cov.rate = 1, prep.tst.int = 90, prep.risk.int = 182,
-  prep.risk.reassess = TRUE, demog.list = data.params[[1]]$demog.list,
+  prep.class.prob = c(0, 0, 0, 0), prep.class.hr = c(1, 0.69, 0.19, 0.05),
+  prep.coverage = 0, prep.cov.method = "curr", prep.cov.rate = 1,
+  prep.tst.int = 90, prep.risk.int = 182, prep.risk.reassess = TRUE,
+  immig.depart.BI.f = 1/(42 * 52 * 4), immig.depart.HI.f = 1/(42 * 52 * 4),
+  immig.depart.BI.m = 1/(42 * 52 * 4), immig.depart.HI.m = 1/(42 * 52 * 4),
+  immig.return.BI.f = 1/4, immig.return.HI.f = 1/4,
+  immig.return.BI.m = 1/4, immig.return.HI.m = 1/4,
+  immig.aq.prob.BI.f = 0.3 * 0.06 * ((base.vi.main.BI.rate +
+  base.vi.pers.BI.rate)/2) * URVI.prob, immig.aq.prob.HI.f = 0.3 * 0.005 *
+  ((base.vi.main.HI.rate + base.vi.pers.HI.rate)/2) * URVI.prob,
+  immig.aq.prob.BI.m = 0.3 * 0.06 * ((base.vi.main.BI.rate +
+  base.vi.pers.BI.rate)/2) * UIVI.prob, immig.aq.prob.HI.m = 0.3 * 0.005 *
+  ((base.vi.main.HI.rate + base.vi.pers.HI.rate)/2) * UIVI.prob,
+  msm.aq.prob.B = 7.183e-06, msm.aq.prob.BI = 7.183e-06,
+  msm.aq.prob.H = 7.183e-06, msm.aq.prob.HI = 7.183e-06,
+  msm.aq.prob.W = 7.183e-06, demog.list = data.params[[1]]$demog.list,
   demog.dist = data.params[[1]]$demog.dist,
   sex.groups = data.params[[1]]$sex.groups,
   race.groups = data.params[[1]]$race.groups,
@@ -269,6 +336,15 @@ use condoms in those partnerships.}
 
 \item{cond.always.prob.corr.msm}{Correlation coefficient for probability of always
 using condoms in both casual and one-off male-male partnerships}
+
+\item{cond.pers.always.prob.het}{Fraction of people in heterosexual casual partnerships who always
+use condoms in those partnerships.}
+
+\item{cond.inst.always.prob.het}{Fraction of people in heterosexual one-time partnerships who always
+use condoms in those partnerships.}
+
+\item{cond.always.prob.corr.het}{Correlation coefficient for probability of always
+using condoms in both casual and one-off heterosexual partnerships}
 
 \item{cond.diag.main.beta.msm}{Beta multiplier for the log odds of using a
 condom in a male-male main partnership if the HIV-infected man has been
@@ -450,22 +526,13 @@ males of race group R, where R is a charater (B, BI, H, HI or W).}
 \item{cond.main.R.prob.het}{Probability of condom use by an person of race group R, 
 where R is a charater (B, BI, H, HI or W), in a heterosexual main partnership.}
 
-\item{cond.pers.always.prob.het}{Fraction of people in heterosexual casual partnerships who always
-use condoms in those partnerships.}
-
 \item{cond.pers.R.prob.het}{Of people who are not consistent condom users, per-act
 probability of condom use in a casual heterosexual partnership by 
 people of race group R, where R is a charater (B, BI, H, HI or W).}
 
-\item{cond.inst.always.prob.het}{Fraction of people in heterosexual one-time partnerships who always
-use condoms in those partnerships.}
-
 \item{cond.inst.R.prob.het}{Of people who are not consistent condom users, per-act
 probability of condom use in a one-time heterosexual partnership by 
 males of race group R, where R is a charater (B, BI, H, HI or W).}
-
-\item{cond.always.prob.corr.het}{Correlation coefficient for probability of always
-using condoms in both casual and one-off heterosexual partnerships}
 
 \item{vv.iev.R.prob}{Probability that a person of group R, where R is a charater (B, BI, H, HI or W),
 in a male male relationship will engage in intra-event versatility
