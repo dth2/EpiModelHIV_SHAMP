@@ -154,15 +154,11 @@ if(length(alter.list>0)){warning("OT alters deleted: missing values",call. = FAL
 ###  Calculate the paramters needed for estimation that are not line data.
   
   #Limit Main and casual to a 2 by 3 set (Main 0:1, Casual 0:2)  
-
-  nsfg.egodata$egos$deg.pers<-ifelse(nsfg.egodata$egos$deg.pers > 1, 2, nsfg.egodata$egos$deg.pers)
-  nsfg.egodata$egos$deg.main<-ifelse(nsfg.egodata$egos$deg.main > 0, 1, nsfg.egodata$egos$deg.main)
-  
   ##Create deg.pers.c and deg.main.c for capping main at 1 and pers at 2 for model fit.
-  nsfg.egodata$egos$deg.pers.c<-nsfg.egodata$egos$deg.pers
-  nsfg.egodata$egos$deg.pers.c<-ifelse(nsfg.egodata$egos$deg.pers.c>=2,2,nsfg.egodata$egos$deg.pers.c)
-  nsfg.egodata$egos$deg.main.c<-nsfg.egodata$egos$deg.main.c
-  nsfg.egodata$egos$deg.main.c<-ifelse(nsfg.egodata$egos$deg.main.c >=1,1,nsfg.egodata$egos$deg.main.c)
+  data$egos$deg.pers.c<-data$egos$deg.pers
+  data$egos$deg.pers.c<-ifelse(data$egos$deg.pers.c > 1, 2,data$egos$deg.pers.c)
+  data$egos$deg.main.c<-data$egos$deg.main
+  data$egos$deg.main.c<-ifelse(data$egos$deg.main.c > 0, 1,data$egos$deg.main.c)
     
   
   # Mean durations
