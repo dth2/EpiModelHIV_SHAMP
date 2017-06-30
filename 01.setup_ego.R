@@ -13,29 +13,6 @@ library(tergmLite)
 load("~/SHAMP/egonet/data/nsfg.egodata.rda")
 str(nsfg.egodata)
 
-##Randomly select a smaller sample of egos for testing.
-#nsfg.egodata$egos$include<-rep(NA,length(nsfg.egodata$egos$ego))
-#count<-length(nsfg.egodata$egos$ego)
-#drop<-rep(0,count-20000)
-#keep<-rep(1,20000)
-#x<-c(drop,keep)
-#nsfg.egodata$egos$include<-(sample(x,count,replace=FALSE))
-#nsfg.egodata$egos<-nsfg.egodata$egos[nsfg.egodata$egos$include==1,]
-
-#ego.list<-nsfg.egodata$egos$ego
-#keep.main<-which(nsfg.egodata$altersMain$ego %in% ego.list)
-#nsfg.egodata$altersMain<-nsfg.egodata$altersMain[keep.main==TRUE,]
-
-#keep.casual<-which(nsfg.egodata$altersCasual$ego %in% ego.list)
-#nsfg.egodata$altersCasual<-nsfg.egodata$altersCasual[keep.casual==TRUE,]
-
-#keep.OT<-which(nsfg.egodata$altersOT$ego %in% ego.list)
-#nsfg.egodata$altersOT<-nsfg.egodata$altersOT[keep.OT==TRUE,]
-
-str(nsfg.egodata)
-
-
-
 
 data.params<-list ()
 
@@ -43,22 +20,10 @@ data.params<-list ()
 nsfg.egodata$egos$age<-sample(18:59, size=length(nsfg.egodata$egos$age), replace = TRUE, prob = NULL)
 nsfg.egodata$egos$sqrt.age<-sqrt(nsfg.egodata$egos$age)
 
-##TEMP get rid of race "O".
-nsfg.egodata$egos$race<-ifelse(nsfg.egodata$egos$race=="O","W",nsfg.egodata$egos$race)
-nsfg.egodata$altersMain$race<-ifelse(nsfg.egodata$altersMain$race=="O","W",nsfg.egodata$altersMain$race)
-nsfg.egodata$altersCasual$race<-ifelse(nsfg.egodata$altersCasual$race=="O","W",nsfg.egodata$altersCasual$race)
-nsfg.egodata$altersOT$race<-ifelse(nsfg.egodata$altersOT$race=="O","W",nsfg.egodata$altersOT$race)
 
-##CHANGE NAMES TO deg.pers and deg.main and set max to 1 main .
-nsfg.egodata$egos$deg.pers<-as.numeric(nsfg.egodata$egos$casual)
-nsfg.egodata$egos$deg.pers<-ifelse(nsfg.egodata$egos$deg.pers>=2,2,nsfg.egodata$egos$deg.pers)
-nsfg.egodata$egos$deg.main<-as.numeric(nsfg.egodata$egos$main)
-nsfg.egodata$egos$deg.main<-ifelse(nsfg.egodata$egos$deg.main >=1,1,nsfg.egodata$egos$deg.main)
 
-new_data<-input_shamp(nsfg.egodata, data.params, immigration=TRUE, msm.msmf=TRUE)
+new_data<-input_shamp(nsfg.egodata, data.params, immigration=TRUE, msm.msmf=FALSE)
 data.params<-as.list(new_data[1])
-
-
 
 
 ##Make the three ergm.ego objects.
@@ -68,25 +33,15 @@ ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol=
 
 
 
-##This fits.
+##Fit the models.
 
-#fit.m.ego<-ergm.ego(ego.obj_m ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
-#                +nodefactor("deg.pers",base=1),
-#                control=control.ergm.ego(ppopsize=100000, stats.est="bootstrap"),
-#                set.control.ergm = control.ergm(MCMC.interval=5000,
-#                                                MCMC.samplesize=5000,
-#                                                MPLE.max.dyad.types = 1e10,
-#                                                init.method = "MPLE",
-#                                                MCMLE.maxit = 200,
-#                                                SAN.maxit=100,
-#                                                SAN.burnin.times = 500))
 
 fit.m.ego<-ergm.ego(ego.obj_m ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
-                    +nodefactor("deg.pers",base=1),
+                    +nodefactor("deg.pers.c",base=1),
                     control=control.ergm.ego(ppopsize=100000, stats.est="bootstrap"),
-                    ergm.control = control.ergm(MCMC.interval=500000,
-                                                    MCMC.samplesize=500000,
-                                                    MCMC.burnin = 500000,
+                    ergm.control = control.ergm(MCMC.interval=7000000,
+                                                    MCMC.samplesize=7000000,
+                                                    MCMC.burnin = 7000000,
                                                     MPLE.max.dyad.types = 1e10,
                                                     init.method = "MPLE",
                                                     MCMLE.maxit = 200,
@@ -95,22 +50,22 @@ fit.m.ego<-ergm.ego(ego.obj_m ~edges + nodematch("sex", diff=FALSE) + nodefactor
 
 
 fit.c.ego<-ergm.ego(ego.obj_c ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
-                    +nodefactor("deg.main",base=1),
+                    +nodefactor("deg.main.c",base=1),
                     control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic"),
-                    ergm.control = control.ergm(MCMC.interval=1500000,
-                                                    MCMC.samplesize=1500000,
-                                                    MCMC.burnin = 1500000,
+                    ergm.control = control.ergm(MCMC.interval=75000000000,
+                                                    MCMC.samplesize=75000000000,
+                                                    MCMC.burnin = 75000000000,
                                                     MPLE.max.dyad.types = 1e10,
                                                     init.method = "MPLE",
                                                     MCMLE.maxit = 200))
 
 
 fit.i.ego<-ergm.ego(ego.obj_i ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
-                + nodefactor("deg.main",base=1) + nodefactor("deg.pers",base=1),
+                + nodefactor("deg.main.c",base=1) + nodefactor("deg.pers.c",base=1),
                 control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic"),
-                set.control.ergm = control.ergm(MCMC.interval=100000,
-                                                MCMC.burnin = 1000000,
-                                                MCMC.samplesize=1000000,
+                set.control.ergm = control.ergm(MCMC.interval=150000000,
+                                                MCMC.burnin = 150000000,
+                                                MCMC.samplesize=150000000,
                                                 MPLE.max.dyad.types = 1e10,
                                                 init.method = "MPLE",
                                                 MCMLE.maxit = 200,
@@ -127,7 +82,7 @@ time.unit <- 7
 method<-1
 
 #Simulation size.
-sim.size<-115086
+sim.size<-114435
 
 
 # Mean durations
@@ -231,7 +186,7 @@ target.stats.names_m<- names(fit.m.ego$target.stats[2:length(fit.m.ego$target.st
 target.stats.names_c<- names(fit.c.ego$target.stats[2:length(fit.c.ego$target.stats)])
 target.stats.names_i<- names(fit.i.ego$target.stats[2:length(fit.i.ego$target.stats)])
 
-##old Maybe
+
 coef.form.crude_m<-fit.m.ego$coef[2:length(fit.m.ego$coef)]
 coef.form_m<-coef.form.crude_m
 coef.form_m[1]<-coef.form_m[1]+fit.m.ego$coef[1]
@@ -249,7 +204,6 @@ coef.form_i<-coef.form.crude_i
 coef.form_i[1]<-coef.form_i[1]+fit.i.ego$coef[1]
 coef.form_i[1]<- coef.form_i[1]
 constraints_i <- ~.
-
 
 
 
