@@ -38,39 +38,35 @@ ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol=
 
 fit.m.ego<-ergm.ego(ego.obj_m ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                     +nodefactor("deg.pers.c",base=1),
-                    control=control.ergm.ego(ppopsize=100000, stats.est="bootstrap"),
-                    ergm.control = control.ergm(MCMC.interval=7000000,
-                                                    MCMC.samplesize=7000000,
-                                                    MCMC.burnin = 7000000,
-                                                    MPLE.max.dyad.types = 1e10,
+                    control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic",
+                    ergm.control = control.ergm(MCMC.interval=500000,
+                                                    MCMC.samplesize=500000,
+                                                    MCMC.burnin = 500000,
+                                                    MPLE.max.dyad.types = 1e6,
                                                     init.method = "MPLE",
-                                                    MCMLE.maxit = 200,
-                                                    SAN.maxit=100,
-                                                    SAN.burnin.times = 500))
+                                                    MCMLE.maxit = 100)))
 
 
 fit.c.ego<-ergm.ego(ego.obj_c ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                     +nodefactor("deg.main.c",base=1),
-                    control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic"),
-                    ergm.control = control.ergm(MCMC.interval=75000000000,
-                                                    MCMC.samplesize=75000000000,
-                                                    MCMC.burnin = 75000000000,
-                                                    MPLE.max.dyad.types = 1e10,
-                                                    init.method = "MPLE",
-                                                    MCMLE.maxit = 200))
+                    control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic",
+                    ergm.control = control.ergm(MCMC.interval=500000,
+                                                MCMC.samplesize=500000,
+                                                MCMC.burnin = 500000,
+                                                MPLE.max.dyad.types = 1e6,
+                                                init.method = "MPLE",
+                                                MCMLE.maxit = 100)))
 
 
 fit.i.ego<-ergm.ego(ego.obj_i ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                 + nodefactor("deg.main.c",base=1) + nodefactor("deg.pers.c",base=1),
-                control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic"),
-                set.control.ergm = control.ergm(MCMC.interval=150000000,
-                                                MCMC.burnin = 150000000,
-                                                MCMC.samplesize=150000000,
-                                                MPLE.max.dyad.types = 1e10,
+                control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic",
+                set.control.ergm = control.ergm(MCMC.interval=500000,
+                                                MCMC.burnin = 500000,
+                                                MCMC.samplesize=500000,
+                                                MPLE.max.dyad.types = 1e6,
                                                 init.method = "MPLE",
-                                                MCMLE.maxit = 200,
-                                                SAN.maxit=100,
-                                                SAN.burnin.times = 500))
+                                                MCMLE.maxit = 200)))
 
 
 
