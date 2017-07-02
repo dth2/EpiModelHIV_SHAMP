@@ -61,12 +61,12 @@ fit.c.ego<-ergm.ego(ego.obj_c ~edges + nodematch("sex", diff=FALSE) + nodefactor
 fit.i.ego<-ergm.ego(ego.obj_i ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                 + nodefactor("deg.main.c",base=1) + nodefactor("deg.pers.c",base=1),
                 control=control.ergm.ego(ppopsize=100000, stats.est="asymptotic",
-                set.control.ergm = control.ergm(MCMC.interval=5000,
-                                                MCMC.burnin = 5000,
+                ergm.control = control.ergm(MCMC.interval=5000,
                                                 MCMC.samplesize=5000,
+                                                MCMC.burnin = 5000,
                                                 MPLE.max.dyad.types = 1e6,
                                                 init.method = "MPLE",
-                                                MCMLE.maxit = 100)))
+                                                MCMLE.maxit = 50)))
 
 
 
