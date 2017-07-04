@@ -79,6 +79,9 @@ initialize_shamp <- function(x, param, init, control, s) {
   dat$attr$deg.pers <- get.vertex.attribute(x[[1]]$fit$network, "deg.pers")
   dat$attr$deg.main <- get.vertex.attribute(x[[2]]$fit$network, "deg.main")
   
+  dat$attr$deg.pers.c <- get.vertex.attribute(x[[1]]$fit$network, "deg.pers.c")
+  dat$attr$deg.main.c <- get.vertex.attribute(x[[2]]$fit$network, "deg.main.c")
+  
 
   # Race
   dat$attr$race <- get.vertex.attribute(nw[[2]], "race")
@@ -315,29 +318,29 @@ init_status_shamp <- function(dat) {
   
 
   # Infection Status
-  nInfB.f <- round(dat$init$prev.B.f * num.B.f)
-  nInfBI.f <- round(dat$init$prev.BI.f * num.BI.f)
-  nInfH.f <- round(dat$init$prev.H.f * num.H.f)
-  nInfHI.f <- round(dat$init$prev.HI.f * num.HI.f)
-  nInfW.f <- round(dat$init$prev.W.f * num.W.f)
+  nInfB.f <- ifelse(num.B.f > 0 & dat$init$prev.B.f > 0 , max(1,round(dat$init$prev.B.f * num.B.f)),round(dat$init$prev.B.f * num.B.f))
+  nInfBI.f <- ifelse(num.BI.f > 0 & dat$init$prev.BI.f > 0 , max(1,round(dat$init$prev.BI.f * num.BI.f)),round(dat$init$prev.BI.f * num.BI.f))
+  nInfH.f <- ifelse(num.H.f > 0 & dat$init$prev.H.f > 0 , max(1,round(dat$init$prev.H.f * num.H.f)),round(dat$init$prev.H.f * num.H.f))
+  nInfHI.f <- ifelse(num.HI.f > 0 & dat$init$prev.HI.f > 0 , max(1,round(dat$init$prev.HI.f * num.HI.f)),round(dat$init$prev.HI.f * num.HI.f))
+  nInfW.f <- ifelse(num.W.f > 0 & dat$init$prev.W.f > 0 , max(1,round(dat$init$prev.W.f * num.W.f)),round(dat$init$prev.W.f * num.W.f))
   
-  nInfB.msf <- round(dat$init$prev.B.msf * num.B.msf)
-  nInfBI.msf <- round(dat$init$prev.BI.msf * num.BI.msf)
-  nInfH.msf <- round(dat$init$prev.H.msf * num.H.msf)
-  nInfHI.msf <- round(dat$init$prev.HI.msf * num.HI.msf)
-  nInfW.msf <- round(dat$init$prev.W.msf * num.W.msf)
+  nInfB.msf <- ifelse(num.B.msf > 0 & dat$init$prev.B.msf > 0 , max(1,round(dat$init$prev.B.msf * num.B.msf)),round(dat$init$prev.B.msf * num.B.msf))
+  nInfBI.msf <- ifelse(num.BI.msf > 0 & dat$init$prev.BI.msf > 0 , max(1,round(dat$init$prev.BI.msf * num.BI.msf)),round(dat$init$prev.BI.msf * num.BI.msf))
+  nInfH.msf <- ifelse(num.H.msf > 0 & dat$init$prev.H.msf > 0 , max(1,round(dat$init$prev.H.msf * num.H.msf)),round(dat$init$prev.H.msf * num.H.msf))
+  nInfHI.msf <- ifelse(num.HI.msf > 0 & dat$init$prev.HI.msf > 0 , max(1,round(dat$init$prev.HI.msf * num.HI.msf)),round(dat$init$prev.HI.msf * num.HI.msf))
+  nInfW.msf <- ifelse(num.W.msf > 0 & dat$init$prev.W.msf > 0 , max(1,round(dat$init$prev.W.msf * num.W.msf)),round(dat$init$prev.W.msf * num.W.msf))
   
-  nInfB.msm <- round(dat$init$prev.B.msm * num.B.msm)
-  nInfBI.msm <- round(dat$init$prev.BI.msm * num.BI.msm)
-  nInfH.msm <- round(dat$init$prev.H.msm * num.H.msm)
-  nInfHI.msm <- round(dat$init$prev.HI.msm * num.HI.msm)
-  nInfW.msm <- round(dat$init$prev.W.msm * num.W.msm)
+  nInfB.msm <- ifelse(num.B.msm > 0 & dat$init$prev.B.msm > 0 , max(1,round(dat$init$prev.B.msm * num.B.msm)),round(dat$init$prev.B.msm * num.B.msm))
+  nInfBI.msm <- ifelse(num.BI.msm > 0 & dat$init$prev.BI.msm > 0 , max(1,round(dat$init$prev.BI.msm * num.BI.msm)),round(dat$init$prev.BI.msm * num.BI.msm))
+  nInfH.msm <- ifelse(num.H.msm > 0 & dat$init$prev.H.msm > 0 , max(1,round(dat$init$prev.H.msm * num.H.msm)),round(dat$init$prev.H.msm * num.H.msm))
+  nInfHI.msm <- ifelse(num.HI.msm > 0 & dat$init$prev.HI.msm > 0 , max(1,round(dat$init$prev.HI.msm * num.HI.msm)),round(dat$init$prev.HI.msm * num.HI.msm))
+  nInfW.msm <- ifelse(num.W.msm > 0 & dat$init$prev.W.msm > 0 , max(1,round(dat$init$prev.W.msm * num.W.msm)),round(dat$init$prev.W.msm * num.W.msm))
   
-  nInfB.msmf <- round(dat$init$prev.B.msmf * num.B.msmf)
-  nInfBI.msmf <- round(dat$init$prev.BI.msmf * num.BI.msmf)
-  nInfH.msmf <- round(dat$init$prev.H.msmf * num.H.msmf)
-  nInfHI.msmf <- round(dat$init$prev.HI.msmf * num.HI.msmf)
-  nInfW.msmf <- round(dat$init$prev.W.msmf * num.W.msmf)
+  nInfB.msmf <- ifelse(num.B.msmf > 0 & dat$init$prev.B.msmf > 0 , max(1,round(dat$init$prev.B.msmf * num.B.msmf)),round(dat$init$prev.B.msmf * num.B.msmf))
+  nInfBI.msmf <- ifelse(num.BI.msmf > 0 & dat$init$prev.BI.msmf > 0 , max(1,round(dat$init$prev.BI.msmf * num.BI.msmf)),round(dat$init$prev.BI.msmf * num.BI.msmf))
+  nInfH.msmf <- ifelse(num.H.msmf > 0 & dat$init$prev.H.msmf > 0 , max(1,round(dat$init$prev.H.msmf * num.H.msmf)),round(dat$init$prev.H.msmf * num.H.msmf))
+  nInfHI.msmf <- ifelse(num.HI.msmf > 0 & dat$init$prev.HI.msmf > 0 , max(1,round(dat$init$prev.HI.msmf * num.HI.msmf)),round(dat$init$prev.HI.msmf * num.HI.msmf))
+  nInfW.msmf <- ifelse(num.W.msmf > 0 & dat$init$prev.W.msmf > 0 , max(1,round(dat$init$prev.W.msmf * num.W.msmf)),round(dat$init$prev.W.msmf * num.W.msmf))
 
   # Age-based infection probability
   probInfCrB.f <- age[ids.B.f] * dat$init$init.prev.age.slope.B.f
