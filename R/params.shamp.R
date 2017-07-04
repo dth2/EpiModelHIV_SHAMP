@@ -344,48 +344,48 @@ param_shamp <- function(race.method = 1,
                       tx.init.W.msmf.prob = 0.2331,
 
                       #No halting in the basic SHAMP model
-                      tx.halt.B.f.prob = 0.0,
-                      tx.halt.BI.f.prob = 0.0,
-                      tx.halt.H.f.prob = 0.0,
-                      tx.halt.HI.f.prob = 0.0,
-                      tx.halt.W.f.prob = 0.0,
-                      tx.halt.B.msf.prob = 0.0,
-                      tx.halt.BI.msf.prob = 0.0,
-                      tx.halt.H.msf.prob = 0.0,
-                      tx.halt.HI.msf.prob = 0.0,
-                      tx.halt.W.msf.prob = 0.0,
-                      tx.halt.B.msm.prob = 0.0,
-                      tx.halt.BI.msm.prob = 0.0,
-                      tx.halt.H.msm.prob = 0.0,
-                      tx.halt.HI.msm.prob = 0.0,
-                      tx.halt.W.msm.prob = 0.0,
-                      tx.halt.B.msmf.prob = 0.0,
-                      tx.halt.BI.msmf.prob = 0.0,
-                      tx.halt.H.msmf.prob = 0.0,
-                      tx.halt.HI.msmf.prob = 0.0,
-                      tx.halt.W.msmf.prob = 0.0,
+                      tx.halt.B.f.prob = 0.0001,
+                      tx.halt.BI.f.prob = 0.0001,
+                      tx.halt.H.f.prob = 0.0001,
+                      tx.halt.HI.f.prob = 0.0001,
+                      tx.halt.W.f.prob = 0.0001,
+                      tx.halt.B.msf.prob = 0.0001,
+                      tx.halt.BI.msf.prob = 0.0001,
+                      tx.halt.H.msf.prob = 0.0001,
+                      tx.halt.HI.msf.prob = 0.0001,
+                      tx.halt.W.msf.prob = 0.0001,
+                      tx.halt.B.msm.prob = 0.0001,
+                      tx.halt.BI.msm.prob = 0.0001,
+                      tx.halt.H.msm.prob = 0.0001,
+                      tx.halt.HI.msm.prob = 0.0001,
+                      tx.halt.W.msm.prob = 0.0001,
+                      tx.halt.B.msmf.prob = 0.0001,
+                      tx.halt.BI.msmf.prob = 0.0001,
+                      tx.halt.H.msmf.prob = 0.0001,
+                      tx.halt.HI.msmf.prob = 0.0001,
+                      tx.halt.W.msmf.prob = 0.0001,
 
                       ##With no halting there is also no re-initiation
-                      tx.reinit.B.f.prob = 0.0,
-                      tx.reinit.BI.f.prob = 0.0,
-                      tx.reinit.H.f.prob = 0.0,
-                      tx.reinit.HI.f.prob = 0.0,
-                      tx.reinit.W.f.prob = 0.0,
-                      tx.reinit.B.msf.prob = 0.0,
-                      tx.reinit.BI.msf.prob = 0.0,
-                      tx.reinit.H.msf.prob = 0.0,
-                      tx.reinit.HI.msf.prob = 0.0,
-                      tx.reinit.W.msf.prob = 0.0,
-                      tx.reinit.B.msm.prob = 0.0,
-                      tx.reinit.BI.msm.prob = 0.0,
-                      tx.reinit.H.msm.prob = 0.0,
-                      tx.reinit.HI.msm.prob = 0.0,
-                      tx.reinit.W.msm.prob = 0.0,
-                      tx.reinit.B.msmf.prob = 0.0,
-                      tx.reinit.BI.msmf.prob = 0.0,
-                      tx.reinit.H.msmf.prob = 0.0,
-                      tx.reinit.HI.msmf.prob = 0.0,
-                      tx.reinit.W.msmf.prob = 0.0,
+                      tx.reinit.B.f.prob = 1,
+                      tx.reinit.BI.f.prob = 1,
+                      tx.reinit.H.f.prob = 1,
+                      tx.reinit.HI.f.prob = 1,
+                      tx.reinit.W.f.prob = 1,
+                      tx.reinit.B.msf.prob = 1,
+                      tx.reinit.BI.msf.prob = 1,
+                      tx.reinit.H.msf.prob = 1,
+                      tx.reinit.HI.msf.prob = 1,
+                      tx.reinit.W.msf.prob = 1,
+                      tx.reinit.B.msm.prob = 1,
+                      tx.reinit.BI.msm.prob = 1,
+                      tx.reinit.H.msm.prob = 1,
+                      tx.reinit.HI.msm.prob = 1,
+                      tx.reinit.W.msm.prob = 1,
+                      tx.reinit.B.msmf.prob = 1,
+                      tx.reinit.BI.msmf.prob = 1,
+                      tx.reinit.H.msmf.prob = 1,
+                      tx.reinit.HI.msmf.prob = 1,
+                      tx.reinit.W.msmf.prob = 1,
 
                       max.time.off.tx.full.int = 520 * 7,
                       max.time.on.tx.part.int = 52 * 15 * 7,
@@ -652,19 +652,19 @@ param_shamp <- function(race.method = 1,
                       cond.main.H.prob.het = 0.17,
                       cond.main.HI.prob.het = 0.19,
                       cond.main.W.prob.het = 0.16,
-                      cond.pers.always.prob.het = 0,
+                      cond.pers.always.prob.het = .0001,
                       cond.pers.B.prob.het = 0.54,
                       cond.pers.BI.prob.het = 0.65,
                       cond.pers.H.prob.het = 0.5,
                       cond.pers.HI.prob.het = 0.49,
                       cond.pers.W.prob.het = 0.48,
-                      cond.inst.always.prob.het = 0,
+                      cond.inst.always.prob.het = .0001,
                       cond.inst.B.prob.het = 0.85,
                       cond.inst.BI.prob.het = 0.73,
                       cond.inst.H.prob.het = 0.78,
                       cond.inst.HI.prob.het = 0.76,
                       cond.inst.W.prob.het = 0.72,
-                      cond.always.prob.corr.het = 0,
+                      cond.always.prob.corr.het = .0001,
                       
                       #WAITING ON APRIL AS POSIBLE DATA SOURCE.
                       #Currect placeholder from home testing project
@@ -841,26 +841,26 @@ init_shamp <- function(prev.B.f = 0.02,
                 dot.args = list(...))
 
   
-  p$init.prev.age.slope.B.f <- prev.B.f / 41
-  p$init.prev.age.slope.BI.f <- prev.BI.f / 41
-  p$init.prev.age.slope.H.f <- prev.H.f / 41
-  p$init.prev.age.slope.HI.f <- prev.HI.f / 41
-  p$init.prev.age.slope.W.f <- prev.W.f / 41
-  p$init.prev.age.slope.B.msf <- prev.B.msf / 41
-  p$init.prev.age.slope.BI.msf <- prev.BI.msf / 41
-  p$init.prev.age.slope.H.msf <- prev.H.msf / 41
-  p$init.prev.age.slope.HI.msf <- prev.HI.msf / 41
-  p$init.prev.age.slope.W.msf <- prev.W.msf / 41
-  p$init.prev.age.slope.B.msm <- prev.B.msm / 41
-  p$init.prev.age.slope.BI.msm <- prev.BI.msm / 41
-  p$init.prev.age.slope.H.msm <- prev.H.msm / 41
-  p$init.prev.age.slope.HI.msm <- prev.HI.msm / 41
-  p$init.prev.age.slope.W.msm <- prev.W.msm / 41
-  p$init.prev.age.slope.B.msmf <- prev.B.msmf / 41
-  p$init.prev.age.slope.BI.msmf <- prev.BI.msmf / 41
-  p$init.prev.age.slope.H.msmf <- prev.H.msmf / 41
-  p$init.prev.age.slope.HI.msmf <- prev.HI.msmf / 41
-  p$init.prev.age.slope.W.msmf <- prev.W.msmf / 41
+  p$init.prev.age.slope.B.f <- prev.B.f / 42
+  p$init.prev.age.slope.BI.f <- prev.BI.f / 42
+  p$init.prev.age.slope.H.f <- prev.H.f / 42
+  p$init.prev.age.slope.HI.f <- prev.HI.f / 42
+  p$init.prev.age.slope.W.f <- prev.W.f / 42
+  p$init.prev.age.slope.B.msf <- prev.B.msf / 42
+  p$init.prev.age.slope.BI.msf <- prev.BI.msf / 42
+  p$init.prev.age.slope.H.msf <- prev.H.msf / 42
+  p$init.prev.age.slope.HI.msf <- prev.HI.msf / 42
+  p$init.prev.age.slope.W.msf <- prev.W.msf / 42
+  p$init.prev.age.slope.B.msm <- prev.B.msm / 42
+  p$init.prev.age.slope.BI.msm <- prev.BI.msm / 42
+  p$init.prev.age.slope.H.msm <- prev.H.msm / 42
+  p$init.prev.age.slope.HI.msm <- prev.HI.msm / 42
+  p$init.prev.age.slope.W.msm <- prev.W.msm / 42
+  p$init.prev.age.slope.B.msmf <- prev.B.msmf / 42
+  p$init.prev.age.slope.BI.msmf <- prev.BI.msmf / 42
+  p$init.prev.age.slope.H.msmf <- prev.H.msmf / 42
+  p$init.prev.age.slope.HI.msmf <- prev.HI.msmf / 42
+  p$init.prev.age.slope.W.msmf <- prev.W.msmf / 42
  
 
   class(p) <- "init.net"
