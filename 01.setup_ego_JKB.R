@@ -39,34 +39,34 @@ ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol=
 fit.m.ego<-ergm.ego(ego.obj_m ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                     +nodefactor("deg.pers.c",base=1),
                     control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
-                                             ergm.control = control.ergm(MCMC.interval=5000,
-                                                                         MCMC.samplesize=5000,
-                                                                         MCMC.burnin = 5000,
-                                                                         MPLE.max.dyad.types = 1e6,
-                                                                         init.method = "MPLE",
-                                                                         MCMLE.maxit = 50)))
+                    ergm.control = control.ergm(MCMC.interval=5000,
+                                                    MCMC.samplesize=5000,
+                                                    MCMC.burnin = 5000,
+                                                    MPLE.max.dyad.types = 1e6,
+                                                    init.method = "MPLE",
+                                                    MCMLE.maxit = 50)))
 
 
 fit.c.ego<-ergm.ego(ego.obj_c ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
                     +nodefactor("deg.main.c",base=1),
                     control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
-                                             ergm.control = control.ergm(MCMC.interval=5000,
-                                                                         MCMC.samplesize=5000,
-                                                                         MCMC.burnin = 5000,
-                                                                         MPLE.max.dyad.types = 1e6,
-                                                                         init.method = "MPLE",
-                                                                         MCMLE.maxit = 50)))
+                    ergm.control = control.ergm(MCMC.interval=5000,
+                                                MCMC.samplesize=5000,
+                                                MCMC.burnin = 5000,
+                                                MPLE.max.dyad.types = 1e6,
+                                                init.method = "MPLE",
+                                                MCMLE.maxit = 50)))
 
 
 fit.i.ego<-ergm.ego(ego.obj_i ~edges + nodematch("sex", diff=FALSE) + nodefactor("race",base=5)
-                    + nodefactor("deg.main.c",base=1) + nodefactor("deg.pers.c",base=1),
-                    control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
-                                             ergm.control = control.ergm(MCMC.interval=5000,
-                                                                         MCMC.samplesize=5000,
-                                                                         MCMC.burnin = 5000,
-                                                                         MPLE.max.dyad.types = 1e6,
-                                                                         init.method = "MPLE",
-                                                                         MCMLE.maxit = 50)))
+                + nodefactor("deg.main.c",base=1) + nodefactor("deg.pers.c",base=1),
+                control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
+                ergm.control = control.ergm(MCMC.interval=5000,
+                                                MCMC.samplesize=5000,
+                                                MCMC.burnin = 5000,
+                                                MPLE.max.dyad.types = 1e6,
+                                                init.method = "MPLE",
+                                                MCMLE.maxit = 50)))
 
 
 
@@ -78,7 +78,7 @@ time.unit <- 7
 method<-1
 
 #Simulation size.
-sim.size<-114435
+sim.size<-38145
 
 
 # Mean durations
@@ -223,11 +223,13 @@ fit.i <- list(fit= fit.i.ego, formation=fit.i.ego$formula, target.stats= target.
 
 param <- param_shamp(data.params)
 init <- init_shamp()
-control <- control_shamp(nsteps = 520)
+control <- control_shamp(nsteps = 5)
 est <- list(fit.m, fit.c, fit.i)
-save(est, file = "~/Models/SHAMP/fit.rda")
+#save(est, file = "~/Models/SHAMP/fit.rda")
+save(est, file='~/Models/SHAMP/fitsmall.rda')
 
-load(file = "~/Models/SHAMP/fit.rda")
+#load(file = "~/Models/SHAMP/fit.rda")
+load(file = "~/Models/SHAMP/fitsmall.rda")
 
 sim<-netsim(est, param, init, control)
 
