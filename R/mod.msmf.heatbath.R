@@ -39,6 +39,7 @@ heatbath_msmf_shamp <- function(dat, at){
   status<-dat$attr$status
   prepStat<-dat$attr$prepStat
   prepClass<-dat$attr$prepClass
+  sex<-dat$attr$sex
   sex.ident<-dat$attr$sex.ident
   
 
