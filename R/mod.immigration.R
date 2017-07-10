@@ -147,7 +147,13 @@ immigration_shamp <- function(dat, at){
   
   returning <- c(ids.BI.f.r, ids.BI.m.r, ids.HI.f.r, ids.HI.m.r)
   
+  
+  ##Move the people
+  
+  if (length(returning) > 0) {dat$attr$immig.loc[returning]==0}
+  if (length(departing) > 0) {dat$attr$immig.loc[departing]==1} 
 
+  ##Track infections
  if (length(infected) >= 1){
     dat$attr$status[infected] <- 1
     dat$attr$inf.time[infected] <- at
