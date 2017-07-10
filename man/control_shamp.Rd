@@ -14,8 +14,8 @@ control_shamp(simno = 1, nsims = 1, ncores = 1, nsteps = 100,
   riskhist.FUN = riskhist_shamp, position.FUN = position_shamp,
   trans.FUN = trans_shamp, heatbath.FUN = heatbath_msmf_shamp,
   immigration.FUN = immigration_shamp, prev.FUN = prevalence_shamp,
-  demog.FUN = demog_shamp, save.nwstats = FALSE, verbose = TRUE,
-  verbose.int = 1, ...)
+  demog.FUN = demog_shamp, verbose.FUN = verbose_msm,
+  save.nwstats = FALSE, verbose = TRUE, verbose.int = 1, ...)
 }
 \arguments{
 \item{simno}{Unique ID for the simulation run, used for file naming purposes
@@ -79,6 +79,9 @@ via conatct with unsimulated populations in home counties during return trips.}
 
 \item{prev.FUN}{Module function to calculate prevalence summary statistics.}
 
+\item{verbose.FUN}{Module function to print model progress to the console or
+external text files.}
+
 \item{save.nwstats}{Calculate and save network statistics as defined in the
 \code{simnet} modules.}
 
@@ -93,9 +96,6 @@ progress is printed.}
 \item{aiclass.FUN}{Module function for one-off AI risk class transitions.}
 
 \item{roleclass.FUN}{Module function for transitions in sexual roles.}
-
-\item{verbose.FUN}{Module function to print model progress to the console or
-external text files.}
 }
 \value{
 A list object of class \code{control_shamp}, which can be passed to the
