@@ -18,6 +18,6 @@ demog_shamp <- function(dat, at) {
  if(at==312){demog312<<-table(dat$attr$demog.cat)}
  if(at==416){demog416<<-table(dat$attr$demog.cat)}
  if(at==520){demog520<<-table(dat$attr$demog.cat)} 
-
+ if(at==1040){demog1040<<-table(dat$attr$demog.cat)}
   return(dat)
 }
