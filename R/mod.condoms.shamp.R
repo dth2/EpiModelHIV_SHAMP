@@ -174,7 +174,7 @@ condoms_shamp <- function(dat, at) {
 
     # Disclosure modifier
     isDiscord <- which((elt.vi[, "st1"] - elt.vi[, "st2"]) == 1)
-    delt <- elt.vi[isDiscord, ]
+    delt <- matrix(elt.vi[isDiscord, ])
     discl.list <- dat$temp$discl.list
     disclose.cdl <- discl.list[, 1] * 1e7 + discl.list[, 2]
     delt.cdl <- uid[delt[, 1]] * 1e7 + uid[delt[, 2]]
@@ -288,7 +288,7 @@ condoms_shamp <- function(dat, at) {
 
     # Disclosure modifier
     isDiscord <- which((elt.ai[, "st1"] - elt.ai[, "st2"]) == 1)
-    delt <- elt.ai[isDiscord, ]
+    delt <- matrix(elt.ai[isDiscord, ])
     discl.list <- dat$temp$discl.list
     disclose.cdl <- discl.list[, 1] * 1e7 + discl.list[, 2]
     delt.cdl <- uid[delt[, 1]] * 1e7 + uid[delt[, 2]]
