@@ -228,6 +228,7 @@ est <- list(fit.m, fit.c, fit.i)
 #save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 
 save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fitsmall.rda")
+save(data.params, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/data.params.rda")
 
 #load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 
