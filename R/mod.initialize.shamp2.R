@@ -142,7 +142,7 @@ initialize_shamp <- function(x, param, init, control, s) {
   
   # Immigrant status
   dat$attr$immig <- get.vertex.attribute(nw[[1]], "immig") 
-  dat$attr$immig.loc <- rep("0",length(dat$attr$age))
+  dat$attr$immig.loc <- rep(0,length(dat$attr$age))
 
   # UAI group
   p1.msm <- dat$param$cond.pers.always.prob.msm
@@ -2787,6 +2787,8 @@ init_status_shamp <- function(dat) {
   dat$attr$diag.status <- diag.status
   dat$attr$diag.time <- diag.time
   dat$attr$last.neg.test <- last.neg.test
+  dat$attr$evertest<-rep(NA, num)
+  dat$attr$evertest<-ifelse(dat$attr$last.neg.test<=0 | dat$attr$diag.status==1,1,0)
   dat$attr$tx.status <- tx.status
   dat$attr$tx.init.time <- tx.init.time
   dat$attr$cum.time.on.tx <- cum.time.on.tx
