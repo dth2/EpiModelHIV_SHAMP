@@ -99,6 +99,7 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
   dat$attr$race[newIds] <- rep(0, nBirths)
   dat$attr$age[newIds] <- rep(0, nBirths)
   dat$attr$demog.cat[newIds] <- rep(0, nBirths)
+  dat$attr$evertest[newIds] <- rep(0, nBirths)
 
   dat$attr$arrival.time[newIds] <- rep(at, nBirths)
 
