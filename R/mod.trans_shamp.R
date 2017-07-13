@@ -235,8 +235,9 @@ trans_shamp <- function(dat, at){
 
   # Update attributes
   
-## Forward transmssion from a heatbath infection is considered local.
-  inf.class<-ifelse(inf.class=="H","L",inf.class)
+## Forward transmssion from a heatbath and foreighn aquired get seperate designation.
+  inf.class<-ifelse(inf.class=="H","Hds",inf.class)
+  inf.class<-ifelse(inf.class=="FA","FAds",inf.class)
 
   infected <- infector <- inf.type <- NULL
   if (sum(trans.ip.ai, trans.rp.ai,trans.ip.vi, trans.rp.vi) > 0) {
