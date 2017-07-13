@@ -38,7 +38,7 @@ immigration_shamp <- function(dat, at){
   active <- dat$attr$active
   status <- dat$attr$status
   immig.loc <- dat$attr$immig.loc
-  
+  sex.ident <- dat$attr$sex.ident
 
   #Parameters
 
@@ -102,7 +102,7 @@ immigration_shamp <- function(dat, at){
   #Who is leaving
   ids.BI.f.d<-which(active==1 & immig.loc==0 & sex=="F" & race =="BI")
   ids.BI.m.d<-which(active==1 & immig.loc==0 & sex=="M" & race =="BI")
-  ids.H.f.d<-which(active==1 & immig.loc==0 & sex=="F" & race =="HI")
+  ids.HI.f.d<-which(active==1 & immig.loc==0 & sex=="F" & race =="HI")
   ids.HI.m.d<-which(active==1 & immig.loc==0 & sex=="M" & race =="HI")
   
   if(length(ids.BI.f.d) > 0){
@@ -111,7 +111,7 @@ immigration_shamp <- function(dat, at){
   
   if(length(ids.BI.m.d) > 0){
   ids.BI.m.d.t<-rbinom(length(ids.BI.m.d),1,prob = depart.BI.m)
-  ids.BI.m.d<-ids.BI.m.inf[ids.BI.m.d.t==1]}
+  ids.BI.m.d<-ids.BI.m.d[ids.BI.m.d.t==1]}
   
   if(length(ids.HI.f.d) > 0){
   ids.HI.f.d.t<-rbinom(length(ids.HI.f.d),1,prob = depart.HI.f)
@@ -126,7 +126,7 @@ immigration_shamp <- function(dat, at){
   #Who is returning
   ids.BI.f.r<-which(active==1 & immig.loc==1 & sex=="F" & race =="BI")
   ids.BI.m.r<-which(active==1 & immig.loc==1 & sex=="M" & race =="BI")
-  ids.H.f.r<-which(active==1 & immig.loc==1 & sex=="F" & race =="HI")
+  ids.HI.f.r<-which(active==1 & immig.loc==1 & sex=="F" & race =="HI")
   ids.HI.m.r<-which(active==1 & immig.loc==1 & sex=="M" & race =="HI")
   
   if(length(ids.BI.f.r) > 0){
@@ -135,7 +135,7 @@ immigration_shamp <- function(dat, at){
   
   if(length(ids.BI.m.r) > 0){
   ids.BI.m.r.t<-rbinom(length(ids.BI.m.r),1,prob = return.BI.m)
-  ids.BI.m.r<-ids.BI.m.inf[ids.BI.m.r.t==1]}
+  ids.BI.m.r<-ids.BI.m.r[ids.BI.m.r.t==1]}
   
   if(length(ids.HI.f.r) > 0){
   ids.HI.f.r.t<-rbinom(length(ids.HI.f.r),1,prob = return.HI.f)
@@ -150,8 +150,8 @@ immigration_shamp <- function(dat, at){
   
   ##Move the people
   
-  if (length(returning) > 0) {dat$attr$immig.loc[returning]==0}
-  if (length(departing) > 0) {dat$attr$immig.loc[departing]==1} 
+  if (length(returning) > 0) {dat$attr$immig.loc[returning]<-0}
+  if (length(departing) > 0) {dat$attr$immig.loc[departing]<-1} 
 
   ##Track infections
  if (length(infected) >= 1){
