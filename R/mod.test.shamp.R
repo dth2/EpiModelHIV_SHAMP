@@ -78,7 +78,7 @@ test_shamp <- function(dat, at) {
     rates.B.f <- rep(1/mean.test.B.f.int, length(elig.B.f))
     tst.B.f <- elig.B.f[rbinom(length(elig.B.f), 1, rates.B.f) == 1]
     
-    elig.BI.f <- which(race == "BI" & sex == "F" &
+    elig.BI.f <- which(race == "BI" & sex == "F" & immig.loc == 0 &
                         tt.traj != 1 &
                         (diag.status == 0 | is.na(diag.status)) &
                         prepStat == 0)
@@ -377,6 +377,7 @@ test_shamp <- function(dat, at) {
   dat$attr$last.neg.test[tst.neg] <- at
   dat$attr$diag.status[tst.pos] <- 1
   dat$attr$diag.time[tst.pos] <- at
+  dat$attr$evertest[tst.all] <- 1
 
   return(dat)
 }
