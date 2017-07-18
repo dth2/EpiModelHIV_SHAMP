@@ -74,10 +74,10 @@ immigration_shamp <- function(dat, at){
   ids.HI.m.r <- NULL
   
   #Of those away who becomes infected
-  ids.BI.f.inf<-which(active==1 & immig.loc==1 & sex=="F" & race =="BI")
-  ids.BI.m.inf<-which(active==1 & immig.loc==1 & sex=="M" & race =="BI")
-  ids.H.f.inf<-which(active==1 & immig.loc==1 & sex=="F" & race =="HI")
-  ids.HI.m.inf<-which(active==1 & immig.loc==1 & sex=="M" & race =="HI")
+  ids.BI.f.inf<-which(active==1 & immig.loc==1 & sex=="F" & race =="BI" & status==0)
+  ids.BI.m.inf<-which(active==1 & immig.loc==1 & sex=="M" & race =="BI" & status==0)
+  ids.H.f.inf<-which(active==1 & immig.loc==1 & sex=="F" & race =="HI" & status==0)
+  ids.HI.m.inf<-which(active==1 & immig.loc==1 & sex=="M" & race =="HI" & status==0)
   
   if(length(ids.BI.f.inf) > 0) {
   ids.BI.f.inf.t<-rbinom(length(ids.BI.f.inf),1,prob = aq.prob.BI.f)
