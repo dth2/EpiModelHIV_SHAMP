@@ -151,8 +151,18 @@ trans_shamp <- function(dat, at){
   # Retransformation to probability
   ip.tprob.ai <- plogis(ip.tlo.ai)
   ip.tprob.vi <- plogis(ip.tlo.vi)
-  stopifnot(ip.tprob.ai >= 0, ip.tprob.ai <= 1)
-  stopifnot(ip.tprob.vi >= 0, ip.tprob.vi <= 1)
+  
+  
+  if(any(ip.tprob.ai < 0 | ip.tprob.ai > 1 | ip.tprob.ai == "NaN")) {warning("AI Transmission probability not 0-1, set to min0, max1, suggest reduce baseline prob.",call. = FALSE)}
+  if(any(ip.tprob.vi < 0 | ip.tprob.vi > 1 | ip.tprob.vi == "NaN")) {warning("VI Transmission probability not 0-1, set to min0, max1, suggest reduce baseline prob.",call. = FALSE)}
+  
+  ip.tprob.ai <- ifelse(ip.tprob.ai >= 1,1,
+                        ifelse(ip.tprob.ai <= 0,0,ip.tprob.ai))
+  ip.tprob.ai <- ifelse(is.na(ip.tprob.ai) == TRUE,1,ip.tprob.ai)
+  
+  ip.tprob.vi <- ifelse(ip.tprob.vi >= 1,1,
+                        ifelse(ip.tprob.vi <= 0,0,ip.tprob.vi))
+  ip.tprob.vi <- ifelse(is.na(ip.tprob.vi) == TRUE,1,ip.tprob.vi)
 
   # PATP: Receptive Infected (Col 2) --------------------------------
 
@@ -218,8 +228,16 @@ trans_shamp <- function(dat, at){
   rp.tprob.ai <- plogis(rp.tlo.ai)
   rp.tprob.vi <- plogis(rp.tlo.vi)
   
-  stopifnot(rp.tprob.ai >= 0, rp.tprob.ai <= 1)
-  stopifnot(rp.tprob.vi >= 0, rp.tprob.vi <= 1)
+  if(any(rp.tprob.ai < 0 | rp.tprob.ai > 1 | rp.tprob.ai== "NaN")) {warning("AI Transmission probability not 0-1, set to min0, max1, suggest reduce baseline prob.",call. = FALSE)}
+  if(any(rp.tprob.vi < 0 | rp.tprob.vi > 1 | rp.tprob.vi== "NaN")) {warning("VI Transmission probability not 0-1, set to min0, max1, suggest reduce baseline prob.",call. = FALSE)}
+  
+  rp.tprob.ai <- ifelse(rp.tprob.ai >= 1,1,
+                        ifelse(rp.tprob.ai <= 0,0,rp.tprob.ai))
+  rp.tprob.ai <- ifelse(is.na(rp.tprob.ai) == TRUE,1,rp.tprob.ai)
+  
+  rp.tprob.vi <- ifelse(rp.tprob.vi >= 1,1,
+                        ifelse(rp.tprob.vi <= 0,0,rp.tprob.vi))
+  rp.tprob.vi <- ifelse(is.na(rp.tprob.vi) == TRUE,1,rp.tprob.vi)
 
   # Transmission --------------------------------------------------------
 
