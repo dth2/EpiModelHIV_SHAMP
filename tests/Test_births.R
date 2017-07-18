@@ -23,19 +23,18 @@ param <- param_shamp(data.params)
 init <- init_shamp()
 control <- control_shamp(nsteps = 1040)
 
-test_death_noinfection<-netsim(est, param, init, control)
+test_births<-netsim(est, param, init, control)
 
 ##Outside of package
-save(test_births, file = "~/EpiModelHIV_shamp_modeling/scenarios/test_death_noinfection.rda")
+save(test_births, file = "~/EpiModelHIV_shamp_modeling/scenarios/test_births.rda")
 
 ##Run the Check
 sum(test_births$epi$dth.gen,na.rm=TRUE)
 sum(test_births$epi$dth.dis,na.rm=TRUE)
 sum(test_births$epi$dth.age,na.rm=TRUE)
-sum(test_births$epi$dat$epi$nBirths,na.rm=TRUE)
+sum(test_births$epi$nBirths,na.rm=TRUE)
 
-(sum(test_births$epi$dth.gen,na.rm=TRUE)+sum(test_births$epi$dth.age,na.rm=TRUE))-(sum(test_births$epi$dat$epi$nBirths,na.rm=TRUE))
-
+(sum(test_births$epi$dth.gen,na.rm=TRUE)+sum(test_births$epi$dth.age,na.rm=TRUE))-(sum(test_births$epi$nBirths,na.rm=TRUE))
 
 ##############################################################################################
 
