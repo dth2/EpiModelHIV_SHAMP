@@ -222,7 +222,9 @@ acts_shamp <- function(dat, at) {
 
   # Remove inactive edges and edges 
   
-  dat$temp$el <- dat$temp$el[-which(dat$temp$el[, "ai"] == 0 & dat$temp$el[, "vi"] == 0), ]
+  acts<-dat$temp$el[,"ai"]+dat$temp$el[,"vi"]
+  keep<-which(acts > 0)
+  dat$temp$el <- dat$temp$el[keep, ]
 
 
   
