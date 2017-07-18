@@ -172,7 +172,8 @@ prevalence_shamp <- function(dat, at) {
     
     dat$epi$incid.FA <- rNA
     dat$epi$incid.H <- rNA
-
+    dat$epi$incid.L <- rNA
+    
     dat$epi$prepCurr <- rNA
     dat$epi$prepCov <- rNA
     dat$epi$prepElig <- rNA
