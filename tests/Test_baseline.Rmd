@@ -1,0 +1,80 @@
+---
+title: "Test_baseline"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+############################################################################
+# Packages
+library(EpiModelHIV)
+library(EpiModelHPC)
+library(ergm.ego)
+library(tergmLite)
+```
+
+## Run sim
+
+```{r}
+############################################################################
+# Run new sim or load from previous run
+
+runNow <- FALSE
+
+############################################################################
+# Data: ergm.ego model and parameters
+
+load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fitsmall.rda")
+load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/data.params.rda")
+source(file= "~/EpiModelHIV_SHAMP2/tests/age_mort.R")
+
+############################################################################
+# Model setup
+param <- param_shamp(data.params)
+init <- init_shamp()
+control <- control_shamp(nsteps = 1040)
+
+############################################################################
+# Run now and save outside of package, or load
+
+if (runNow) {
+  test_baseline<-netsim(est, param, init, control)
+  save(test_baseline, file = "~/EpiModelHIV_shamp_modeling/scenarios/test_baseline.rda")
+} else {
+  load(file = "~/EpiModelHIV_shamp_modeling/scenarios/test_baseline.rda")
+}
+
+```
+
+## Check outcomes
+
+### Prevalence plot
+
+```{r, echo=FALSE}
+# Plot code - move to package
+plotprev <- function(netobj, 
+                     maxtime=1040, 
+                     groups=c('i.prev.B', 'i.prev.BI', 'i.prev.H', 'i.prev.HI', 'i.prev.W'), 
+                     labels=c('B', 'BI', 'H', 'HI', 'W'),
+                     prevcolors=c('deeppink2', 'red4', 'darkviolet', 'blue3', 
+                              'dodgerblue3', 'darkgreen', 'gold4', 'grey39')) {
+  time <- 1:maxtime
+  plot(time, netobj$epi$i.prev[,1], type='l', lwd=4, ylab='Prevalence')
+  for (i in 1:length(groups)) {
+    lines(netobj$epi[[groups[i]]][,1], col=prevcolors[i], lwd=1.5)
+  }
+  legend('topright', bty='n', fill=c('black', prevcolors[1:length(groups)]),
+         legend=c('Total', labels))
+}
+
+
+# Plot
+plotprev(test_baseline)
+```
+
+```{r, echo=FALSE}
+plotprev(test_baseline, 
+         groups=c('i.prev.m', 'i.prev.f', 'i.prev.msmf'),
+         labels=c('M', 'F', 'MSMF'))
+```
