@@ -153,10 +153,10 @@ if(length(alter.list>0)){warning("OT alters deleted: missing values",call. = FAL
 
 ###  Calculate the paramters needed for estimation that are not line data.
   
-  #Limit Main and casual to a 2 by 3 set (Main 0:1, Casual 0:2)  
-  ##Create deg.pers.c and deg.main.c for capping main at 1 and pers at 2 for model fit.
+  #Limit Main and casual to a 2 by 2 set (Main 0:1, Casual 0:1)  
+  ##Create deg.pers.c and deg.main.c for capping main at 1 and pers at 1 for model fit.
   data$egos$deg.pers.c<-data$egos$deg.pers
-  data$egos$deg.pers.c<-ifelse(data$egos$deg.pers.c > 1, 2,data$egos$deg.pers.c)
+  data$egos$deg.pers.c<-ifelse(data$egos$deg.pers.c > 0, 1,data$egos$deg.pers.c)
   data$egos$deg.main.c<-data$egos$deg.main
   data$egos$deg.main.c<-ifelse(data$egos$deg.main.c > 0, 1,data$egos$deg.main.c)
     
