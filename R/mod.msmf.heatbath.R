@@ -98,15 +98,15 @@ heatbath_msmf_shamp <- function(dat, at){
     dat$attr$stage.time[infected] <- 0
     dat$attr$diag.status[infected] <- 0
     dat$attr$tx.status[infected] <- 0
-    dat$attr$inf.class[infected] <- "H"
+    dat$attr$inf.class[infected] <- "MSM"
       
     
-    dat$attr$infector[infected] <- "heat"
-    dat$attr$inf.role[infected] <- "heat"
-    dat$attr$inf.type[infected] <- "heat"
-    dat$attr$inf.diag[infected] <- "heat" 
-    dat$attr$inf.tx[infected] <- "heat"
-    dat$attr$inf.stage[infected] <- "heat"
+    dat$attr$infector[infected] <- "MSM"
+    dat$attr$inf.role[infected] <- "MSM"
+    dat$attr$inf.type[infected] <- "MSM"
+    dat$attr$inf.diag[infected] <- "MSM" 
+    dat$attr$inf.tx[infected] <- "MSM"
+    dat$attr$inf.stage[infected] <- "MSM"
     
     dat$attr$cum.time.on.tx[infected] <- 0
     dat$attr$cum.time.off.tx[infected] <- 0
@@ -127,7 +127,7 @@ heatbath_msmf_shamp <- function(dat, at){
     dat$epi$incid.msm[at] <- dat$epi$incid.msm[at] + sum(sex.ident[infected] == "msm")
     dat$epi$incid.msmf[at] <- dat$epi$incid.msmf[at] + sum(sex.ident[infected] == "msmf")
     
-    dat$epi$incid.H[at] <- length(infected)
+    dat$epi$incid.MSM[at] <- length(infected)
      }
     
     if (length(infected) < 1){ dat$epi$incid.H[at] <-0}
