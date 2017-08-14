@@ -29,6 +29,7 @@ prevalence_shamp <- function(dat, at) {
   sex.ident<-dat$attr$sex.ident
   sex<-dat$attr$sex
   prepStat <- dat$attr$prepStat
+  inf.class <- dat$attr$inf.class
 
   nsteps <- dat$control$nsteps
   rNA <- rep(NA, nsteps)
@@ -171,8 +172,8 @@ prevalence_shamp <- function(dat, at) {
     dat$epi$incid.msmf <- rNA
     
     dat$epi$incid.FA <- rNA
-    dat$epi$incid.H <- rNA
-    dat$epi$incid.L <- rNA
+    dat$epi$incid.MSM <- rNA
+    dat$epi$incid.Lhet <- rNA
     
     dat$epi$prepCurr <- rNA
     dat$epi$prepCov <- rNA
@@ -185,6 +186,18 @@ prevalence_shamp <- function(dat, at) {
 
     dat$epi$cprob.always.pers <- rNA
     dat$epi$cprob.always.inst <- rNA
+    
+    dat$epi$i.num.MSM.inf <- rNA
+    dat$epi$i.num.MSMds.inf <- rNA
+    dat$epi$i.num.FA.inf <- rNA
+    dat$epi$i.num.FAds.inf <- rNA
+    dat$epi$i.num.Lhet.inf <- rNA
+    
+    dat$epi$prop.MSM.inf <- rNA
+    dat$epi$prop.MSMds.inf <- rNA
+    dat$epi$prop.FA.inf <- rNA
+    dat$epi$prop.FAds.inf <- rNA
+    dat$epi$prop.Lhet.inf <- rNA
   }
 
 
@@ -276,6 +289,18 @@ prevalence_shamp <- function(dat, at) {
   dat$epi$i.num.HI.msmf[at] <- sum(status == 1 & race == "HI" & sex.ident== "msmf", na.rm = TRUE)
   dat$epi$i.num.W.msmf[at] <- sum(status == 1 & race == "W" & sex.ident== "msmf", na.rm = TRUE) 
   
+  dat$epi$i.num.MSM.inf <- sum(inf.class=="MSM")
+  dat$epi$i.num.MSMds.inf <- sum(inf.class=="MSMds")
+  dat$epi$i.num.FA.inf <- sum(inf.class=="FA")
+  dat$epi$i.num.FAds.inf <- sum(inf.class=="FAds")
+  dat$epi$i.num.Lhet.inf <- sum(inf.class=="Lhet")
+  
+  dat$epi$prop.MSM.inf <- sum(inf.class=="MSM", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  dat$epi$prop.MSMds.inf <- sum(inf.class=="MSMds", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  dat$epi$prop.FA.inf <- sum(inf.class=="FA", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  dat$epi$prop.FAds.inf <- sum(inf.class=="FAds", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  dat$epi$prop.Lhet.inf <- sum(inf.class=="Lhet", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  
   dat$epi$i.prev[at] <- dat$epi$i.num[at] / dat$epi$num[at]
   dat$epi$i.prev.B[at] <- dat$epi$i.num.B[at] / dat$epi$num.B[at]
   dat$epi$i.prev.BI[at] <- dat$epi$i.num.BI[at] / dat$epi$num.BI[at]
@@ -317,6 +342,8 @@ prevalence_shamp <- function(dat, at) {
   dat$epi$i.prev.H.msmf[at] <- dat$epi$i.num.H.msmf[at] / dat$epi$num.H.msmf[at]
   dat$epi$i.prev.HI.msmf[at] <- dat$epi$i.num.HI.msmf[at] / dat$epi$num.HI.msmf[at]
   dat$epi$i.prev.W.msmf[at] <- dat$epi$i.num.W.msmf[at] / dat$epi$num.W.msmf[at]
+  
+
 
   dat$epi$prepCurr[at] <- sum(prepStat == 1, na.rm = TRUE)
   dat$epi$prepElig[at] <- sum(dat$attr$prepElig == 1, na.rm = TRUE)
