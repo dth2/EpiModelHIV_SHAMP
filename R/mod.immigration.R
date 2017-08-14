@@ -165,12 +165,12 @@ immigration_shamp <- function(dat, at){
     dat$attr$inf.class[infected] <- "FA"
       
     
-    dat$attr$infector[infected] <- "immig"
-    dat$attr$inf.role[infected] <- "immig"
-    dat$attr$inf.type[infected] <- "immig"
-    dat$attr$inf.diag[infected] <- "immig" 
-    dat$attr$inf.tx[infected] <- "immig"
-    dat$attr$inf.stage[infected] <- "immig"
+    dat$attr$infector[infected] <- "FA"
+    dat$attr$inf.role[infected] <- "FA"
+    dat$attr$inf.type[infected] <- "FA"
+    dat$attr$inf.diag[infected] <- "FA" 
+    dat$attr$inf.tx[infected] <- "FA"
+    dat$attr$inf.stage[infected] <- "FA"
 
     dat$attr$cum.time.on.tx[infected] <- 0
     dat$attr$cum.time.off.tx[infected] <- 0
