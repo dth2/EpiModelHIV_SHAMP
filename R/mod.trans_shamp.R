@@ -254,7 +254,7 @@ trans_shamp <- function(dat, at){
   # Update attributes
   
 ## Forward transmssion from a heatbath and foreighn aquired get seperate designation.
-  inf.class<-ifelse(inf.class=="H","Hds",inf.class)
+  inf.class<-ifelse(inf.class=="MSM","MSMds",inf.class)
   inf.class<-ifelse(inf.class=="FA","FAds",inf.class)
 
   infected <- infector <- inf.type <- NULL
@@ -317,7 +317,7 @@ trans_shamp <- function(dat, at){
   dat$epi$incid.msm[at] <- sum(sex.ident[infected] == "msm")  
   dat$epi$incid.msmf[at] <- sum(sex.ident[infected] == "msmf")
 
-  dat$epi$incid.L[at] <- length(infected)
+  dat$epi$incid.Lhet[at] <- length(infected)
 
   return(dat)
 }
