@@ -22,9 +22,9 @@ data.params<-as.list(new_data[1])
 
 
 ##Make the three ergm.ego objects.
-ego.obj_c<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersCohab,egoIDcol="ego")
-ego.obj_p<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersPers,egoIDcol="ego")
-ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol="ego")
+ego.obj_c<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersCohab,egoIDcol="ego", egoWt=new_data[[2]]$egos$weight)
+ego.obj_p<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersPers,egoIDcol="ego", egoWt=new_data[[2]]$egos$weight)
+ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol="ego", egoWt=new_data[[2]]$egos$weight)
 
 
 
