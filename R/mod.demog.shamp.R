@@ -11,12 +11,11 @@
 #'
 demogupdate_shamp <- function(dat, at) {
 
-
   #AGECAT
-  dat$attr$agecat<-ifelse(data$att$age < 26 ,"18-25",
-                           ifelse(data$attr$age > 25 & data$attr$age < 36,"26-35",
-                                  ifelse(data$attr$age > 35 & data$attr$age < 46,"36-45",
-                                         ifelse(data$attr$age > 45,"46-60",data$attr$agecat))))
+  dat$attr$agecat<-ifelse(dat$att$age < 26 ,"18-25",
+                           ifelse(dat$attr$age > 25 & dat$attr$age < 36,"26-35",
+                                  ifelse(dat$attr$age > 35 & dat$attr$age < 46,"36-45",
+                                         ifelse(dat$attr$age > 45,"46-60",dat$attr$agecat))))
   
   #sqrt.age.adj
   dat$attr$sqrt.age.adj<-ifelse(dat$attr$sex=="M",dat$attr$sqrt.age,
