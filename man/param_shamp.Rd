@@ -222,7 +222,8 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   demog.dist = data.params[[1]]$demog.dist,
   sex.groups = data.params[[1]]$sex.groups,
   race.groups = data.params[[1]]$race.groups,
-  age.groups = data.params[[1]]$age.groups, ...)
+  age.groups = data.params[[1]]$age.groups,
+  adj.adj = data.params[[1]]$age.adj, ...)
 }
 \arguments{
 \item{testing.pattern}{Method for HIV testing, with options \code{"memoryless"}
@@ -457,6 +458,9 @@ re-initiate treatment.}
 \item{b.R.S.rate}{Rate at which a person in race group R, where R is a 
 charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
 enters the population.}
+
+\item{age.adj}{This value is added to the squareroot of age for females in sqrt.age.adj
+so that sex age asymmetry can be captured with an absdiff term}
 
 \item{disc.outset.main.R.S.prob}{Probability that an HIV-infected person in race group R,
 where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
