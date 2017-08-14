@@ -29,6 +29,9 @@ aging <- function(dat, at) {
 
   dat$attr$age <- age
   dat$attr$sqrt.age <- sqrt(age)
+  
+  dat$attr$sqrt.age.adj<-ifelse(dat$attr$sex=="M",dat$attr$sqrt.age,
+                                 ifelse(dat$attr$sex=="F",dat$attr$sqrt.age + dat$params$age.adj))
 
 
  
