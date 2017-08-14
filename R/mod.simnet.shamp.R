@@ -17,7 +17,7 @@ simnet_shamp <- function(dat, at) {
   dat <- edges_correct_msm(dat, at)
   
   ## Main network
-  nwparam.m <- EpiModel::get_nwparam(dat, network = 1)
+  nwparam.c <- EpiModel::get_nwparam(dat, network = 1)
   
   if (dat$param$method == 1) {
     dat$attr$deg.pers <- get_degree(dat$el[[2]])
@@ -40,26 +40,26 @@ simnet_shamp <- function(dat, at) {
   
   dat$temp$new.edges <- NULL
   if (at == 2) {
-    new.edges.m <- matrix(dat$el[[1]], ncol = 2)
+    new.edges.c <- matrix(dat$el[[1]], ncol = 2)
   } else {
-    new.edges.m <- attributes(dat$el[[1]])$changes
-    new.edges.m <- new.edges.m[new.edges.m[, "to"] == 1, 1:2, drop = FALSE]
+    new.edges.c <- attributes(dat$el[[1]])$changes
+    new.edges.c <- new.edges.c[new.edges.c[, "to"] == 1, 1:2, drop = FALSE]
   }
-  dat$temp$new.edges <- matrix(dat$attr$uid[new.edges.m], ncol = 2)
+  dat$temp$new.edges <- matrix(dat$attr$uid[new.edges.c], ncol = 2)
   
   
   ## Casual network
   nwparam.p <- EpiModel::get_nwparam(dat, network = 2)
   
   if (dat$param$method == 1) {
-    dat$attr$deg.main <- get_degree(dat$el[[1]])
-    dat$attr$deg.main.c <- dat$attr$deg.main
-    dat$attr$deg.main.c<-ifelse(dat$attr$deg.main.c > 0 , 1,dat$attr$deg.main.c)
+    dat$attr$deg.cohab <- get_degree(dat$el[[1]])
+    dat$attr$deg.cohab.c <- dat$attr$deg.cohab
+    dat$attr$deg.cohab.c<-ifelse(dat$attr$deg.cohab.c > 0 , 1,dat$attr$deg.cohab.c)
     
   } else {
-    dat$attr$deg.main <- paste0(dat$attr$race, get_degree(dat$el[[1]]))
-    dat$attr$deg.main.c <- dat$attr$deg.main
-    dat$attr$deg.main.c<-ifelse(dat$attr$deg.main.c > 0, 1,dat$attr$deg.main.c)
+    dat$attr$deg.cohab <- paste0(dat$attr$race, get_degree(dat$el[[1]]))
+    dat$attr$deg.cohab.c <- dat$attr$deg.cohab
+    dat$attr$deg.cohab.c<-ifelse(dat$attr$deg.cohab.c > 0, 1,dat$attr$deg.cohab.c)
   }
   dat <- tergmLite::updateModelTermInputs(dat, network = 2)
   
@@ -164,9 +164,9 @@ edges_correct_msm <- function(dat, at) {
   new.num <- sum(dat$attr$active == 1, na.rm = TRUE)
   adjust <- log(old.num) - log(new.num)
   
-  coef.form.m <- get_nwparam(dat, network = 1)$coef.form
-  coef.form.m[1] <- coef.form.m[1] + adjust
-  dat$nwparam[[1]]$coef.form <- coef.form.m
+  coef.form.c <- get_nwparam(dat, network = 1)$coef.form
+  coef.form.c[1] <- coef.form.c[1] + adjust
+  dat$nwparam[[1]]$coef.form <- coef.form.c
   
   coef.form.p <- get_nwparam(dat, network = 2)$coef.form
   coef.form.p[1] <- coef.form.p[1] + adjust
