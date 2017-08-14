@@ -69,6 +69,8 @@
 #' @param b.method Method for calculating the number of expected births at each
 #'        time step, with \code{"fixed"} based on the number of persons at the
 #'        initial time step and \code{"varying"} based on the current time step.
+#' @param age.adj This value is added to the squareroot of age for females in sqrt.age.adj
+#'        so that sex age asymmetry can be captured with an absdiff term  
 #' @param msm.frac The fraction of males entering the population at each time step 
 #'        as a male that has intercourse exclusivly with other males "msm" - 
 #'        males not designated as msm or msmf are considered "msf".
@@ -626,7 +628,7 @@ param_shamp <- function(race.method = 1,
                       ai.scale = 1,
                       vi.scale = 1,
 
-                      ##MARTINA IS WORKING ON CONDOM USE RATES!
+                      
                       # For MSM pulled data from the mobile study but we are not modeling MSM for now.
                       cond.main.B.prob.msm = 0.062,
                       cond.main.BI.prob.msm = 0.062,
@@ -711,6 +713,7 @@ param_shamp <- function(race.method = 1,
                       prep.risk.int = 182,
                       prep.risk.reassess = TRUE,
                       
+                      temp.adjust=1,
                       immig.depart.BI.f=1/(42*52*4),
                       immig.depart.HI.f=1/(42*52*4),
                       immig.depart.BI.m=1/(42*52*4),
@@ -719,22 +722,23 @@ param_shamp <- function(race.method = 1,
                       immig.return.HI.f=1/4,
                       immig.return.BI.m=1/4,
                       immig.return.HI.m=1/4,
-                      immig.aq.prob.BI.f=.3*.06*((base.vi.main.BI.rate+base.vi.pers.BI.rate)/2)*URVI.prob,
-                      immig.aq.prob.HI.f=.3*.005*((base.vi.main.HI.rate+base.vi.pers.HI.rate)/2)*URVI.prob ,
-                      immig.aq.prob.BI.m=.3*.06*((base.vi.main.BI.rate+base.vi.pers.BI.rate)/2)*UIVI.prob ,
-                      immig.aq.prob.HI.m=.3*.005*((base.vi.main.HI.rate+base.vi.pers.HI.rate)/2)*UIVI.prob ,  
+                      immig.aq.prob.BI.f=.3*.06*((base.vi.main.BI.rate+base.vi.pers.BI.rate)/2)*URVI.prob * temp.adjust,
+                      immig.aq.prob.HI.f=.3*.005*((base.vi.main.HI.rate+base.vi.pers.HI.rate)/2)*URVI.prob * temp.adjust ,
+                      immig.aq.prob.BI.m=.3*.06*((base.vi.main.BI.rate+base.vi.pers.BI.rate)/2)*UIVI.prob * temp.adjust ,
+                      immig.aq.prob.HI.m=.3*.005*((base.vi.main.HI.rate+base.vi.pers.HI.rate)/2)*UIVI.prob * temp.adjust ,  
                       
-                      msm.aq.prob.B=0.000007183,
-                      msm.aq.prob.BI=0.000007183,
-                      msm.aq.prob.H=0.000007183,
-                      msm.aq.prob.HI=0.000007183,
-                      msm.aq.prob.W=0.000007183,
+                      msm.aq.prob.B=0.000007183 * temp.adjust,
+                      msm.aq.prob.BI=0.000007183 * temp.adjust,
+                      msm.aq.prob.H=0.000007183 * temp.adjust,
+                      msm.aq.prob.HI=0.000007183 * temp.adjust,
+                      msm.aq.prob.W=0.000007183 * temp.adjust,
                       
                       demog.list=data.params[[1]]$demog.list,
                       demog.dist=data.params[[1]]$demog.dist,
                       sex.groups=data.params[[1]]$sex.groups,
                       race.groups=data.params[[1]]$race.groups,
                       age.groups=data.params[[1]]$age.groups,
+                      adj.adj=data.params[[1]]$age.adj,
 
                       ...) {
 
@@ -939,6 +943,7 @@ control_shamp <- function(simno = 1,
                         aging.FUN = aging_msm,
                         deaths.FUN = deaths_shamp,
                         births.FUN = births_shamp2,
+                        demogupdate.FUN = demogupdate_shamp,
                         test.FUN = test_shamp,
                         tx.FUN = tx_shamp,
                         prep.FUN = prep_shamp,
@@ -956,7 +961,6 @@ control_shamp <- function(simno = 1,
                         heatbath.FUN = heatbath_msmf_shamp,
                         immigration.FUN = immigration_shamp,
                         prev.FUN = prevalence_shamp,
-                        demog.FUN = demog_shamp,
                         verbose.FUN = verbose_msm,
                         save.nwstats = FALSE,
                         verbose = TRUE,
