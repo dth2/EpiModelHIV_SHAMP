@@ -77,10 +77,10 @@ initialize_shamp <- function(x, param, init, control, s) {
 
   # Degree terms
   dat$attr$deg.pers <- get.vertex.attribute(x[[1]]$fit$network, "deg.pers")
-  dat$attr$deg.main <- get.vertex.attribute(x[[2]]$fit$network, "deg.main")
+  dat$attr$deg.cohab <- get.vertex.attribute(x[[2]]$fit$network, "deg.cohab")
   
   dat$attr$deg.pers.c <- get.vertex.attribute(x[[1]]$fit$network, "deg.pers.c")
-  dat$attr$deg.main.c <- get.vertex.attribute(x[[2]]$fit$network, "deg.main.c")
+  dat$attr$deg.cohab.c <- get.vertex.attribute(x[[2]]$fit$network, "deg.cohab.c")
   
 
   # Race
@@ -117,6 +117,13 @@ initialize_shamp <- function(x, param, init, control, s) {
   ids.HI.m<-na.omit(ids.M[ids.HI])
   ids.W.m<-na.omit(ids.M[ids.W])
   
+  #race.sex.cohab.
+  dat$attr$race.sex.cohab<-get.vertex.attribute(nw[[1]], "race.sex.cohab")
+  
+   #race.sex.pers.
+  dat$attr$race.sex.pers<-get.vertex.attribute(nw[[1]], "race.sex.pers")
+  
+  
   # Sex Identity
   dat$attr$sex.ident <- get.vertex.attribute(nw[[1]], "sex.ident")
   num.msf <-sum(dat$attr$sex.ident == "msf")
@@ -135,8 +142,11 @@ initialize_shamp <- function(x, param, init, control, s) {
   
   dat$attr$age<-dat$attr$age+partial
   
-  dat$attr$sqrt.age <- sqrt(dat$attr$age)
-
+  dat$attr$sqrt.age <- get.vertex.attribute(nw[[1]], "sqrt.age")
+  
+  dat$attr$agecat <- get.vertex.attribute(nw[[1]], "agecat")
+  dat$attr$sqrt.age.adj <- get.vertex.attribute(nw[[1]], "sqrt.age.adj")
+  
   # Risk group
   dat$attr$riskg <- get.vertex.attribute(nw[[1]], "riskg")
   
@@ -2777,7 +2787,7 @@ init_status_shamp <- function(dat) {
   
   ##Infection Class
   selected <- which(status == 1)
-  inf.class[selected] <- "L"
+  inf.class[selected] <- "Lhet"
 
   ## Set all onto dat$attr
   dat$attr$stage <- stage
