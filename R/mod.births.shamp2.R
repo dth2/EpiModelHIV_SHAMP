@@ -363,8 +363,11 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
                                                        ccr5.W.m.prob[2], ccr5.W.m.prob[1]))
 
   # Degree
-  dat$attr$deg.main[newIds] <- 0
+  dat$attr$deg.cohab[newIds] <- 0
   dat$attr$deg.pers[newIds] <- 0
+
+  dat$attr$deg.cohab.c[newIds] <- 0
+  dat$attr$deg.pers.c[newIds] <- 0
 
   # One-off risk group
   dat$attr$riskg[newIds] <- sample(1:5, nBirths, TRUE)
@@ -389,23 +392,6 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
   dat$attr$prepStat[newIds] <- 0
   
   
-#  Recalculate the demog.cat for new demo.
-
-  sex.groups<-sort(unique(dat$attr$sex))
-  for (i in 1:(length(sex.groups))){
-    dat$attr$demog.cat<-ifelse(dat$attr$sex==sex.groups[i],i*1000,dat$attr$demog.cat)      
-  }
-  
-  race.groups<-sort(unique(dat$attr$race))
-  for (i in 1:(length(race.groups))){
-    dat$attr$demog.cat<-ifelse(dat$attr$race==race.groups[i],dat$attr$demog.cat+(i*100),dat$attr$demog.cat)      
-  }
-  
-  age.groups<-sort(unique(floor(dat$attr$age)))
-  age.temp<-floor(dat$attr$age)
-  for (i in 1:(length(age.groups))){   
-    dat$attr$demog.cat<-ifelse (age.temp==age.groups[i],dat$attr$demog.cat+(age.groups[i]),dat$attr$demog.cat)      
-  }
 
   
   return(dat)
