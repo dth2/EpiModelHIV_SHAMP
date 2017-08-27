@@ -179,15 +179,15 @@ immigration_shamp <- function(dat, at){
     # Summary Output
     dat$epi$incid[at] <- dat$epi$incid[at] + length(infected)
     
-    dat$epi$incid.BI[at] <- dat$epi$incid.BI[at] + sum(race[infected] == "BI")
-    dat$epi$incid.HI[at] <- dat$epi$incid.HI[at] + sum(race[infected] == "HI")
+    dat$epi$incid.BI[at] <- sum(dat$epi$incid.BI[at] , sum(race[infected] == "BI", na.rm = TRUE), na.rm = TRUE)
+    dat$epi$incid.HI[at] <- sum(dat$epi$incid.HI[at] , sum(race[infected] == "HI", na.rm = TRUE), na.rm = TRUE)
 
-    dat$epi$incid.f[at] <- dat$epi$incid.f[at] + sum(sex[infected] == "F") 
-    dat$epi$incid.m[at] <- dat$epi$incid.m[at] + sum(sex[infected] == "M")
+    dat$epi$incid.f[at] <- sum(dat$epi$incid.f[at] , sum(sex[infected] == "F", na.rm = TRUE), na.rm = TRUE) 
+    dat$epi$incid.m[at] <- sum(dat$epi$incid.m[at] , sum(sex[infected] == "M", na.rm = TRUE), na.rm = TRUE)
     
-    dat$epi$incid.msf[at] <- dat$epi$incid.msf[at] + sum(sex.ident[infected] == "msf")
-    dat$epi$incid.msm[at] <- dat$epi$incid.msm[at] + sum(sex.ident[infected] == "msm")
-    dat$epi$incid.msmf[at] <- dat$epi$incid.msmf[at] + sum(sex.ident[infected] == "msmf")
+    dat$epi$incid.msf[at] <- sum(dat$epi$incid.msf[at] , sum(sex.ident[infected] == "msf", na.rm = TRUE), na.rm = TRUE)
+    dat$epi$incid.msm[at] <- sum(dat$epi$incid.msm[at] , sum(sex.ident[infected] == "msm", na.rm = TRUE), na.rm = TRUE)
+    dat$epi$incid.msmf[at] <- sum(dat$epi$incid.msmf[at] , sum(sex.ident[infected] == "msmf", na.rm = TRUE), na.rm = TRUE)
     
     dat$epi$incid.FA[at] <- length(infected)
      }
