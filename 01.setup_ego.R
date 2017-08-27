@@ -30,45 +30,71 @@ ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol=
 
 ###cohab partnership network.
 
+summary(ego.obj_c ~edges + 
+                  nodefactor("race",base=5) +
+                  nodematch("race",diff=TRUE) +
+                  nodefactor("agecat", base=1) + 
+                  absdiff("sqrt.age.adj") + 
+                  nodefactor("deg.pers.c",base=1))
+
+##~bd(maxout=1) still produced 4% with 2 ties and a handful with more
+##Try offset concurrent() ??              
 fit.c<-ergm.ego(ego.obj_c ~edges + 
-                    nodefactor("race.sex.pers",base=9) + 
                     nodefactor("race",base=5) +
                     nodematch("race",diff=TRUE) +
                     nodefactor("agecat", base=1) + 
                     absdiff("sqrt.age.adj") + 
-                    offset(nodematch("sex", diff=FALSE)),
-                  offset.coef = -Inf,
-                  control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
-                                           ergm.control = control.ergm(MCMC.interval=6000,
-                                                                       MCMC.samplesize=6000,
-                                                                       MCMC.burnin = 6000,
-                                                                       MPLE.max.dyad.types = 1e5,
-                                                                       init.method = "MPLE",
-                                                                       MCMLE.maxit = 250)))
+                    nodefactor("deg.pers.c",base=1) + 
+                    offset(nodematch("sex", diff=FALSE)) + 
+                    offset(concurrent()),
+                    offset.coef = c(-Inf, -Inf),
+                    constraints=~bd(maxout=1),
+                    control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
+                                           ergm.control = control.ergm(MCMC.interval=7500,
+                                                                       MCMC.samplesize=7500,
+                                                                       MCMC.burnin = 7500,
+                                                                       MPLE.max.dyad.types = 1e7,
+                                                                       init.method = "zeros",
+                                                                       MCMLE.maxit = 400)))
+
 
 summary(fit.c)
-
+test <- simulate(fit.c)
+degreedist(test)
 
 ####Casual partnership network.
 
+summary(ego.obj_p ~edges + 
+          nodefactor("race",base=5) + 
+          nodematch("race",diff=TRUE) +
+          nodefactor("agecat", base=1) + 
+          absdiff("sqrt.age.adj") + 
+          nodefactor("deg.cohab.c",base=1) +
+          concurrent(by="sex") + 
+          concurrent(by="race"))
 
 fit.p<-ergm.ego(ego.obj_p ~edges + 
-                    nodefactor("race.sex.cohab",base=9) + 
                     nodefactor("race",base=5) + 
                     nodematch("race",diff=TRUE) +
                     nodefactor("agecat", base=1) + 
                     absdiff("sqrt.age.adj") + 
+                    nodefactor("deg.cohab.c",base=1) +
+                    concurrent(by="sex") + 
+                    concurrent(by="race") +
                     offset(nodematch("sex", diff=FALSE)),
                   offset.coef = -Inf,
+                  constraints=~bd(maxout=4),
                   control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
-                                           ergm.control = control.ergm(MCMC.interval=5000,
-                                                                       MCMC.samplesize=5000,
-                                                                       MCMC.burnin = 5000,
-                                                                       MPLE.max.dyad.types = 1e5,
-                                                                       init.method = "MPLE",
-                                                                       MCMLE.maxit = 250)))
+                                           ergm.control = control.ergm(MCMC.interval=7000,
+                                                                       MCMC.samplesize=7000,
+                                                                       MCMC.burnin = 7000,
+                                                                       MPLE.max.dyad.types = 1e7,
+                                                                       init.method = "zeros",
+                                                                       MCMLE.maxit = 350)))
 
 summary(fit.p)
+test <- simulate(fit.p)
+degreedist(test)
 
 
 ######One time partnerships.
@@ -97,7 +123,7 @@ fit.i<-ergm.ego(ego.obj_i ~edges +
                                                                        MCMC.burnin = 7000,
                                                                        MPLE.max.dyad.types = 1e4,
                                                                        init.method = "MPLE",
-                                                                       MCMLE.maxit = 250)))
+                                                                       MCMLE.maxit = 350)))
 
 summary(fit.i)
 
@@ -106,6 +132,7 @@ summary(fit.i)
 modelfits <- list(fit.c, fit.p, fit.i)
 save(modelfits, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/modelfits.rda")
 
+load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/modelfits.rda")
 
 
 #Create additional required elements for est
@@ -114,7 +141,7 @@ time.unit <- 7
 method<-1
 
 #Simulation size.
-sim.size<-36368
+sim.size<-47733
 
 
 # Mean durations
@@ -123,39 +150,39 @@ diss_c = ~offset(edges)
 diss_p = ~offset(edges)
 
 #Mortality
-ages <- 18:60
+ages <- 18:59
 age.unit <- 52
 
 asmr.B.f <- c(rep(0, 17),
             1-(1-c(rep(0.000405376, 12),
                    rep(0.000661066, 10),
                    rep(0.001378053, 10),
-                   rep(0.003065837, 11)))^(1 / age.unit),
+                   rep(0.003065837, 10)))^(1 / age.unit),
             1)
 asmr.BI.f <- c(rep(0, 17),
              1-(1-c(rep(0.000405376, 12),
                     rep(0.000661066, 10),
                     rep(0.001378053, 10),
-                    rep(0.003065837, 11)))^(1 / age.unit),
+                    rep(0.003065837, 10)))^(1 / age.unit),
              1)
 
 asmr.H.f <- c(rep(0, 17),
             1-(1-c(rep(0.000405376, 12),
                    rep(0.000661066, 10),
                    rep(0.001378053, 10),
-                   rep(0.003065837, 11)))^(1/age.unit),
+                   rep(0.003065837, 10)))^(1/age.unit),
             1)
 asmr.HI.f <- c(rep(0, 17),
              1-(1-c(rep(0.000405376, 12),
                     rep(0.000661066, 10),
                     rep(0.001378053, 10),
-                    rep(0.003065837, 11)))^(1/age.unit),
+                    rep(0.003065837, 10)))^(1/age.unit),
              1)
 asmr.W.f <- c(rep(0, 17),
             1-(1-c(rep(0.000405376, 12),
                    rep(0.000661066, 10),
                    rep(0.001378053, 10),
-                   rep(0.003065837, 11)))^(1/age.unit),
+                   rep(0.003065837, 10)))^(1/age.unit),
             1)
 
 
@@ -163,32 +190,32 @@ asmr.B.m <- c(rep(0, 17),
               1-(1-c(rep(0.000853417, 12),
                      rep(0.001084014, 10),
                      rep(0.001982864, 10),
-                     rep(0.005400669, 11)))^(1 / age.unit),
+                     rep(0.005400669, 10)))^(1 / age.unit),
               1)
 asmr.BI.m <- c(rep(0, 17),
                1-(1-c(rep(0.000853417, 12),
                       rep(0.001084014, 10),
                       rep(0.001982864, 10),
-                      rep(0.005400669, 11)))^(1 / age.unit),
+                      rep(0.005400669, 10)))^(1 / age.unit),
                1)
 
 asmr.H.m <- c(rep(0, 17),
               1-(1-c(rep(0.000853417, 12),
                      rep(0.001084014, 10),
                      rep(0.001982864, 10),
-                     rep(0.005400669, 11)))^(1/age.unit),
+                     rep(0.005400669, 10)))^(1/age.unit),
               1)
 asmr.HI.m <- c(rep(0, 17),
                1-(1-c(rep(0.000853417, 12),
                       rep(0.001084014, 10),
                       rep(0.001982864, 10),
-                      rep(0.005400669, 11)))^(1/age.unit),
+                      rep(0.005400669, 10)))^(1/age.unit),
                1)
 asmr.W.m <- c(rep(0, 17),
               1-(1-c(rep(0.000853417, 12),
                      rep(0.001084014, 10),
                      rep(0.001982864, 10),
-                     rep(0.005400669, 11)))^(1/age.unit),
+                     rep(0.005400669, 10)))^(1/age.unit),
               1)
 
 
@@ -243,44 +270,68 @@ constraints_i <- ~.
 nw<-network.initialize(sim.size, directed = FALSE, hyper = FALSE, loops = FALSE,
                        multiple = FALSE, bipartite = FALSE)
 
-fit.c.s <- list(fit= fit.c, formation=fit.c$formula, target.stats= target.stats_c,
+fit.1 <- list(fit= fit.c, formation=fit.c$formula, target.stats= target.stats_c,
             target.stats.names= target.stats.names_c, coef.form = coef.form_c,
             coef.form.crude= coef.form.crude_c, coef.diss=coef.diss_c, constraints= constraints_c,
             edapprox=TRUE)
 
-fit.p.s <- list(fit= fit.p, formation=fit.p$formula, target.stats= target.stats_p,
+fit.2 <- list(fit= fit.p, formation=fit.p$formula, target.stats= target.stats_p,
               target.stats.names= target.stats.names_p, coef.form = coef.form_p,
               coef.form.crude= coef.form.crude_p, coef.diss=coef.diss_p, constraints= constraints_p,
               edapprox=TRUE)
 
-fit.i.s <- list(fit= fit.i, formation=fit.i$formula, target.stats= target.stats_i,
+fit.3 <- list(fit= fit.i, formation=fit.i$formula, target.stats= target.stats_i,
               target.stats.names= target.stats.names_i, coef.form = coef.form_i,
               coef.form.crude= coef.form.crude_i, coef.diss=coef.diss_i, constraints= constraints_i,
               edapprox=TRUE)
 
-param <- param_shamp(data.params)
-init <- init_shamp()
-control <- control_shamp(nsteps = 5)
-est <- list(fit.c.s, fit.p.s, fit.i.s)
-#save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 
+est <- list(fit.1, fit.2, fit.3)
+#save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 save(est, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fitsmall.rda")
 save(data.params, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/data.params.rda")
 
-#load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
+param <- param_shamp(data.params,temp.adjust=100)
+init <- init_shamp()
+control <- control_shamp(nsteps = 520)
 
+
+
+
+#load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fit.rda")
 load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/fitsmall.rda")
+load(file = "~/EpiModelHIV_shamp_modeling/scenarios/est/data.params.rda")
+
 
 sim<-netsim(est, param, init, control)
 
-save(sim, file = "~/EpiModelHIV_shamp_modeling/scenarios/sim.rda")
-demog.table<-as.data.frame(rbind(demog4,demog52,demog104,demog208,demog312,demog416,demog520))
-save(demog.table, file = "~/EpiModelHIV_shamp_modeling/scenarios/demogs.rda")
 
 
-
-library(xlsx) #load the package
-write.xlsx(x = demog.table, file = "~/EpiModelHIV_shamp_modeling/scenarios/demogs.xlsx",
-           sheetName = "SHAMP Demog", row.names = FALSE)
 
 netsim(est, param, init, control)
+
+###################################################################################
+########testing#########
+
+test <- simulate(est[[2]]$fit)
+
+degreedist(test)
+
+summary(test ~edges + degree
+          nodefactor("race",base=5) + 
+          nodematch("race",diff=TRUE) +
+          nodefactor("agecat", base=1) + 
+          absdiff("sqrt.age.adj") + 
+          nodefactor("deg.cohab.c",base=1))
+
+
+param <- param_shamp(data.params, msm.temp.adjust = 100, fa.temp.adjust = 500, depart.adjust = 20, return.adjust = .5)
+init <- init_shamp()
+control <- control_shamp(nsteps = 1040)
+sim1<-netsim(est, param, init, control)
+
+save(sim1, file = "~/EpiModelHIV_shamp_modeling/scenarios/sim100_500_20_5.rda")
+
+time<-1:1040
+plot(time,sim1$epi$i.prev[,1] , main = "Prev: temp.adjust - 10, depart.adjust - 5")
+
