@@ -34,8 +34,8 @@ simnet_shamp <- function(dat, at) {
 
   dat$el[[1]] <- tergmLite::simulate_network(p = dat$p[[1]],
                                              el = dat$el[[1]],
-                                             coef.form = nwparam.m$coef.form,
-                                             coef.diss = nwparam.m$coef.diss$coef.adj,
+                                             coef.form = nwparam.c$coef.form,
+                                             coef.diss = nwparam.c$coef.diss$coef.adj,
                                              save.changes = TRUE)
   
   dat$temp$new.edges <- NULL
