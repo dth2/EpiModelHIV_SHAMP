@@ -171,9 +171,9 @@ prevalence_shamp <- function(dat, at) {
     dat$epi$incid.msm <- rNA
     dat$epi$incid.msmf <- rNA
     
-    dat$epi$incid.FA <- rNA
-    dat$epi$incid.MSM <- rNA
-    dat$epi$incid.Lhet <- rNA
+    dat$epi$incid.FA <- rep(0, nsteps)
+    dat$epi$incid.MSM <- rep(0, nsteps)
+    dat$epi$incid.Lhet <- rep(0, nsteps)
     
     dat$epi$prepCurr <- rNA
     dat$epi$prepCov <- rNA
@@ -187,17 +187,17 @@ prevalence_shamp <- function(dat, at) {
     dat$epi$cprob.always.pers <- rNA
     dat$epi$cprob.always.inst <- rNA
     
-    dat$epi$i.num.MSM.inf <- rNA
-    dat$epi$i.num.MSMds.inf <- rNA
-    dat$epi$i.num.FA.inf <- rNA
-    dat$epi$i.num.FAds.inf <- rNA
-    dat$epi$i.num.Lhet.inf <- rNA
+    dat$epi$i.num.MSM.inf <- rep(0, nsteps)
+    dat$epi$i.num.MSMds.inf <- rep(0, nsteps)
+    dat$epi$i.num.FA.inf <- rep(0, nsteps)
+    dat$epi$i.num.FAds.inf <- rep(0, nsteps)
+    dat$epi$i.num.Lhet.inf <- rep(0, nsteps)
     
-    dat$epi$prop.MSM.inf <- rNA
-    dat$epi$prop.MSMds.inf <- rNA
-    dat$epi$prop.FA.inf <- rNA
-    dat$epi$prop.FAds.inf <- rNA
-    dat$epi$prop.Lhet.inf <- rNA
+    dat$epi$prop.MSM.inf <- rep(0, nsteps)
+    dat$epi$prop.MSMds.inf <- rep(0, nsteps)
+    dat$epi$prop.FA.inf <- rep(0, nsteps)
+    dat$epi$prop.FAds.inf <- rep(0, nsteps)
+    dat$epi$prop.Lhet.inf <- rep(0, nsteps)
   }
 
 
@@ -289,17 +289,17 @@ prevalence_shamp <- function(dat, at) {
   dat$epi$i.num.HI.msmf[at] <- sum(status == 1 & race == "HI" & sex.ident== "msmf", na.rm = TRUE)
   dat$epi$i.num.W.msmf[at] <- sum(status == 1 & race == "W" & sex.ident== "msmf", na.rm = TRUE) 
   
-  dat$epi$i.num.MSM.inf <- sum(inf.class=="MSM")
-  dat$epi$i.num.MSMds.inf <- sum(inf.class=="MSMds")
-  dat$epi$i.num.FA.inf <- sum(inf.class=="FA")
-  dat$epi$i.num.FAds.inf <- sum(inf.class=="FAds")
-  dat$epi$i.num.Lhet.inf <- sum(inf.class=="Lhet")
+  dat$epi$i.num.MSM.inf[at] <- sum(inf.class=="MSM", na.rm = TRUE)
+  dat$epi$i.num.MSMds.inf[at] <- sum(inf.class=="MSMds", na.rm = TRUE)
+  dat$epi$i.num.FA.inf[at] <- sum(inf.class=="FA", na.rm = TRUE)
+  dat$epi$i.num.FAds.inf[at] <- sum(inf.class=="FAds", na.rm = TRUE)
+  dat$epi$i.num.Lhet.inf[at] <- sum(inf.class=="Lhet", na.rm = TRUE)
   
-  dat$epi$prop.MSM.inf <- sum(inf.class=="MSM", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
-  dat$epi$prop.MSMds.inf <- sum(inf.class=="MSMds", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
-  dat$epi$prop.FA.inf <- sum(inf.class=="FA", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
-  dat$epi$prop.FAds.inf <- sum(inf.class=="FAds", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
-  dat$epi$prop.Lhet.inf <- sum(inf.class=="Lhet", na.rm=TRUE)/sum(status=1, na.rm=TRUE)
+  dat$epi$prop.MSM.inf[at] <- dat$epi$i.num.MSM.inf[at]/dat$epi$i.num[at]
+  dat$epi$prop.MSMds.inf[at] <- dat$epi$i.num.MSMds.inf[at]/dat$epi$i.num[at]
+  dat$epi$prop.FA.inf[at] <- dat$epi$i.num.FA.inf[at]/dat$epi$i.num[at]
+  dat$epi$prop.FAds.inf[at] <- dat$epi$i.num.FAds.inf[at]/dat$epi$i.num[at]
+  dat$epi$prop.Lhet.inf[at] <- dat$epi$i.num.Lhet.inf[at]/dat$epi$i.num[at]
   
   dat$epi$i.prev[at] <- dat$epi$i.num[at] / dat$epi$num[at]
   dat$epi$i.prev.B[at] <- dat$epi$i.num.B[at] / dat$epi$num.B[at]
