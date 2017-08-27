@@ -17,10 +17,7 @@ demogupdate_shamp <- function(dat, at) {
                                   ifelse(dat$attr$age > 35 & dat$attr$age < 46,"36-45",
                                          ifelse(dat$attr$age > 45,"46-60",dat$attr$agecat))))
   
-  #sqrt.age.adj
-  dat$attr$sqrt.age.adj<-ifelse(dat$attr$sex=="M",dat$attr$sqrt.age,
-                                ifelse(dat$attr$sex=="F",dat$attr$sqrt.age + dat$param$age.adj,dat$attr$sqrt.age.adj))
-  
+
   #Create a new factor for age by sex group by pers.c.
   
   dat$attr$race.sex.pers<-rep(NA,length(dat$attr$age)) 
