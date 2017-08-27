@@ -303,19 +303,19 @@ trans_shamp <- function(dat, at){
   }
 
   # Summary Output
-  dat$epi$incid[at] <- length(infected)
-  dat$epi$incid.B[at] <- sum(race[infected] == "B")
-  dat$epi$incid.BI[at] <- sum(race[infected] == "BI")
-  dat$epi$incid.H[at] <- sum(race[infected] == "H")
-  dat$epi$incid.HI[at] <- sum(race[infected] == "HI") 
-  dat$epi$incid.W[at] <- sum(race[infected] == "W") 
+  dat$epi$incid[at] <- sum(dat$epi$incid[at] , length(infected), na.rm = TRUE)
+  dat$epi$incid.B[at] <- sum(dat$epi$incid.B[at] , sum(race[infected] == "B", na.rm = TRUE), na.rm = TRUE)
+  dat$epi$incid.BI[at] <- sum(dat$epi$incid.BI[at] , sum(race[infected] == "BI", na.rm = TRUE), na.rm = TRUE)
+  dat$epi$incid.H[at] <- sum(dat$epi$incid.H[at] , sum(race[infected] == "H", na.rm = TRUE), na.rm = TRUE)
+  dat$epi$incid.HI[at] <- sum(dat$epi$incid.HI[at] , sum(race[infected] == "HI", na.rm = TRUE), na.rm = TRUE) 
+  dat$epi$incid.W[at] <- sum(dat$epi$incid.W[at] , sum(race[infected] == "W", na.rm = TRUE), na.rm = TRUE) 
   
-  dat$epi$incid.f[at] <- sum(sex[infected] == "F") 
-  dat$epi$incid.m[at] <- sum(sex[infected] == "M")  
+  dat$epi$incid.f[at] <- sum(dat$epi$incid.f[at] , sum(sex[infected] == "F", na.rm = TRUE), na.rm = TRUE) 
+  dat$epi$incid.m[at] <- sum(dat$epi$incid.m[at] , sum(sex[infected] == "M", na.rm = TRUE), na.rm = TRUE)  
   
-  dat$epi$incid.msf[at] <- sum(sex.ident[infected] == "msf") 
-  dat$epi$incid.msm[at] <- sum(sex.ident[infected] == "msm")  
-  dat$epi$incid.msmf[at] <- sum(sex.ident[infected] == "msmf")
+  dat$epi$incid.msf[at] <- sum(dat$epi$incid.msf[at] , sum(sex.ident[infected] == "msf", na.rm = TRUE), na.rm = TRUE) 
+  dat$epi$incid.msm[at] <- sum(dat$epi$incid.msm[at] , sum(sex.ident[infected] == "msm", na.rm = TRUE), na.rm = TRUE)  
+  dat$epi$incid.msmf[at] <- sum(dat$epi$incid.msmf[at] , sum(sex.ident[infected] == "msmf", na.rm = TRUE), na.rm = TRUE)
 
   dat$epi$incid.Lhet[at] <- length(infected)
 
