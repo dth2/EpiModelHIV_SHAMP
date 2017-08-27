@@ -31,13 +31,17 @@ aging <- function(dat, at) {
   dat$attr$sqrt.age <- sqrt(age)
   
   dat$attr$sqrt.age.adj<-ifelse(dat$attr$sex=="M",dat$attr$sqrt.age,
-                                 ifelse(dat$attr$sex=="F",dat$attr$sqrt.age + dat$params$age.adj))
+                               ifelse(dat$attr$sex=="F",dat$attr$sqrt.age + dat$param$age.adj,dat$attr$sqrt.age))
 
 
  
-  for (i in seq_along(dat$nw)) {
-    dat$nw[[i]] <- set.vertex.attribute(dat$nw[[i]], "sqrt.age", sqrt(age))
-  }
+#  for (i in seq_along(dat$nw)) {
+#    dat$nw[[i]] <- set.vertex.attribute(dat$nw[[i]], "sqrt.age", sqrt(age))
+#  }
+#  
+#  for (i in seq_along(dat$nw)) {
+#    dat$nw[[i]] <- set.vertex.attribute(dat$nw[[i]], "sqrt.age.adj", dat$attr$sqrt.age.adj)
+#  }
     
 
   return(dat)
