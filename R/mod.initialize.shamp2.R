@@ -39,9 +39,10 @@ initialize_shamp <- function(x, param, init, control, s) {
   nw <- list()
   for (i in 1:3) {
 
-    nw[[i]] <- simulate(x[[i]]$fit, popsize=sim.size, 
-                   control = control.simulate.ergm.ego(simulate.control = control.simulate(MCMC.burnin = 1e6)))
+   # nw[[i]] <- simulate(x[[i]]$fit, popsize=sim.size, 
+    #                control = control.simulate.ergm.ego(simulate.control = control.simulate(MCMC.burnin = 1e6)))
     
+    nw[[i]] <- simulate(x[[i]]$fit)
    }
 
 
@@ -146,6 +147,25 @@ initialize_shamp <- function(x, param, init, control, s) {
   
   dat$attr$agecat <- get.vertex.attribute(nw[[1]], "agecat")
   dat$attr$sqrt.age.adj <- get.vertex.attribute(nw[[1]], "sqrt.age.adj")
+  
+  #demographic catagory.
+  dat$attr$demog.cat<-rep(NA,length(dat$attr$sex))
+  sex.groups<-sort(unique(dat$attr$sex))
+  for (i in 1:(length(sex.groups))){
+    dat$attr$demog.cat<-ifelse(dat$attr$sex==sex.groups[i],i*1000,dat$attr$demog.cat)      
+  }
+  
+  race.groups<-sort(unique(dat$attr$race))
+  for (i in 1:(length(race.groups))){
+    dat$attr$demog.cat<-ifelse(dat$attr$race==race.groups[i],dat$attr$demog.cat+(i*100),dat$attr$demog.cat)      
+  }
+  
+  age.groups<-sort(unique(floor(dat$attr$age)))
+  age.temp<-floor(dat$attr$age)
+  for (i in 1:(length(age.groups))){   
+    dat$attr$demog.cat<-ifelse (age.temp==age.groups[i],dat$attr$demog.cat+(age.groups[i]),dat$attr$demog.cat)      
+  }
+  
   
   # Risk group
   dat$attr$riskg <- get.vertex.attribute(nw[[1]], "riskg")
