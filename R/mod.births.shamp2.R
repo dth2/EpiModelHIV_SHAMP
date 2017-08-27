@@ -132,8 +132,15 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
   dat$attr$age[newIds] <- age
   dat$attr$sqrt.age[newIds] <- sqrt(dat$attr$age[newIds]) 
   
+  dat$attr$sqrt.age.adj<-ifelse(dat$attr$sex=="M",dat$attr$sqrt.age,
+                                ifelse(dat$attr$sex=="F",dat$attr$sqrt.age + dat$param$age.adj,dat$attr$sqrt.age))
+  
+  dat$attr$agecat[newIds]<-"18-25"
+                      
+  
   newF<-which(sex=="F")
   newM<-which(sex=="M")
+
   
   newB<-which(race=="B")
   newBI<-which(race=="BI")
@@ -393,6 +400,7 @@ setBirthAttr_shamp <- function(dat, at, nBirths.gen, nBirths.age, nBirths.dis) {
   
   
 
+  
   
   return(dat)
 }
