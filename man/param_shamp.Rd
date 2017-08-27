@@ -172,13 +172,13 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   vi.scale = 1, cond.main.B.prob.msm = 0.062,
   cond.main.BI.prob.msm = 0.062, cond.main.H.prob.msm = 0.062,
   cond.main.HI.prob.msm = 0.062, cond.main.W.prob.msm = 0.062,
-  cond.pers.always.prob.msm = 0.001, cond.pers.B.prob.msm = 0.0304,
+  cond.pers.always.prob.msm = 0.01, cond.pers.B.prob.msm = 0.0304,
   cond.pers.BI.prob.msm = 0.0304, cond.pers.H.prob.msm = 0.0304,
   cond.pers.HI.prob.msm = 0.0304, cond.pers.W.prob.msm = 0.0304,
-  cond.inst.always.prob.msm = 0.001, cond.inst.B.prob.msm = 0.413,
+  cond.inst.always.prob.msm = 0.01, cond.inst.B.prob.msm = 0.413,
   cond.inst.BI.prob.msm = 0.413, cond.inst.H.prob.msm = 0.413,
   cond.inst.HI.prob.msm = 0.413, cond.inst.W.prob.msm = 0.413,
-  cond.always.prob.corr.msm = 0.001, cond.main.B.prob.het = 0.12,
+  cond.always.prob.corr.msm = 0.01, cond.main.B.prob.het = 0.12,
   cond.main.BI.prob.het = 0.17, cond.main.H.prob.het = 0.17,
   cond.main.HI.prob.het = 0.19, cond.main.W.prob.het = 0.16,
   cond.pers.always.prob.het = 1e-04, cond.pers.B.prob.het = 0.54,
@@ -206,24 +206,30 @@ param_shamp(race.method = 1, time.unit = 7, method = 1,
   prep.class.prob = c(0, 0, 0, 0), prep.class.hr = c(1, 0.69, 0.19, 0.05),
   prep.coverage = 0, prep.cov.method = "curr", prep.cov.rate = 1,
   prep.tst.int = 90, prep.risk.int = 182, prep.risk.reassess = TRUE,
-  immig.depart.BI.f = 1/(42 * 52 * 4), immig.depart.HI.f = 1/(42 * 52 * 4),
-  immig.depart.BI.m = 1/(42 * 52 * 4), immig.depart.HI.m = 1/(42 * 52 * 4),
-  immig.return.BI.f = 1/4, immig.return.HI.f = 1/4,
-  immig.return.BI.m = 1/4, immig.return.HI.m = 1/4,
-  immig.aq.prob.BI.f = 0.3 * 0.06 * ((base.vi.main.BI.rate +
-  base.vi.pers.BI.rate)/2) * URVI.prob, immig.aq.prob.HI.f = 0.3 * 0.005 *
-  ((base.vi.main.HI.rate + base.vi.pers.HI.rate)/2) * URVI.prob,
+  msm.temp.adjust = 1, fa.temp.adjust = 1, depart.adjust = 1,
+  return.adjust = 1, immig.depart.BI.f = (1/(42 * 52 * 4)) * depart.adjust,
+  immig.depart.HI.f = (1/(42 * 52 * 4)) * depart.adjust,
+  immig.depart.BI.m = (1/(42 * 52 * 4)) * depart.adjust,
+  immig.depart.HI.m = (1/(42 * 52 * 4)) * depart.adjust,
+  immig.return.BI.f = (1/4) * return.adjust, immig.return.HI.f = (1/4) *
+  return.adjust, immig.return.BI.m = (1/4) * return.adjust,
+  immig.return.HI.m = (1/4) * return.adjust, immig.aq.prob.BI.f = 0.3 * 0.06
+  * ((base.vi.main.BI.rate + base.vi.pers.BI.rate)/2) * URVI.prob *
+  fa.temp.adjust, immig.aq.prob.HI.f = 0.3 * 0.005 * ((base.vi.main.HI.rate +
+  base.vi.pers.HI.rate)/2) * URVI.prob * fa.temp.adjust,
   immig.aq.prob.BI.m = 0.3 * 0.06 * ((base.vi.main.BI.rate +
-  base.vi.pers.BI.rate)/2) * UIVI.prob, immig.aq.prob.HI.m = 0.3 * 0.005 *
-  ((base.vi.main.HI.rate + base.vi.pers.HI.rate)/2) * UIVI.prob,
-  msm.aq.prob.B = 7.183e-06, msm.aq.prob.BI = 7.183e-06,
-  msm.aq.prob.H = 7.183e-06, msm.aq.prob.HI = 7.183e-06,
-  msm.aq.prob.W = 7.183e-06, demog.list = data.params[[1]]$demog.list,
+  base.vi.pers.BI.rate)/2) * UIVI.prob * fa.temp.adjust,
+  immig.aq.prob.HI.m = 0.3 * 0.005 * ((base.vi.main.HI.rate +
+  base.vi.pers.HI.rate)/2) * UIVI.prob * fa.temp.adjust,
+  msm.aq.prob.B = 7.183e-06 * msm.temp.adjust, msm.aq.prob.BI = 7.183e-06 *
+  msm.temp.adjust, msm.aq.prob.H = 7.183e-06 * msm.temp.adjust,
+  msm.aq.prob.HI = 7.183e-06 * msm.temp.adjust, msm.aq.prob.W = 7.183e-06 *
+  msm.temp.adjust, demog.list = data.params[[1]]$demog.list,
   demog.dist = data.params[[1]]$demog.dist,
   sex.groups = data.params[[1]]$sex.groups,
   race.groups = data.params[[1]]$race.groups,
   age.groups = data.params[[1]]$age.groups,
-  adj.adj = data.params[[1]]$age.adj, ...)
+  age.adj = data.params[[1]]$age.adj, ...)
 }
 \arguments{
 \item{testing.pattern}{Method for HIV testing, with options \code{"memoryless"}
@@ -426,6 +432,9 @@ in days.}
 \item{prep.risk.reassess}{If \code{TRUE}, reassess eligibility for PrEP at
 each testing visit.}
 
+\item{age.adj}{This value is added to the squareroot of age for females in sqrt.age.adj
+so that sex age asymmetry can be captured with an absdiff term}
+
 \item{...}{Additional arguments passed to the function.}
 
 \item{last.neg.test.R.S.int}{Time range in days for last negative test for
@@ -458,9 +467,6 @@ re-initiate treatment.}
 \item{b.R.S.rate}{Rate at which a person in race group R, where R is a 
 charater (B, BI, H, HI or W), and sex group S, where s is a charter (f, msf, msm, msmf),
 enters the population.}
-
-\item{age.adj}{This value is added to the squareroot of age for females in sqrt.age.adj
-so that sex age asymmetry can be captured with an absdiff term}
 
 \item{disc.outset.main.R.S.prob}{Probability that an HIV-infected person in race group R,
 where R is a charater (B, BI, H, HI or W), and sex group S, where s is a charter 
