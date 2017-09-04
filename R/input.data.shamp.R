@@ -113,7 +113,7 @@ for(i in 1:length(fields)){
   alter.ids<-data$altersCohab$ego[ids]
   alter.list<-c(alter.list,alter.ids)}
 
-if(length(alter.list>0)){warning("Main alters deleted: missing values",call. = FALSE)
+if(length(alter.list>0)){warning("Cohab alters deleted: missing values",call. = FALSE)
     print(length(alter.list))}
     data$altersCohab<-data$altersCohab[data$altersCohab$ego %in% alter.list == FALSE,]
 
