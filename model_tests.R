@@ -47,18 +47,19 @@ fit.c<-ergm.ego(ego.obj_c ~edges +
 
 
 
+summary(fit.c)
 plot(gof(fit.c, GOF="degree"))
 plot(gof(fit.c, GOF="model"))
 
 
-test<-simulate(fit.c)
-test <- as.egodata(test)
-degreedist.egodata(test, by="race.sex", prob=T)
-summary(test ~ degree(0:5, by="race.sex"))
+test.c<-simulate(fit.c)
+test.c <- as.egodata(test.c)
+degreedist.egodata(test.c, by="race.sex", prob=T)
+summary(test.c ~ degree(0:5, by="race.sex"))
 
 pdf(file = "XXX", height = 6, width = 12, pointsize = 16)
 #par(mfrow = c(1,2), mar = c(4,3,2.5,1), mgp = c(2,.5,0))
-degreedist.egodata(test, by="race.sex")
+degreedist.egodata(test.c, by="race.sex")
 dev.off()
 
 ####Casual partnership network.
@@ -93,20 +94,20 @@ fit.p<-ergm.ego(ego.obj_p ~edges +
                                                                        parallel = np, 
                                                                        parallel.type="PSOCK")))
 
+summary(fit.p)
 plot(gof(fit.p, GOF="degree"))
 plot(gof(fit.p, GOF="model"))
 
 
-test<-simulate(fit.p)
-test <- as.egodata(test)
-degreedist.egodata(test, by="race.sex", prob=T)
-summary(test ~ degree(0:5, by="race.sex"))
+test.p<-simulate(fit.p)
+test.p <- as.egodata(test.p)
+degreedist.egodata(test.p, by="race.sex", prob=T)
+summary(test.p ~ degree(0:5, by="race.sex"))
 
 pdf(file = "XXX", height = 6, width = 12, pointsize = 16)
 #par(mfrow = c(1,2), mar = c(4,3,2.5,1), mgp = c(2,.5,0))
-degreedist.egodata(test, by="race.sex")
+degreedist.egodata(test.p, by="race.sex")
 dev.off()
-
 
 ######One time partnerships.
 
@@ -123,10 +124,11 @@ fit.i<-ergm.ego(ego.obj_i ~edges +
                     nodefactor("agecat", base=c(3,4)) + 
                     nodefactor("deg.cohab.c",base=1) +
                     nodefactor("deg.pers.c",base=1) +
-                    offset(nodematch("sex", diff=FALSE)),
-                  offset.coef = -Inf,
-                  verbose=TRUE,
-                  control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
+                    offset(nodematch("sex", diff=FALSE)) + 
+                    offset(degree(2)),
+                    offset.coef = c(-Inf, -Inf),
+                    verbose=TRUE,
+                    control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
                                            ergm.control = control.ergm(SAN.maxit=50,
                                                                        SAN.burnin.times=100,
                                                                        MCMC.interval=7000,
@@ -140,7 +142,12 @@ fit.i<-ergm.ego(ego.obj_i ~edges +
 
 summary(fit.i)
 
+test.i<-simulate(fit.i)
+test.i <- as.egodata(test.i)
+degreedist.egodata(test.i, by="race.sex", prob=T)
+summary(test.i ~ degree(0:5, by="race.sex"))
 
-
-modelfits <- list(fit.c, fit.p, fit.i)
-save(modelfits, file = "~/EpiModelHIV_shamp_modeling/scenarios/est/modelfits.rda")
+pdf(file = "XXX", height = 6, width = 12, pointsize = 16)
+#par(mfrow = c(1,2), mar = c(4,3,2.5,1), mgp = c(2,.5,0))
+degreedist.egodata(test.i, by="race.sex")
+dev.off()
