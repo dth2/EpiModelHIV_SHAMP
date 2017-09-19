@@ -8,6 +8,8 @@ library(EpiModelHPC)
 #devtools::install_github("statnet/ergm.ego")
 library(ergm.ego)
 library(tergmLite)
+library(parallel)
+np = detectCores()
 
 #Load the ego and alter data frames and look at them
 load("~/SHAMP/egonet/data/all.egodata.rda")
@@ -27,11 +29,16 @@ ego.obj_p<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersPers,egoIDco
 ego.obj_i<-as.egodata(new_data[[2]]$egos,alters=new_data[[2]]$altersOT,egoIDcol="ego", egoWt=new_data[[2]]$egos$weight)
 
 
+save(ego.obj_c, file = "~/EpiModelHIV_SHAMP2/data/ego.obj_c.rda")
+save(ego.obj_p, file = "~/EpiModelHIV_SHAMP2/data/ego.obj_p.rda")
+save(ego.obj_i, file = "~/EpiModelHIV_SHAMP2/data/ego.obj_i.rda")
+
+
 
 ###cohab partnership network.
 
 summary(ego.obj_c ~edges + 
-                  nodefactor("race",base=5) +
+                  nodefactor("race.sex",base=0) +
                   nodematch("race",diff=TRUE) +
                   nodefactor("agecat", base=1) + 
                   absdiff("sqrt.age.adj") + 
@@ -55,7 +62,9 @@ fit.c<-ergm.ego(ego.obj_c ~edges +
                                                                        MCMC.burnin = 7500,
                                                                        MPLE.max.dyad.types = 1e7,
                                                                        init.method = "zeros",
-                                                                       MCMLE.maxit = 400)))
+                                                                       MCMLE.maxit = 400,
+                                                                       parallel = np, 
+                                                                       parallel.type="PSOCK")))
 
 
 summary(fit.c)
@@ -83,14 +92,16 @@ fit.p<-ergm.ego(ego.obj_p ~edges +
                     concurrent(by="race") +
                     offset(nodematch("sex", diff=FALSE)),
                   offset.coef = -Inf,
-                  constraints=~bd(maxout=4),
+                  constraints=~bd(maxout=3),
                   control=control.ergm.ego(ppopsize=50000, stats.est="asymptotic",
                                            ergm.control = control.ergm(MCMC.interval=7000,
                                                                        MCMC.samplesize=7000,
                                                                        MCMC.burnin = 7000,
                                                                        MPLE.max.dyad.types = 1e7,
                                                                        init.method = "zeros",
-                                                                       MCMLE.maxit = 350)))
+                                                                       MCMLE.maxit = 350,
+                                                                       parallel = np, 
+                                                                       parallel.type="PSOCK")))
 
 summary(fit.p)
 test <- simulate(fit.p)
@@ -123,7 +134,9 @@ fit.i<-ergm.ego(ego.obj_i ~edges +
                                                                        MCMC.burnin = 7000,
                                                                        MPLE.max.dyad.types = 1e4,
                                                                        init.method = "MPLE",
-                                                                       MCMLE.maxit = 350)))
+                                                                       MCMLE.maxit = 350,
+                                                                       parallel = np, 
+                                                                       parallel.type="PSOCK")))
 
 summary(fit.i)
 
